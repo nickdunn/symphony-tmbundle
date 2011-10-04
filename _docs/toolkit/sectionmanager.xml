@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<class type="class" name="SectionManager" handle="sectionmanager">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="13">lib/toolkit/class.sectionmanager.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The SectionManager is responsible for managing all Sections in a Symphony
+ installation. The SectionManager contains basic CRUD operations for Sections.
+ Sections are stored in the database in <code>tbl_sections</code>.</p>
+  </description>
+  <fields>
+    <field name="$_Parent" type="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="26">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>The parent class who initialised the SectionManager, usually a 
+ Symphony instance, either Frontend or Administration</p>
+      </description>
+    </field>
+    <field name="$_pool" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="20">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>An array of all the objects that the Manager is responsible for.
+ Defaults to an empty array.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="mixed"/>
+      </parameters>
+      <location line="34">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>The construct function sets the parent variable of the SectionManager</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The class that initialised this Section, usually SectionManager</p></description></tag>
+      </tags>
+    </method>
+    <method name="add" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="settings" type="array"/>
+      </parameters>
+      <location line="48">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>Takes an associative array of Section settings and creates a new
+ entry in the <code>tbl_sections</code> table, returning the ID of the Section.
+ The ID of the section is generated using auto_increment</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="settings"><description><p>An associative of settings for a section with the key being a column name from <code>tbl_sections</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="create" return="Section">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="190">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>Returns a new Section object, using the SectionManager
+ as the Section's $parent.</p>
+      </description>
+    </method>
+    <method name="delete" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="section_id" type="integer"/>
+      </parameters>
+      <location line="81">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>Deletes a Section by Section ID, removing all entries, fields, the
+ Section and then any Section Associations in that order</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="section_id"><description><p>The ID of the Section to delete</p></description></tag>
+      </tags>
+    </method>
+    <method name="edit" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="section_id" type="integer"/>
+        <parameter name="settings" type="array"/>
+      </parameters>
+      <location line="68">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>Updates an existing Section given it's ID and an associative
+ array of settings. The array does not have to contain all the
+ settings for the Section as there is no deletion of settings
+ prior to updating the Section</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="section_id"><description><p>The ID of the Section to update</p></description></tag>
+        <tag group="Parameters" name="settings"><description><p>An associative of settings for a section with the key being a column name from <code>tbl_sections</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="fetch" return="Section|array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="section_id" type="integer"/>
+        <parameter name="order" type="string"/>
+        <parameter name="sortfield" type="string"/>
+      </parameters>
+      <location line="130">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>Returns a Section object by ID, or returns an array of Sections
+ if the Section ID was omitted. If the Section ID is omitted, it is
+ possible to sort the Sections by providing a sort order and sort
+ field. By default, Sections will be order in ascending order by
+ their name</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="section_id"><description><p>The ID of the section to return. Defaults to null</p></description></tag>
+        <tag group="Parameters" name="order"><description><p>If <code>$section_id</code> is omitted, this is the sortorder of the returned objects. Defaults to ASC, other options id DESC</p></description></tag>
+        <tag group="Parameters" name="sortfield"><description><p>The name of the column in the <code>tbl_sections</code> table to sort on. Defaults to name</p></description></tag>
+        <tag group="Returns"><description><p>A Section object or an array of Section objects</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchIDFromHandle" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="handle" type="string"/>
+      </parameters>
+      <location line="173">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>Return a Section ID by the handle</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="handle"><description><p>The handle of the section</p></description></tag>
+        <tag group="Returns"><description><p>The Section ID</p></description></tag>
+      </tags>
+    </method>
+    <method name="flush" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="180">lib/toolkit/class.sectionmanager.php</location>
+      <description>
+        <p>This function will empty the $_pool array.</p>
+      </description>
+    </method>
+  </methods>
+</class>

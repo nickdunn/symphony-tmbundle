@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/system/extensions/',
+	'delegate' => 'ExtensionPreDisable',
+	'callback' => 'extensionPreDisable'
+),
+</string>
+	<key>name</key>
+	<string>ExtensionPreDisable</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>828D8097-A67E-5AB3-9622-D44DFAB9EC4C</string>
+</dict>
+</plist>

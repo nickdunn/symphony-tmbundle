@@ -1,0 +1,386 @@
+<?xml version="1.0"?>
+<class type="class" name="SMTP" handle="smtp">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="19">lib/toolkit/class.smtp.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>A SMTP client class, for sending text/plain emails.
+ This class only supports the very basic SMTP functions.
+ Inspired by the SMTP class in the Zend library</p>
+  </description>
+  <tags>
+    <tag group="Author">Huib Keemink &lt;huib.keemink@creativedutchmen.com&gt;</tag>
+    <tag group="Version" name="0.1">20 okt 2010</tag>
+  </tags>
+  <constants>
+    <constant name="EOL" type="str" value="&amp;quot;\r\n&amp;quot;">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="22">lib/toolkit/class.smtp.php</location>
+    </constant>
+    <constant name="TIMEOUT" type="int" value="30">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="21">lib/toolkit/class.smtp.php</location>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_auth" type="mixed" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="48">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_connection" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="38">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_data" type="mixed" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="46">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_from" type="mixed" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="32">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_header_fields" type="mixed" value="Array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="30">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_helo" type="mixed" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="44">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_host" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="24">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_ip" type="mixed" value="'127.0.0.1'">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="36">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_mail" type="mixed" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="45">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_pass" type="mixed" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="28">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_port" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="25">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_rcpt" type="mixed" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="47">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_secure" type="mixed" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="42">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_subject" type="mixed" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="33">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_to" type="mixed" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="34">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_transport" type="mixed" value="'tcp'">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="40">lib/toolkit/class.smtp.php</location>
+    </field>
+    <field name="$_user" type="mixed" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="27">lib/toolkit/class.smtp.php</location>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="host" type="string"/>
+        <parameter name="port" type="int"/>
+        <parameter name="options" type="array"/>
+      </parameters>
+      <location line="66">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Constructor.</p>
+        <pre>
+          <code>Host to connect to. Defaults to localhost (127.0.0.1)
+</code>
+        </pre>
+      </description>
+      <tags>
+        <tag group="Parameters" name="host"><description><p>When ssl is used, defaults to 465 When no ssl is used, and ini_get returns no value, defaults to 25.</p></description></tag>
+        <tag group="Parameters" name="port"><description><p>Currently supports 3 values: $options['secure'] can be ssl, tls or null. $options['username'] the username used to login to the server. Leave empty for no authentication. $options['password'] the password used to login to the server. Leave empty for no authentication. $options['local_ip'] the ip address used in the ehlo/helo commands. Only ip's are accepted.</p></description></tag>
+        <tag group="Parameters"></tag>
+      </tags>
+    </method>
+    <method name="_auth" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="325">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Authenticates to the server.
+ Currently supports the AUTH LOGIN command.
+ May be extended if more methods are needed.</p>
+      </description>
+    </method>
+    <method name="_connect" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="host" type="string"/>
+        <parameter name="port" type="int"/>
+      </parameters>
+      <location line="476">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Connect to the host.</p>
+      </description>
+    </method>
+    <method name="_ehlo" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="349">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Calls the EHLO function.
+ This is the HELO function for more modern servers.</p>
+      </description>
+    </method>
+    <method name="_expect" return="string">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="code" type="string|array"/>
+        <parameter name="timeout" type="mixed"/>
+      </parameters>
+      <location line="438">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Parse server response for successful codes</p>
+        <p>Read the response from the stream and check for expected return code.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="code"><description><p>One or more codes that indicate a successful response</p></description></tag>
+        <tag group="Returns"><description><p>Last line of response string</p></description></tag>
+      </tags>
+    </method>
+    <method name="_helo" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="361">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Initiates the connection by calling the HELO function.
+ This function should only be used if the server does not support the HELO function.</p>
+      </description>
+    </method>
+    <method name="_receive" return="string">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="timeout" type="mixed"/>
+      </parameters>
+      <location line="405">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Get a line from the stream.</p>
+      </description>
+    </method>
+    <method name="_send" return="bool|integer">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="request" type="string"/>
+      </parameters>
+      <location line="389">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Send a request to the host, appends the request with a line break.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>number of characters written.</p></description></tag>
+      </tags>
+    </method>
+    <method name="_tls" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="372">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Encrypts the current session with TLS.</p>
+      </description>
+    </method>
+    <method name="checkConnection" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="112">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Checks to see if <code>$this-&gt;_connection</code> is a valid resource. Throws an
+ exception if there is no connection, otherwise returns true.</p>
+      </description>
+    </method>
+    <method name="data" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="string"/>
+      </parameters>
+      <location line="250">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Calls the data command on the server.
+ Also includes header fields in the command.</p>
+      </description>
+    </method>
+    <method name="helo" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="174">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Initiates the ehlo/helo requests.</p>
+      </description>
+    </method>
+    <method name="mail" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="from" type="string"/>
+      </parameters>
+      <location line="204">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Calls the MAIL command on the server.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="from"><description><p>The email address to send the email from.</p></description></tag>
+      </tags>
+    </method>
+    <method name="quit" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="311">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Disconnects to the server.</p>
+      </description>
+    </method>
+    <method name="rcpt" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="to" type="string"/>
+      </parameters>
+      <location line="230">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Calls the RCPT command on the server. May be called multiple times for more than one recipient.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="to"><description><p>The address to send the email to.</p></description></tag>
+      </tags>
+    </method>
+    <method name="rset" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="296">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Resets the current session. This 'undoes' all rcpt, mail, etc calls.</p>
+      </description>
+    </method>
+    <method name="sendMail" return="bool">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="from" type="string"/>
+        <parameter name="to" type="string"/>
+        <parameter name="subject" type="string"/>
+        <parameter name="message" type="string"/>
+      </parameters>
+      <location line="134">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>The actual email sending.
+ The connection to the server (connecting, EHLO, AUTH, etc) is done here,
+ right before the actual email is sent. This is to make sure the connection does not time out.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="from"><description><p>The from string. Should have the following format: email@domain.tld</p></description></tag>
+        <tag group="Parameters" name="to"><description><p>The email address to send the email to.</p></description></tag>
+        <tag group="Parameters" name="subject"><description><p>The subject to send the email to.</p></description></tag>
+        <tag group="Parameters"></tag>
+      </tags>
+    </method>
+    <method name="setHeader" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="header" type="string"/>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="161">lib/toolkit/class.smtp.php</location>
+      <description>
+        <p>Sets a header to be sent in the email.</p>
+      </description>
+    </method>
+  </methods>
+</class>

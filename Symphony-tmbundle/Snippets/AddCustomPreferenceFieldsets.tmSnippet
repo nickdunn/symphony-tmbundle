@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/system/preferences/',
+	'delegate' => 'AddCustomPreferenceFieldsets',
+	'callback' => 'addCustomPreferenceFieldsets'
+),
+</string>
+	<key>name</key>
+	<string>AddCustomPreferenceFieldsets</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>07FFAF1B-0C9E-D1C1-62C6-97715EB51652</string>
+</dict>
+</plist>

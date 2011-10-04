@@ -1,0 +1,1724 @@
+<?xml version="1.0"?>
+<delegates>
+  <delegate name="AddCustomPreferenceFieldsets">
+    <description>
+      <p>Add Extension custom preferences. Use the $wrapper reference to append objects.</p>
+    </description>
+    <location line="105">content/content.systempreferences.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/preferences/'</p>
+        </description>
+      </parameter>
+      <parameter name="wrapper" type="XMLElement">
+        <description>
+          <p>An XMLElement of the current page</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AddCustomPublishColumn">
+    <description>
+      <p>Allows the creation of custom entries tablecolumns. Called
+after all the Section Visible columns have been added  as well
+as the Section Associations</p>
+    </description>
+    <location line="177">content/content.publish.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/publish/'</p>
+        </description>
+      </parameter>
+      <parameter name="tableHead" type="array">
+        <description>
+          <p>An array of the current columns, passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="section_id" type="integer">
+        <description>
+          <p>The current Section ID</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AddCustomPublishColumnData">
+    <description>
+      <p>Allows Extensions to inject custom table data for each Entry
+into the Publish Index</p>
+    </description>
+    <location line="291">content/content.publish.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/publish/'</p>
+        </description>
+      </parameter>
+      <parameter name="tableData" type="array">
+        <description>
+          <p>An array of <code>Widget::TableData</code>, passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="section_id" type="integer">
+        <description>
+          <p>The current Section ID</p>
+        </description>
+      </parameter>
+      <parameter name="entry_id" type="integer">
+        <description>
+          <p>The Entry ID for this row</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AddDefaultAuthorAreas">
+    <description>
+      <p>Allows injection or manipulation of the Default Area dropdown for an Author.
+Take care with adding in options that are only valid for Developers, as if a
+normal Author is set to that option, they will be redirected to their own
+Author record.</p>
+    </description>
+    <location line="347">content/content.systemauthors.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/authors/</p>
+        </description>
+      </parameter>
+      <parameter name="options" type="array">
+        <description>
+          <p>An associative array of options, suitable for use for the Widget::Select function. By default this will be an array of the Sections in the current installation. New options should be the path to the page after the <code>SYMPHONY_URL</code> constant.</p>
+        </description>
+      </parameter>
+      <parameter name="default_area" type="string">
+        <description>
+          <p>The current <code>default_area</code> for this Author.</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AddElementToFooter">
+    <description>
+      <p>Add new list elements to the footer</p>
+    </description>
+    <location line="869">lib/toolkit/class.administrationpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/backend/'</p>
+        </description>
+      </parameter>
+      <parameter name="wrapper" type="XMLElement">
+        <description>
+          <p>A XMLElement representing the `` at in the Symphony footer, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AddElementstoAuthorForm">
+    <description>
+      <p>Allows the injection of custom form fields given the current <code>$this-&gt;Form</code>
+object. Please note that this custom data should be saved in own extension
+tables and that modifying <code>tbl_authors</code> to house your data is highly discouraged.</p>
+    </description>
+    <location line="415">content/content.systemauthors.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/authors/</p>
+        </description>
+      </parameter>
+      <parameter name="form" type="XMLElement">
+        <description>
+          <p>The contents of <code>$this-&gt;Form</code> after all the default form elements have been appended.</p>
+        </description>
+      </parameter>
+      <parameter name="author" type="Author">
+        <description>
+          <p>The current Author object that is being edited</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AddSectionElements">
+    <description>
+      <p>Allows extensions to add elements to the header of the Section Editor
+form. Usually for section settings, this delegate is passed the current
+<code>$meta</code> array and the <code>$this-&gt;_errors</code> array.</p>
+    </description>
+    <location line="402">content/content.blueprintssections.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/sections/'</p>
+        </description>
+      </parameter>
+      <parameter name="form" type="XMLElement">
+        <description>
+          <p>An XMLElement of the current <code>$this-&gt;Form</code>, just after the Section settings have been appended, but before the Fields duplicator</p>
+        </description>
+      </parameter>
+      <parameter name="meta" type="array">
+        <description>
+          <p>The current $_POST['meta'] array</p>
+        </description>
+      </parameter>
+      <parameter name="errors" type="array">
+        <description>
+          <p>The current errors array</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AdminPagePostGenerate">
+    <description>
+      <p>Immediately after generating the admin page. Provided with string containing page source</p>
+    </description>
+    <location line="399">lib/core/class.administration.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/backend/'</p>
+        </description>
+      </parameter>
+      <parameter name="output" type="string">
+        <description>
+          <p>The resulting backend page HTML as a string, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AdminPagePreGenerate">
+    <description>
+      <p>Immediately before generating the admin page. Provided with the page object</p>
+    </description>
+    <location line="387">lib/core/class.administration.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/backend/'</p>
+        </description>
+      </parameter>
+      <parameter name="oPage" type="HTMLPage">
+        <description>
+          <p>An instance of the current page to be rendered, this will usually be a class that extends HTMLPage. The Symphony backend uses a convention of contentPageName as the class that extends the HTMLPage</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AppendElementBelowView">
+    <description>
+      <p>Allows developers to add items just above the page footer. Use <code>$context['parent']-&gt;Page</code>
+for access to the page object</p>
+    </description>
+    <location line="273">lib/toolkit/class.administrationpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/backend/'</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AppendEventFilter">
+    <description>
+      <p>Allows adding of new filter rules to the Event filter rule select box</p>
+    </description>
+    <location line="148">content/content.blueprintsevents.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/events/(edit|new|info)/'</p>
+        </description>
+      </parameter>
+      <parameter name="selected" type="array">
+        <description>
+          <p>An array of all the selected filters for this Event</p>
+        </description>
+      </parameter>
+      <parameter name="options" type="array">
+        <description>
+          <p>An array of all the filters that are available, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AppendEventFilterDocumentation">
+    <description>
+      <p>Allows adding documentation for new filters. A reference to the $documentation
+array is provided, along with selected filters</p>
+    </description>
+    <location line="415">content/content.blueprintsevents.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/events/(edit|new|info)/'</p>
+        </description>
+      </parameter>
+      <parameter name="selected" type="array">
+        <description>
+          <p>An array of all the selected filters for this Event</p>
+        </description>
+      </parameter>
+      <parameter name="documentation" type="array">
+        <description>
+          <p>An array of all the documentation XMLElements, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AppendPageAlert">
+    <description>
+      <p>Allows for appending of alerts. Administration::instance()-&gt;Page-&gt;Alert is way to tell what
+is currently in the system</p>
+    </description>
+    <location line="460">lib/toolkit/class.administrationpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/backend/'</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AppendPageContent">
+    <description>
+      <p>After all Page related Fields have been added to the DOM, just before the
+actions.</p>
+    </description>
+    <location line="568">content/content.blueprintspages.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/pages/'</p>
+        </description>
+      </parameter>
+      <parameter name="form" type="XMLElement"/>
+      <parameter name="fields" type="array"/>
+      <parameter name="errors" type="array"/>
+    </parameters>
+  </delegate>
+  <delegate name="AuthorLoginFailure">
+    <description>
+      <p>A failed login attempt into the Symphony backend</p>
+    </description>
+    <location line="180">content/content.login.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/login/'</p>
+        </description>
+      </parameter>
+      <parameter name="username" type="string">
+        <description>
+          <p>The username of the Author who attempted to login.</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AuthorLoginSuccess">
+    <description>
+      <p>A successful login attempt into the Symphony backend</p>
+    </description>
+    <location line="195">content/content.login.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/login/'</p>
+        </description>
+      </parameter>
+      <parameter name="username" type="string">
+        <description>
+          <p>The username of the Author who logged in.</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AuthorPostCreate">
+    <description>
+      <p>Creation of a new Author. The Author object is provided as read
+only through this delegate.</p>
+    </description>
+    <location line="457">content/content.systemauthors.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/authors/'</p>
+        </description>
+      </parameter>
+      <parameter name="author" type="Author">
+        <description>
+          <p>The Author object that has just been created</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AuthorPostEdit">
+    <description>
+      <p>After editing an author, provided with the Author object</p>
+    </description>
+    <location line="543">content/content.systemauthors.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/authors/'</p>
+        </description>
+      </parameter>
+      <parameter name="author" type="Author">
+        <description>
+          <p>An Author object</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AuthorPostPasswordChange">
+    <description>
+      <p>When an Author changes their password as the result of a login
+with an emergency token (ie. forgot password). Just after their
+new password has been set successfully</p>
+    </description>
+    <location line="298">content/content.login.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/login/'</p>
+        </description>
+      </parameter>
+      <parameter name="author_id" type="integer">
+        <description>
+          <p>The ID of the Author who has just changed their password</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AuthorPostPasswordResetFailure">
+    <description>
+      <p>When a password reset has been attempted, but Symphony doesn't
+recognise the credentials the user has given.</p>
+    </description>
+    <location line="264">content/content.login.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/login/'</p>
+        </description>
+      </parameter>
+      <parameter name="email" type="string">
+        <description>
+          <p>The santizied Email of the Author who tried to request the password reset</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AuthorPostPasswordResetRequest">
+    <description>
+      <p>Just after a Forgot Password email has been sent to the Author
+who has requested a password reset.</p>
+    </description>
+    <location line="342">content/content.login.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/login/'</p>
+        </description>
+      </parameter>
+      <parameter name="author_id" type="integer">
+        <description>
+          <p>The ID of the Author who has requested their password be reset</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AuthorPostPasswordResetSuccess">
+    <description>
+      <p>When a password reset has occured and after the Password
+Reset email has been sent.</p>
+    </description>
+    <location line="248">content/content.login.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/login/'</p>
+        </description>
+      </parameter>
+      <parameter name="author_id" type="integer">
+        <description>
+          <p>The ID of the Author who requested the password reset</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="AuthorPreDelete">
+    <description>
+      <p>Prior to deleting an author, provided with the Author ID.</p>
+    </description>
+    <location line="565">content/content.systemauthors.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/authors/'</p>
+        </description>
+      </parameter>
+      <parameter name="author_id" type="integer">
+        <description>
+          <p>The ID of Author ID that is about to be deleted</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="CustomActions">
+    <description>
+      <p>This is where Extensions can hook on to custom actions they may need to provide
+as a result of adding some custom actions through the <code>AddCustomPreferenceFieldsets</code>
+delegate</p>
+    </description>
+    <location line="130">content/content.systempreferences.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/preferences/'</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="DataSourceEntriesBuilt">
+    <description>
+      <p>Immediately after building entries allow modification of the Data Source entry list</p>
+    </description>
+    <location line="206">lib/toolkit/data-sources/datasource.section.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="datasource" type="Datasource"/>
+      <parameter name="entries" type="array"/>
+      <parameter name="filters" type="array"/>
+    </parameters>
+  </delegate>
+  <delegate name="DatasourcePostCreate">
+    <description>
+      <p>After creating the Datasource, the path to the Datasource file is provided</p>
+    </description>
+    <location line="1188">content/content.blueprintsdatasources.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/datasources/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Datasource file</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="DatasourcePostEdit">
+    <description>
+      <p>After editing the Datasource, the path to the Datasource file is provided</p>
+    </description>
+    <location line="1201">content/content.blueprintsdatasources.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/datasources/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Datasource file</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="DatasourcePreCreate">
+    <description>
+      <p>Prior to creating the Datasource, the file path where it will be written to
+is provided and well as the contents of that file.</p>
+    </description>
+    <location line="1110">content/content.blueprintsdatasources.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/datasources/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Datasource file</p>
+        </description>
+      </parameter>
+      <parameter name="contents" type="string">
+        <description>
+          <p>The contents for this Datasource as a string passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="params" type="array">
+        <description>
+          <p>An array of all the <code>$dsParam*</code> values</p>
+        </description>
+      </parameter>
+      <parameter name="elements" type="array">
+        <description>
+          <p>An array of all the elements included in this datasource</p>
+        </description>
+      </parameter>
+      <parameter name="filters" type="array">
+        <description>
+          <p>An associative array of all the filters for this datasource with the key being the <code>field_id</code> and the value the filter.</p>
+        </description>
+      </parameter>
+      <parameter name="dependencies" type="array">
+        <description>
+          <p>An array of dependencies that this datasource has</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="DatasourcePreDelete">
+    <description>
+      <p>Prior to deleting the Datasource file. Target file path is provided.</p>
+    </description>
+    <location line="854">content/content.blueprintsdatasources.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/datasources/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Datasource file</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="DatasourcePreEdit">
+    <description>
+      <p>Prior to editing a Datasource, the file path where it will be written to
+is provided and well as the contents of that file.</p>
+    </description>
+    <location line="1142">content/content.blueprintsdatasources.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/datasources/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Datasource file</p>
+        </description>
+      </parameter>
+      <parameter name="contents" type="string">
+        <description>
+          <p>The contents for this Datasource as a string passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="params" type="array">
+        <description>
+          <p>An array of all the <code>$dsParam*</code> values</p>
+        </description>
+      </parameter>
+      <parameter name="elements" type="array">
+        <description>
+          <p>An array of all the elements included in this datasource</p>
+        </description>
+      </parameter>
+      <parameter name="filters" type="array">
+        <description>
+          <p>An associative array of all the filters for this datasource with the key being the <code>field_id</code> and the value the filter.</p>
+        </description>
+      </parameter>
+      <parameter name="dependencies" type="array">
+        <description>
+          <p>An array of dependencies that this datasource has</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="Delete">
+    <description>
+      <p>Prior to deletion of entries. Array of Entry ID's is provided.
+The array can be manipulated</p>
+    </description>
+    <location line="917">content/content.publish.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/publish/'</p>
+        </description>
+      </parameter>
+      <parameter name="checked" type="array">
+        <description>
+          <p>An array of Entry ID's passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="EntryPostCreate">
+    <description>
+      <p>Creation of an Entry. New Entry object is provided.</p>
+    </description>
+    <location line="632">content/content.publish.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/publish/new/'</p>
+        </description>
+      </parameter>
+      <parameter name="section" type="Section"/>
+      <parameter name="entry" type="Entry"/>
+      <parameter name="fields" type="array"/>
+    </parameters>
+  </delegate>
+  <delegate name="EntryPostEdit">
+    <description>
+      <p>Just after the editing of an Entry</p>
+    </description>
+    <location line="886">content/content.publish.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/publish/edit/'</p>
+        </description>
+      </parameter>
+      <parameter name="section" type="Section"/>
+      <parameter name="entry" type="Entry"/>
+      <parameter name="fields" type="array"/>
+    </parameters>
+  </delegate>
+  <delegate name="EntryPreCreate">
+    <description>
+      <p>Just prior to creation of an Entry</p>
+    </description>
+    <location line="613">content/content.publish.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/publish/new/'</p>
+        </description>
+      </parameter>
+      <parameter name="section" type="Section"/>
+      <parameter name="entry" type="Entry"/>
+      <parameter name="fields" type="array"/>
+    </parameters>
+  </delegate>
+  <delegate name="EntryPreEdit">
+    <description>
+      <p>Just prior to editing of an Entry.</p>
+    </description>
+    <location line="866">content/content.publish.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/publish/edit/'</p>
+        </description>
+      </parameter>
+      <parameter name="section" type="Section"/>
+      <parameter name="entry" type="Entry"/>
+      <parameter name="fields" type="array"/>
+    </parameters>
+  </delegate>
+  <delegate name="EntryPreRender">
+    <description>
+      <p>Just prior to rendering of an Entry edit form.</p>
+    </description>
+    <location line="703">content/content.publish.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/publish/new/'</p>
+        </description>
+      </parameter>
+      <parameter name="section" type="Section"/>
+      <parameter name="entry" type="Entry"/>
+      <parameter name="fields" type="array"/>
+    </parameters>
+  </delegate>
+  <delegate name="EventFinalSaveFilter">
+    <description>
+      <p>This delegate that lets extensions know the final status of the
+current Event. It is triggered when everything has processed correctly.
+The <code>$messages</code> array contains the results of the previous filters that
+have executed, and the <code>$errors</code> array contains any errors that have
+occurred as a result of this delegate. These errors cannot stop the
+processing of the Event, as that has already been done.</p>
+    </description>
+    <location line="367">lib/toolkit/events/event.section.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="fields" type="array"/>
+      <parameter name="event" type="string"/>
+      <parameter name="messages" type="array">
+        <description>
+          <p>An associative array of array's which contain 4 values, the name of the filter (string), the status (boolean), the message (string) an optionally an associative array of additional attributes to add to the filter element.</p>
+        </description>
+      </parameter>
+      <parameter name="errors" type="array">
+        <description>
+          <p>An associative array of array's which contain 4 values, the name of the filter (string), the status (boolean), the message (string) an optionally an associative array of additional attributes to add to the filter element.</p>
+        </description>
+      </parameter>
+      <parameter name="entry" type="Entry"/>
+    </parameters>
+  </delegate>
+  <delegate name="EventPostCreate">
+    <description>
+      <p>After creating the Event, the path to the Event file is provided</p>
+    </description>
+    <location line="508">content/content.blueprintsevents.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/events/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Event file</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="EventPostEdit">
+    <description>
+      <p>After editing the Event, the path to the Event file is provided</p>
+    </description>
+    <location line="521">content/content.blueprintsevents.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/events/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Event file</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="EventPostSaveFilter">
+    <description>
+      <p>After saving entry from the front-end. This delegate will not force
+the Events to terminate if it populates the <code>$filter_results</code> array.
+Provided with references to this object, the <code>$_POST</code> data and also
+the error array</p>
+    </description>
+    <location line="324">lib/toolkit/events/event.section.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="entry_id" type="integer"/>
+      <parameter name="fields" type="array"/>
+      <parameter name="entry" type="Entry"/>
+      <parameter name="event" type="string"/>
+      <parameter name="messages" type="array">
+        <description>
+          <p>An associative array of array's which contain 4 values, the name of the filter (string), the status (boolean), the message (string) an optionally an associative array of additional attributes to add to the filter element.</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="EventPreDelete">
+    <description>
+      <p>Prior to deleting the Event file. Target file path is provided.</p>
+    </description>
+    <location line="199">content/content.blueprintsevents.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/events/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Event file</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="EventPreEdit">
+    <description>
+      <p>Prior to editing an Event, the file path where it will be written to
+is provided and well as the contents of that file.</p>
+    </description>
+    <location line="466">content/content.blueprintsevents.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/events/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Event file</p>
+        </description>
+      </parameter>
+      <parameter name="contents" type="string">
+        <description>
+          <p>The contents for this Event as a string passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="filters" type="array">
+        <description>
+          <p>An array of the filters attached to this event</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="EventPreSaveFilter">
+    <description>
+      <p>Prior to saving entry from the front-end. This delegate will
+force the Event to terminate if it populates the <code>$filter_results</code>
+array. All parameters are passed by reference.</p>
+    </description>
+    <location line="49">lib/toolkit/events/event.section.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="fields" type="array"/>
+      <parameter name="event" type="string"/>
+      <parameter name="messages" type="array">
+        <description>
+          <p>An associative array of array's which contain 4 values, the name of the filter (string), the status (boolean), the message (string) an optionally an associative array of additional attributes to add to the filter element.</p>
+        </description>
+      </parameter>
+      <parameter name="post_values" type="XMLElement"/>
+    </parameters>
+  </delegate>
+  <delegate name="EventsPreCreate">
+    <description>
+      <p>Prior to creating an Event, the file path where it will be written to
+is provided and well as the contents of that file.</p>
+    </description>
+    <location line="444">content/content.blueprintsevents.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/events/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Event file</p>
+        </description>
+      </parameter>
+      <parameter name="contents" type="string">
+        <description>
+          <p>The contents for this Event as a string passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="filters" type="array">
+        <description>
+          <p>An array of the filters attached to this event</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="ExtensionPreDisable">
+    <description>
+      <p>Notifies just before an Extension is to be disabled.</p>
+    </description>
+    <location line="167">content/content.systemextensions.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/extensions/'</p>
+        </description>
+      </parameter>
+      <parameter name="extensions" type="array">
+        <description>
+          <p>An array of all the extension name's to be disabled, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="ExtensionPreEnable">
+    <description>
+      <p>Notifies just before an Extension is to be enabled.</p>
+    </description>
+    <location line="147">content/content.systemextensions.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/extensions/'</p>
+        </description>
+      </parameter>
+      <parameter name="extensions" type="array">
+        <description>
+          <p>An array of all the extension name's to be enabled, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="ExtensionPreUninstall">
+    <description>
+      <p>Notifies just before an Extension is to be uninstalled</p>
+    </description>
+    <location line="186">content/content.systemextensions.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/extensions/'</p>
+        </description>
+      </parameter>
+      <parameter name="extensions" type="array">
+        <description>
+          <p>An array of all the extension name's to be uninstalled, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="ExtensionsAddToNavigation">
+    <description>
+      <p>After building the Navigation properties array. This is specifically
+for extensions to add their groups to the navigation or items to groups,
+already in the navigation. Note: THIS IS FOR ADDING ONLY! If you need
+to edit existing navigation elements, use the <code>NavigationPreRender</code> delegate.</p>
+    </description>
+    <location line="749">lib/toolkit/class.administrationpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/backend/'</p>
+        </description>
+      </parameter>
+      <parameter name="navigation" type="array"/>
+    </parameters>
+  </delegate>
+  <delegate name="FieldPostCreate">
+    <description>
+      <p>After creation of a Field.</p>
+    </description>
+    <location line="745">content/content.blueprintssections.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/sections/'</p>
+        </description>
+      </parameter>
+      <parameter name="field" type="Field">
+        <description>
+          <p>The Field object, passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="data" type="array">
+        <description>
+          <p>The settings for ths <code>$field</code>, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FieldPostEdit">
+    <description>
+      <p>After editing of a Field.</p>
+    </description>
+    <location line="759">content/content.blueprintssections.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/sections/'</p>
+        </description>
+      </parameter>
+      <parameter name="field" type="Field">
+        <description>
+          <p>The Field object, passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="data" type="array">
+        <description>
+          <p>The settings for ths <code>$field</code>, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendDevKitResolve">
+    <description>
+      <p>Allows a devkit object to be specified, and stop continued execution:</p>
+    </description>
+    <location line="191">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="full_generate" type="boolean">
+        <description>
+          <p>Whether this page will be completely generated (ie. invoke the XSLT transform) or not, by default this is true. Passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="devkit" type="mixed">
+        <description>
+          <p>Allows a devkit to register to this page</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendEventPostProcess">
+    <description>
+      <p>Just after the page events have triggered. Provided with the XML object</p>
+    </description>
+    <location line="749">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="xml" type="XMLElement">
+        <description>
+          <p>The XMLElement to append the Events results to. Event results are contained in a root XMLElement that is the handlised version of their name.</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendInitialised">
+    <location line="108">lib/core/class.frontend.php</location>
+    <parameters/>
+  </delegate>
+  <delegate name="FrontendOutputPostGenerate">
+    <description>
+      <p>Immediately after generating the page. Provided with string containing page source</p>
+    </description>
+    <location line="260">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="output" type="string">
+        <description>
+          <p>The generated output of this page, ie. a string of HTML, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendOutputPreGenerate">
+    <description>
+      <p>Immediately before generating the page. Provided with the page object, XML and XSLT</p>
+    </description>
+    <location line="217">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="page" type="FrontendPage">
+        <description>
+          <p>This FrontendPage object, by reference</p>
+        </description>
+      </parameter>
+      <parameter name="xml" type="string">
+        <description>
+          <p>This pages XML, including the Parameters, Datasource and Event XML, by reference</p>
+        </description>
+      </parameter>
+      <parameter name="xsl" type="string">
+        <description>
+          <p>This pages XSLT</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendPageResolved">
+    <description>
+      <p>Just after having resolved the page, but prior to any commencement of output creation</p>
+    </description>
+    <location line="329">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="page" type="FrontendPage">
+        <description>
+          <p>An instance of this class, passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="page_data" type="array">
+        <description>
+          <p>An associative array of page data, which is a combination from <code>tbl_pages</code> and the path of the page on the filesystem. Passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendParamsPostResolve">
+    <description>
+      <p>Access to the resolved param pool, including additional parameters provided by Data Source outputs</p>
+    </description>
+    <location line="442">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="params" type="array">
+        <description>
+          <p>An associative array of this page's parameters</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendParamsResolve">
+    <description>
+      <p>Just after having resolved the page params, but prior to any commencement of output creation</p>
+    </description>
+    <location line="395">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="params" type="array">
+        <description>
+          <p>An associative array of this page's parameters</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendPrePageResolve">
+    <description>
+      <p>Before page resolve. Allows manipulation of page without redirection</p>
+    </description>
+    <location line="519">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="row" type="mixed"/>
+      <parameter name="page" type="FrontendPage">
+        <description>
+          <p>An instance of this FrontendPage</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendPreRenderHeaders">
+    <description>
+      <p>This is just prior to the page headers being rendered, and is suitable for changing them</p>
+    </description>
+    <location line="248">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="FrontendProcessEvents">
+    <description>
+      <p>Manipulate the events array and event element wrapper</p>
+    </description>
+    <location line="697">lib/toolkit/class.frontendpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="env" type="array"/>
+      <parameter name="events" type="string">
+        <description>
+          <p>A string of all the Events attached to this page, comma separated.</p>
+        </description>
+      </parameter>
+      <parameter name="wrapper" type="XMLElement">
+        <description>
+          <p>The XMLElement to append the Events results to. Event results are contained in a root XMLElement that is the handlised version of their name.</p>
+        </description>
+      </parameter>
+      <parameter name="page_data" type="array">
+        <description>
+          <p>An associative array of page meta data</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="InitaliseAdminPageHead">
+    <description>
+      <p>Allows developers to insert items into the page HEAD. Use <code>$context['parent']-&gt;Page</code>
+for access to the page object</p>
+    </description>
+    <location line="237">lib/toolkit/class.administrationpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/backend/'</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="ManipulateDevKitNavigation">
+    <description>
+      <p>Allow navigation XML to be manipulated before it is rendered.</p>
+    </description>
+    <location line="145">lib/toolkit/class.devkit.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/frontend/'</p>
+        </description>
+      </parameter>
+      <parameter name="xml" type="DOMDocument"/>
+    </parameters>
+  </delegate>
+  <delegate name="ModifyTextareaFieldPublishWidget">
+    <description>
+      <p>Allows developers modify the textarea before it is rendered in the publish forms</p>
+    </description>
+    <location line="48">lib/toolkit/fields/field.textarea.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/backend/'</p>
+        </description>
+      </parameter>
+      <parameter name="field" type="Field"/>
+      <parameter name="label" type="Widget"/>
+      <parameter name="textarea" type="Widget"/>
+    </parameters>
+  </delegate>
+  <delegate name="NavigationPreRender">
+    <description>
+      <p>Immediately before displaying the admin navigation. Provided with the
+navigation array. Manipulating it will alter the navigation for all pages.</p>
+    </description>
+    <location line="492">lib/toolkit/class.administrationpage.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/backend/'</p>
+        </description>
+      </parameter>
+      <parameter name="nav" type="array">
+        <description>
+          <p>An associative array of the current navigation, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="PagePostCreate">
+    <description>
+      <p>Just after the creation of a new page in <code>tbl_pages</code></p>
+    </description>
+    <location line="833">content/content.blueprintspages.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/pages/'</p>
+        </description>
+      </parameter>
+      <parameter name="page_id" type="integer">
+        <description>
+          <p>The ID of the newly created Page</p>
+        </description>
+      </parameter>
+      <parameter name="fields" type="array">
+        <description>
+          <p>An associative array of data that was just saved for this page</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="PagePostEdit">
+    <description>
+      <p>Just after updating a page in <code>tbl_pages</code></p>
+    </description>
+    <location line="883">content/content.blueprintspages.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/pages/'</p>
+        </description>
+      </parameter>
+      <parameter name="page_id" type="integer">
+        <description>
+          <p>The ID of the Page that was just updated</p>
+        </description>
+      </parameter>
+      <parameter name="fields" type="array">
+        <description>
+          <p>An associative array of data that was just saved for this page</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="PagePostValidate">
+    <description>
+      <p>Just after the Symphony validation has run, allows Developers
+to run custom validation logic on a Page</p>
+    </description>
+    <location line="702">content/content.blueprintspages.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/pages/'</p>
+        </description>
+      </parameter>
+      <parameter name="fields" type="array">
+        <description>
+          <p>The <code>$_POST['fields']</code> array. This should be read-only and not changed through this delegate.</p>
+        </description>
+      </parameter>
+      <parameter name="errors" type="array">
+        <description>
+          <p>An associative array of errors, with the key matching a key in the <code>$fields</code> array, and the value being the string of the error. <code>$errors</code> is passed by reference.</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="PagePreCreate">
+    <description>
+      <p>Just prior to creating a new Page record in <code>tbl_pages</code>, provided
+with the <code>$fields</code> associative array. Use with caution, as no
+duplicate page checks are run after this delegate has fired</p>
+    </description>
+    <location line="805">content/content.blueprintspages.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/pages/'</p>
+        </description>
+      </parameter>
+      <parameter name="fields" type="array">
+        <description>
+          <p>The <code>$_POST['fields']</code> array passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="PagePreDelete">
+    <description>
+      <p>Prior to deleting Pages</p>
+    </description>
+    <location line="955">content/content.blueprintspages.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/pages/</p>
+        </description>
+      </parameter>
+      <parameter name="page_ids" type="array">
+        <description>
+          <p>An array of Page ID's that are about to be deleted, passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="redirect" type="string">
+        <description>
+          <p>The absolute path that the Developer will be redirected to after the Pages are deleted</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="PagePreEdit">
+    <description>
+      <p>Just prior to updating a Page record in <code>tbl_pages</code>, provided
+with the <code>$fields</code> associative array. Use with caution, as no
+duplicate page checks are run after this delegate has fired</p>
+    </description>
+    <location line="855">content/content.blueprintspages.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/pages/'</p>
+        </description>
+      </parameter>
+      <parameter name="page_id" type="integer">
+        <description>
+          <p>The ID of the Page that is about to be updated</p>
+        </description>
+      </parameter>
+      <parameter name="fields" type="array">
+        <description>
+          <p>The <code>$_POST['fields']</code> array passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="PageTypePreCreate">
+    <description>
+      <p>Just before the page's types are saved into <code>tbl_pages_types</code>.
+Use with caution as no further processing is done on the <code>$types</code>
+array to prevent duplicate <code>$types</code> from occurring (ie. two index
+page types). Your logic can use the contentBlueprintsPages::typeUsed
+function to perform this logic.</p>
+    </description>
+    <location line="906">content/content.blueprintspages.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/pages/'</p>
+        </description>
+      </parameter>
+      <parameter name="page_id" type="integer">
+        <description>
+          <p>The ID of the Page that was just created or updated</p>
+        </description>
+      </parameter>
+      <parameter name="types" type="array">
+        <description>
+          <p>An associative array of the types for this page passed by reference.</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="Save">
+    <description>
+      <p>Just prior to saving the preferences and writing them to the <code>CONFIG</code>
+Allows extensions to preform custom validaton logic on the settings.</p>
+    </description>
+    <location line="147">content/content.systempreferences.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/system/preferences/'</p>
+        </description>
+      </parameter>
+      <parameter name="settings" type="array">
+        <description>
+          <p>An array of the preferences to be saved, passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="errors" type="array">
+        <description>
+          <p>An array of errors passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="SectionPostCreate">
+    <description>
+      <p>After the Section has been created, and all the Field's have been
+created for this section, but just before the redirect</p>
+    </description>
+    <location line="777">content/content.blueprintssections.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/sections/'</p>
+        </description>
+      </parameter>
+      <parameter name="section_id" type="integer">
+        <description>
+          <p>The newly created Section ID.</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="SectionPostEdit">
+    <description>
+      <p>After the Section has been updated, and all the Field's have been
+updated for this section, but just before the redirect</p>
+    </description>
+    <location line="793">content/content.blueprintssections.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/sections/'</p>
+        </description>
+      </parameter>
+      <parameter name="section_id" type="integer">
+        <description>
+          <p>The edited Section ID.</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="SectionPreCreate">
+    <description>
+      <p>Just prior to saving the Section settings. Use with caution as
+there is no additional processing to ensure that Field's or Section's
+are unique.</p>
+    </description>
+    <location line="661">content/content.blueprintssections.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/sections/'</p>
+        </description>
+      </parameter>
+      <parameter name="meta" type="array">
+        <description>
+          <p>The section's settings, passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="fields" type="array">
+        <description>
+          <p>An associative array of the fields that will be saved to this section with the key being the position in the Section Editor and the value being a Field object, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="SectionPreDelete">
+    <description>
+      <p>Just prior to calling the Section Manager's delete function</p>
+    </description>
+    <location line="816">content/content.blueprintssections.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/sections/'</p>
+        </description>
+      </parameter>
+      <parameter name="section_ids" type="array">
+        <description>
+          <p>An array of Section ID's passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="SectionPreEdit">
+    <description>
+      <p>Just prior to updating the Section settings. Use with caution as
+there is no additional processing to ensure that Field's or Section's
+are unique.</p>
+    </description>
+    <location line="690">content/content.blueprintssections.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/sections/'</p>
+        </description>
+      </parameter>
+      <parameter name="section_id" type="integer">
+        <description>
+          <p>The Section ID that is about to be edited.</p>
+        </description>
+      </parameter>
+      <parameter name="meta" type="array">
+        <description>
+          <p>The section's settings, passed by reference</p>
+        </description>
+      </parameter>
+      <parameter name="fields" type="array">
+        <description>
+          <p>An associative array of the fields that will be saved to this section with the key being the position in the Section Editor and the value being a Field object, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="UtilityPostCreate">
+    <description>
+      <p>Just after the Utility has been written to disk</p>
+    </description>
+    <location line="241">content/content.blueprintsutilities.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/utilities/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Utility file</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="UtilityPostEdit">
+    <description>
+      <p>Prior to deleting the Utility</p>
+    </description>
+    <location line="254">content/content.blueprintsutilities.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/utilities/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Utility file</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="UtilityPreCreate">
+    <description>
+      <p>Just before the Utility has been created</p>
+    </description>
+    <location line="200">content/content.blueprintsutilities.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/utilities/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Utility file</p>
+        </description>
+      </parameter>
+      <parameter name="contents" type="string">
+        <description>
+          <p>The contents of the <code>$fields['body']</code>, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="UtilityPreDelete">
+    <description>
+      <p>Prior to deleting the Utility</p>
+    </description>
+    <location line="275">content/content.blueprintsutilities.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/utilities/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Utility file</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+  <delegate name="UtilityPreEdit">
+    <description>
+      <p>Just before the Utility has been updated</p>
+    </description>
+    <location line="215">content/content.blueprintsutilities.php</location>
+    <parameters>
+      <parameter name="context" type="string">
+        <description>
+          <p>'/blueprints/utilities/'</p>
+        </description>
+      </parameter>
+      <parameter name="file" type="string">
+        <description>
+          <p>The path to the Utility file</p>
+        </description>
+      </parameter>
+      <parameter name="contents" type="string">
+        <description>
+          <p>The contents of the <code>$fields['body']</code>, passed by reference</p>
+        </description>
+      </parameter>
+    </parameters>
+  </delegate>
+</delegates>

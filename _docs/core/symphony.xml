@@ -1,0 +1,383 @@
+<?xml version="1.0"?>
+<class type="class" name="Symphony" handle="symphony">
+  <package name="core" handle="core"/>
+  <location line="33">lib/core/class.symphony.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+    <modifier>abstract</modifier>
+  </modifiers>
+  <description>
+    <p>The Symphony class is an abstract class that implements the
+ Singleton interface. It provides the glue that forms the Symphony
+ CMS and initialises the toolkit classes. Symphony is extended by
+ the Frontend and Administration classes</p>
+  </description>
+  <constants>
+    <constant name="CRLF" type="string" value="PHP_EOL">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="89">lib/core/class.symphony.php</location>
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This will be removed in the next version of Symphony</p></description></tag>
+      </tags>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$Author" type="Author" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="82">lib/core/class.symphony.php</location>
+      <description>
+        <p>An instance of the currently logged in Author</p>
+      </description>
+    </field>
+    <field name="$Configuration" type="Configuration" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="46">lib/core/class.symphony.php</location>
+      <description>
+        <p>An instance of the Configuration class</p>
+      </description>
+    </field>
+    <field name="$Cookie" type="Cookie" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="76">lib/core/class.symphony.php</location>
+      <description>
+        <p>An instance of the Cookie class</p>
+      </description>
+    </field>
+    <field name="$Database" type="MySQL" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="52">lib/core/class.symphony.php</location>
+      <description>
+        <p>An instance of the Database class</p>
+      </description>
+    </field>
+    <field name="$ExtensionManager" type="ExtensionManager" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="58">lib/core/class.symphony.php</location>
+      <description>
+        <p>An instance of the ExtensionManager class</p>
+      </description>
+    </field>
+    <field name="$Log" type="Log" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="64">lib/core/class.symphony.php</location>
+      <description>
+        <p>An instance of the Log class</p>
+      </description>
+    </field>
+    <field name="$Profiler" type="Profiler" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="70">lib/core/class.symphony.php</location>
+      <description>
+        <p>An instance of the Profiler class</p>
+      </description>
+    </field>
+    <field name="$_instance" type="Symphony" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="40">lib/core/class.symphony.php</location>
+      <description>
+        <p>An instance of the Symphony class, either Administration or
+ Frontend.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="Configuration" return="Configuration">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="167">lib/core/class.symphony.php</location>
+      <description>
+        <p>Accessor for the current Configuration instance. This contains
+ representation of the the Symphony config file.</p>
+      </description>
+    </method>
+    <method name="Database" return="MySQL">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="285">lib/core/class.symphony.php</location>
+      <description>
+        <p>Accessor for the current <code>$Database</code> instance.</p>
+      </description>
+    </method>
+    <method name="Engine" return="Symphony">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="151">lib/core/class.symphony.php</location>
+      <description>
+        <p>Accessor for the Symphony instance, whether it be Frontend
+ or Administration</p>
+      </description>
+      <tags>
+        <tag group="Since">Symphony 2.2</tag>
+      </tags>
+    </method>
+    <method name="ExtensionManager" return="ExtensionManager">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="229">lib/core/class.symphony.php</location>
+      <description>
+        <p>Accessor for the current <code>$ExtensionManager</code> instance.</p>
+      </description>
+      <tags>
+        <tag group="Since">Symphony 2.2</tag>
+      </tags>
+    </method>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="99">lib/core/class.symphony.php</location>
+      <description>
+        <p>The Symphony constructor initialises the class variables of Symphony.
+ It will set the DateTime settings, define new date constants and initialise
+ the correct Language for the currently logged in Author. If magic quotes
+ are enabled, Symphony will sanitize the <code>$_SERVER</code>, <code>$_COOKIE</code>,
+ <code>$_GET</code> and <code>$_POST</code> arrays. The constructor loads in
+ the initial Configuration values from the <code>CONFIG</code> file</p>
+      </description>
+    </method>
+    <method name="customError" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="heading" type="string"/>
+        <parameter name="message" type="string|XMLElement"/>
+        <parameter name="template" type="string"/>
+        <parameter name="additional" type="array"/>
+      </parameters>
+      <location line="520">lib/core/class.symphony.php</location>
+      <description>
+        <p>A wrapper for throwing a new Symphony Error page.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="SymphonyErrorPage" path="core.SymphonyErrorPage">core.SymphonyErrorPage</tag>
+        <tag group="Parameters" name="heading"><description><p>A heading for the error page</p></description></tag>
+        <tag group="Parameters" name="message"><description><p>A description for this error, which can be provided as a string or as an XMLElement.</p></description></tag>
+        <tag group="Parameters" name="template"><description><p>A string for the error page template to use, defaults to 'error'. This can be the name of any template file in the <code>TEMPLATES</code> directory. A template using the naming convention of <code>tpl.*.php</code>.</p></description></tag>
+        <tag group="Parameters" name="additional"><description><p>Allows custom information to be passed to the Symphony Error Page that the template may want to expose, such as custom Headers etc.</p></description></tag>
+      </tags>
+    </method>
+    <method name="initialiseCookie" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="197">lib/core/class.symphony.php</location>
+      <description>
+        <p>Setter for <code>$Cookie</code>. This will use PHP's parse<em>url
+ function on the current URL to set a cookie using the cookie</em>prefix
+ defined in the Symphony configuration. The cookie will last two
+ weeks.</p>
+      </description>
+    </method>
+    <method name="initialiseDatabase" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="243">lib/core/class.symphony.php</location>
+      <description>
+        <p>Setter for the <code>$Database</code>. This will create a new Database driver
+ and then attempt to create a connection to the database using the
+ connection details provided in the Symphony configuration. If any
+ errors occur whilst doing so, a Symphony Error Page is displayed.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>This function will return true if the <code>$Database</code> was initialised successfully.</p></description></tag>
+      </tags>
+    </method>
+    <method name="initialiseExtensionManager" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="213">lib/core/class.symphony.php</location>
+      <description>
+        <p>Setter for <code>$ExtensionManager</code> using the current
+ Symphony instance as the parent. If for some reason this fails,
+ a Symphony Error page will be thrown</p>
+      </description>
+    </method>
+    <method name="initialiseLog" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="176">lib/core/class.symphony.php</location>
+      <description>
+        <p>Setter for <code>$Log</code>. This function uses the configuration
+ settings in the 'log' group in the Configuration to create an instance. Date
+ formatting options are also retrieved from the configuration.</p>
+      </description>
+    </method>
+    <method name="isLoggedIn" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="406">lib/core/class.symphony.php</location>
+      <description>
+        <p>This function determines whether an there is a currently logged in
+ Author for Symphony by using the <code>$Cookie</code>'s username
+ and password. If an Author is found, they will be logged in, otherwise
+ the <code>$Cookie</code> will be destroyed.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Cookie" docblock="expire" path="core.Cookie#expire()">core.Cookie#expire()</tag>
+      </tags>
+    </method>
+    <method name="login" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="username" type="string"/>
+        <parameter name="password" type="string"/>
+        <parameter name="isHash" type="boolean"/>
+      </parameters>
+      <location line="308">lib/core/class.symphony.php</location>
+      <description>
+        <p>Attempts to log an Author in given a username and password.
+ If the password is not hashed, it will be hashed using the sha1
+ algorithm. The username and password will be sanitized before
+ being used to query the Database. If an Author is found, they
+ will be logged in and the sanitized username and password (also hashed)
+ will be saved as values in the <code>$Cookie</code>.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="General" docblock="hash" path="toolkit.General#hash()">toolkit.General#hash()</tag>
+        <tag group="Parameters" name="username"><description><p>The Author's username. This will be sanitized before use.</p></description></tag>
+        <tag group="Parameters" name="password"><description><p>The Author's password. This will be sanitized and then hashed before use</p></description></tag>
+        <tag group="Parameters" name="isHash"><description><p>If the password provided is already hashed, setting this parameter to true will stop it becoming rehashed. By default it is false.</p></description></tag>
+        <tag group="Returns"><description><p>True if the Author was logged in, false otherwise</p></description></tag>
+      </tags>
+    </method>
+    <method name="loginFromToken" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="token" type="string"/>
+      </parameters>
+      <location line="346">lib/core/class.symphony.php</location>
+      <description>
+        <p>Symphony allows Authors to login via the use of tokens instead of
+ a username and password. A token is derived from concatenating the
+ Author's username and password and applying the sha1 hash to
+ it, from this, a portion of the hash is used as the token. This is a useful
+ feature often used when setting up other Authors accounts or if an
+ Author forgets their password.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="token"><description><p>The Author token, which is a portion of the hashed string concatenation of the Author's username and password</p></description></tag>
+        <tag group="Returns"><description><p>True if the Author is logged in, false otherwise</p></description></tag>
+      </tags>
+    </method>
+    <method name="logout" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="394">lib/core/class.symphony.php</location>
+      <description>
+        <p>This function will destroy the currently logged in <code>$Author</code>
+ session, essentially logging them out.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Cookie" docblock="expire" path="core.Cookie#expire()">core.Cookie#expire()</tag>
+      </tags>
+    </method>
+    <method name="resolvePage" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="page_id" type="mixed"/>
+        <parameter name="column" type="mixed"/>
+      </parameters>
+      <location line="449">lib/core/class.symphony.php</location>
+      <description>
+        <p>Given the <code>$page_id</code> and a <code>$column</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="page_id"><description><p>The ID of the Page that currently being viewed, or the handle of the current Page</p></description></tag>
+        <tag group="Returns"><description><p>An array of the current Page, containing the <code>$column</code> requested. The current page will be the last item the array, as all parent pages are prepended to the start of the array</p></description></tag>
+      </tags>
+    </method>
+    <method name="resolvePagePath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="page_id" type="mixed"/>
+      </parameters>
+      <location line="497">lib/core/class.symphony.php</location>
+      <description>
+        <p>Given the <code>$page_id</code>, return the complete path to the
+ current page.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="page_id"><description><p>The ID of the Page that currently being viewed, or the handle of the current Page</p></description></tag>
+        <tag group="Returns"><description><p>The complete path to the current Page including any parent Pages, ie. /articles/read</p></description></tag>
+      </tags>
+    </method>
+    <method name="resolvePageTitle" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="page_id" type="mixed"/>
+      </parameters>
+      <location line="480">lib/core/class.symphony.php</location>
+      <description>
+        <p>Given the <code>$page_id</code>, return the complete title of the
+ current page.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="page_id"><description><p>The ID of the Page that currently being viewed, or the handle of the current Page</p></description></tag>
+        <tag group="Returns"><description><p>The title of the current Page. If the page is a child of another it will be prepended by the parent and a colon, ie. Articles: Read</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

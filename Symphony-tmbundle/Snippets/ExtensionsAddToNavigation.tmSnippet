@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/backend/',
+	'delegate' => 'ExtensionsAddToNavigation',
+	'callback' => 'extensionsAddToNavigation'
+),
+</string>
+	<key>name</key>
+	<string>ExtensionsAddToNavigation</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>27ED9911-C67F-2AB3-E893-A1930EBAA91A</string>
+</dict>
+</plist>

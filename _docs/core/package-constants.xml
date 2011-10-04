@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<constants package="core">
+  <constant name="__SYM_COOKIE_PATH__" type="mixed">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="202">lib/core/class.symphony.php</location>
+  </constant>
+  <constant name="__SYM_COOKIE_PREFIX_" type="mixed">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="203">lib/core/class.symphony.php</location>
+  </constant>
+  <constant name="__SYM_DATETIME_FORMAT__" type="mixed">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="120">lib/core/class.symphony.php</location>
+  </constant>
+  <constant name="__SYM_DATE_FORMAT__" type="mixed">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="118">lib/core/class.symphony.php</location>
+  </constant>
+  <constant name="__SYM_TIME_FORMAT__" type="mixed">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="119">lib/core/class.symphony.php</location>
+  </constant>
+</constants>

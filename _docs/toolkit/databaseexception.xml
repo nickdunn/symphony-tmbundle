@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<class type="class" name="DatabaseException" handle="databaseexception">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="14">lib/toolkit/class.mysql.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass>Exception</superclass>
+  <description>
+    <p>The DatabaseException class extends a normal Exception to add in
+ debugging information when a SQL query fails such as the internal
+ database error code and message in additional to the usual
+ Exception information. It allows a DatabaseException to contain a human
+ readable error, as well more technical information for debugging.</p>
+  </description>
+  <fields>
+    <field name="$_error" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="20">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>An associative array with three keys, 'query', 'msg' and 'num'</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="message" type="mixed"/>
+        <parameter name="error" type="mixed"/>
+      </parameters>
+      <location line="26">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Constructor takes a message and an associative array to set to
+ <code>$_error</code>. The message is passed to the default Exception constructor</p>
+      </description>
+    </method>
+    <method name="getDatabaseErrorCode" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="45">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Accessor function for the Database error code for this type of error</p>
+      </description>
+    </method>
+    <method name="getDatabaseErrorMessage" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="54">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Accessor function for the Database message from this Exception</p>
+      </description>
+    </method>
+    <method name="getQuery" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="36">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Accessor function for the original query that caused this Exception</p>
+      </description>
+    </method>
+  </methods>
+</class>

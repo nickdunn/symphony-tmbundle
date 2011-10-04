@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<class type="class" name="GenericErrorHandler" handle="genericerrorhandler">
+  <package name="core" handle="core"/>
+  <location line="214">lib/core/class.errorhandler.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p><code>GenericErrorHandler</code> will catch any warnings or notices thrown by PHP and
+ raise the errors to Exceptions so they can be dealt with by the
+ <code>GenericExceptionHandler</code>. If the error raised is not a <code>E_NOTICE</code> or <code>E_STRICT</code>,
+ it will be written to the Symphony log. Symphony will raise Exceptions for errors
+ thrown based on the error_reporting level set in PHP</p>
+  </description>
+  <fields>
+    <field name="$_Log" type="Log" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="233">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>An instance of the Symphony Log class, used to write errors to the log</p>
+      </description>
+    </field>
+    <field name="$enabled" type="boolean" value="true">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="221">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>Whether the error handler is enabled or not, defaults to true.
+ Setting to false will prevent any Symphony error handling from occurring</p>
+      </description>
+    </field>
+    <field name="$errorTypeStrings" type="array" value="array(...)">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="240">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>An associative array with the PHP error constant as a key, and
+ a string describing that constant as the value</p>
+      </description>
+    </field>
+    <field name="$raise" type="boolean" value="false">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="227">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>Whether to raise all Warnings to Exceptions or not.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="handler" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="code" type="integer"/>
+        <parameter name="message" type="string"/>
+        <parameter name="file" type="string"/>
+        <parameter name="line" type="integer"/>
+      </parameters>
+      <location line="287">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>The handler function will write the error to the <code>$Log</code> if it is not <code>E_NOTICE</code>
+ or <code>E_STRICT</code> before raising the error as an Exception. This allows all <code>E_WARNING</code>
+ to actually be captured by an Exception handler.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="code"><description><p>The error code, one of the PHP error constants</p></description></tag>
+        <tag group="Parameters" name="message"><description><p>The message of the error, this will be written to the log and displayed as the exception message</p></description></tag>
+        <tag group="Parameters" name="file"><description><p>The file that holds the logic that caused the error. Defaults to null</p></description></tag>
+        <tag group="Parameters" name="line"><description><p>The line where the error occurred.</p></description></tag>
+        <tag group="Returns"><description><p>Usually a string of HTML that will displayed to a user</p></description></tag>
+      </tags>
+    </method>
+    <method name="initialise" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="Log" type="Log|null"/>
+        <parameter name="raise" type="string"/>
+      </parameters>
+      <location line="251">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>Initialise will set the error handler to be the <code>__CLASS__</code> handler
+ function and will set this <code>$_Log</code> variable to a Log instance</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="Log"><description><p>(optional) An instance of a Symphony Log object to write errors to</p></description></tag>
+        <tag group="Parameters" name="raise"><description><p>Whether to raise E_WARNING as an Exception</p></description></tag>
+      </tags>
+    </method>
+    <method name="isEnabled" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="266">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>Determines if the error handler is enabled by checking that error_reporting
+ is set in the php config and that $enabled is true</p>
+      </description>
+    </method>
+  </methods>
+</class>

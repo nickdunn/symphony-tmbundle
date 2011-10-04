@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<class type="class" name="Section" handle="section">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="15">lib/toolkit/class.section.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Section class represents a Symphony Section object. A section is a model
+ of a data structure using one or more Fields. Sections are stored in the database
+ and are used as repositories for Entry objects, which are a model for this data
+ structure. This class contains functions for finding Fields within a Section and
+ saving a Section's settings.</p>
+  </description>
+  <fields>
+    <field name="$_Parent" type="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="19">lib/toolkit/class.section.php</location>
+      <description>
+        <p>The class who initialised this Section, usually SectionManager</p>
+      </description>
+    </field>
+    <field name="$_data" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="25">lib/toolkit/class.section.php</location>
+      <description>
+        <p>An array of the Section's settings</p>
+      </description>
+    </field>
+    <field name="$_fieldManager" type="FieldManager">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="31">lib/toolkit/class.section.php</location>
+      <description>
+        <p>An instance of the FieldManager class</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="mixed"/>
+      </parameters>
+      <location line="40">lib/toolkit/class.section.php</location>
+      <description>
+        <p>The construct function sets the parent variable of this Section and
+ initialises a new FieldManager object</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The class that initialised this Section, usually SectionManager</p></description></tag>
+      </tags>
+    </method>
+    <method name="commit" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="176">lib/toolkit/class.section.php</location>
+      <description>
+        <p>Commit the settings of this section from the section editor to
+ create an instance of this section in <code>tbl_sections</code>. This function
+ loops of each of the fields in this section and calls their commit
+ function.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Field" docblock="commit" path="toolkit.Field#commit()">toolkit.Field#commit()</tag>
+        <tag group="Returns"><description><p>true if the commit was successful, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchAssociatedSections" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="respect_visibility" type="bool"/>
+        <parameter name="respect_visibilty" type="boolean"/>
+      </parameters>
+      <location line="87">lib/toolkit/class.section.php</location>
+      <description>
+        <p>Returns any section associations this section has with other sections
+ linked using fields. Has an optional parameter, respect_visibility that
+ will only return associations that are deemed visible by a field that
+ created the association. eg. An articles section may link to the authors
+ section, but the field that links these sections has hidden this association
+ so an Articles column will not appear on the Author's Publish Index</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="respect_visibilty"><description><p>Whether to return all the section associations regardless of if they are deemed visible or not. Defaults to false, which will return all associations.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchFields" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="string"/>
+        <parameter name="location" type="string"/>
+      </parameters>
+      <location line="124">lib/toolkit/class.section.php</location>
+      <description>
+        <p>Returns an array of all the fields in this section optionally filtered by
+ the field type or it's location within the section.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="type"><description><p>The field type (it's handle as returned by <code>$field-&gt;handle()</code>)</p></description></tag>
+        <tag group="Parameters" name="location"><description><p>The location of the fields in the entry creator, whether they are 'main' or 'sidebar'</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchFieldsSchema" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="162">lib/toolkit/class.section.php</location>
+      <description>
+        <p>Returns the Schema of this section which includes all this sections
+ fields and their settings.</p>
+      </description>
+    </method>
+    <method name="fetchFilterableFields" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="location" type="string"/>
+      </parameters>
+      <location line="138">lib/toolkit/class.section.php</location>
+      <description>
+        <p>Returns an array of all the fields that can be filtered.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This function will be removed in the next major release. It is unused by Symphony.</p></description></tag>
+        <tag group="Parameters" name="location"><description><p>The location of the fields in the entry creator, whether they are 'main' or 'sidebar'</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchToggleableFields" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="location" type="string"/>
+      </parameters>
+      <location line="152">lib/toolkit/class.section.php</location>
+      <description>
+        <p>Returns an array of all the fields that can be toggled. This function
+ is used to help build the With Selected drop downs on the Publish
+ Index pages</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="location"><description><p>The location of the fields in the entry creator, whether they are 'main' or 'sidebar'</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchVisibleColumns" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="109">lib/toolkit/class.section.php</location>
+      <description>
+        <p>Returns an array of all the fields in this section that are to be displayed
+ on the entries tablepage ordered by the order in which they appear
+ in the Section Editor interface</p>
+      </description>
+    </method>
+    <method name="get" return="array|string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="setting" type="mixed"/>
+      </parameters>
+      <location line="68">lib/toolkit/class.section.php</location>
+      <description>
+        <p>An accessor function for this Section's settings. If the
+ $setting param is omitted, an array of all setting will
+ be returned, otherwise it will return the data for
+ the setting given</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>If setting is provided, returns a string, if setting is omitted returns an associative array of this Section's settings</p></description></tag>
+      </tags>
+    </method>
+    <method name="set" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="setting" type="string"/>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="54">lib/toolkit/class.section.php</location>
+      <description>
+        <p>A setter function that will save a section's setting into
+ the poorly named <code>$this-&gt;_data</code> variable</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="setting"><description><p>The setting name</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>The setting value</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

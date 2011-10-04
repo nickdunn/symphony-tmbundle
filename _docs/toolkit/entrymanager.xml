@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+<class type="class" name="EntryManager" handle="entrymanager">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="19">lib/toolkit/class.entrymanager.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The EntryManager is responsible for all Entry objects in Symphony.
+ Entries are stored in the database in a cluster of tables. There is a
+ parent entry row stored in <code>tbl_entries</code> and then each field's data is
+ stored in a separate table, <code>tbl_entries_data_{field_id}</code>. Where Field ID
+ is generated when the Section is saved. This Manager provides basic
+ add, edit, delete and fetching methods for Entries.</p>
+  </description>
+  <fields>
+    <field name="$_Parent" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="25">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>The class that initialised the Entry, usually the EntryManager</p>
+      </description>
+    </field>
+    <field name="$_fetchSortDirection" type="string" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="57">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>The direction that entries should be sorted in, available options are
+ RAND, ASC or DESC. Defaults to null, which implies ASC</p>
+      </description>
+    </field>
+    <field name="$_fetchSortField" type="integer" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="50">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>The Field ID that will be used to sort when fetching Entries, defaults
+ to null, which implies the Entry ID (id column in <code>tbl_entries</code>)</p>
+      </description>
+    </field>
+    <field name="$fieldManager" type="FieldManager">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="43">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>An instance of the FieldManager</p>
+      </description>
+    </field>
+    <field name="$formatterManager" type="TextFormatterManager">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="31">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>An instance of the TextFormatterManager</p>
+      </description>
+    </field>
+    <field name="$sectionManager" type="SectionManager">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="37">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>An instance of the SectionManager</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__buildEntries" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="rows" type="array"/>
+        <parameter name="section_id" type="integer"/>
+        <parameter name="element_names" type="array"/>
+      </parameters>
+      <location line="364">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Given an array of Entry data from <code>tbl_entries</code> and a section ID, return an
+ array of Entry objects. For performance reasons, it's possible to pass an array
+ of field handles via <code>$element_names</code>, so that only a subset of the section schema
+ will be queried. This function currently only supports Entry from one section at a
+ time.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="rows"><description><p>An array of Entry data from <code>tbl_entries</code> including the Entry ID, Entry section, the ID of the Author who created the Entry, and a Unix timestamp of creation</p></description></tag>
+        <tag group="Parameters" name="section_id"><description><p>The section ID of the entries in the <code>$rows</code></p></description></tag>
+        <tag group="Parameters" name="element_names"><description><p>Choose whether to get data from a subset of fields or all fields in a section, by providing an array of field names. Defaults to null, which will load data from all fields in a section.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="Administration" package="core" class="Administration"/>
+      </parameters>
+      <location line="67">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>The constructor initialises the formatterManager, sectionManager and
+ fieldManager variables and sets the <code>$this-&gt;_Parent</code> to the param provided.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The Administration object that this page has been created from passed by reference</p></description></tag>
+      </tags>
+    </method>
+    <method name="add" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="entry" type="Entry" package="toolkit" class="Entry"/>
+      </parameters>
+      <location line="138">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Given an Entry object, iterate over all of the fields in that object
+ an insert them into their relevant entry tables.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="entry"><description><p>An Entry object to insert into the database</p></description></tag>
+      </tags>
+    </method>
+    <method name="create" return="Entry">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="593">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Creates a new Entry object using this class as the parent.</p>
+      </description>
+    </method>
+    <method name="delete" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="entries" type="array|Entry"/>
+      </parameters>
+      <location line="237">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Given an Entry object, or an array of Entry objects delete all
+ data associated with this Entry using a Field's <code>entryDataCleanup()</code>
+ function, and then remove this Entry from <code>tbl_entries</code>.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="entries"><description><p>An Entry object, or an array of Entry objects to delete</p></description></tag>
+        <tag group="Parameters"></tag>
+      </tags>
+    </method>
+    <method name="edit" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="entry" type="Entry" package="toolkit" class="Entry"/>
+      </parameters>
+      <location line="187">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Update an existing Entry object given an Entry object</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="entry"><description><p>An Entry object</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetch" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="entry_id" type="integer|array"/>
+        <parameter name="section_id" type="integer"/>
+        <parameter name="limit" type="integer"/>
+        <parameter name="start" type="integer"/>
+        <parameter name="where" type="string"/>
+        <parameter name="joins" type="string"/>
+        <parameter name="group" type="boolean"/>
+        <parameter name="buildentries" type="boolean"/>
+        <parameter name="element_names" type="array"/>
+        <parameter name="records_only" type="boolean"/>
+      </parameters>
+      <location line="291">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>This function will return an array of Entry objects given an ID or an array of ID's.
+ Do not provide <code>$entry_id</code> as an array if not specifying the <code>$section_id</code>. This function
+ is commonly passed custom SQL statements through the <code>$where</code> and <code>$join</code> parameters
+ that is generated by the fields of this section</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="entry_id"><description><p>An array of Entry ID's or an Entry ID to return</p></description></tag>
+        <tag group="Parameters" name="section_id"><description><p>The ID of the Section that these entries are contained in</p></description></tag>
+        <tag group="Parameters" name="limit"><description><p>The limit of entries to return</p></description></tag>
+        <tag group="Parameters" name="start"><description><p>The starting offset of the entries to return</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>Any custom WHERE clauses</p></description></tag>
+        <tag group="Parameters" name="joins"><description><p>Any custom JOIN's</p></description></tag>
+        <tag group="Parameters" name="group"><description><p>Whether the entries need to be grouped by Entry ID or not</p></description></tag>
+        <tag group="Parameters" name="records_only"><description><p>If this is set to true, an array of Entry objects will be returned without any basic pagination information. Defaults to false</p></description></tag>
+        <tag group="Parameters" name="buildentries"><description><p>Whether to return an array of entry ID's or Entry objects. Defaults to true, which will return Entry objects</p></description></tag>
+        <tag group="Parameters" name="element_names"><description><p>Choose whether to get data from a subset of fields or all fields in a section, by providing an array of field names. Defaults to null, which will load data from all fields in a section.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchByPage" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="page" type="integer"/>
+        <parameter name="section_id" type="integer"/>
+        <parameter name="entriesPerPage" type="integer"/>
+        <parameter name="where" type="string"/>
+        <parameter name="joins" type="string"/>
+        <parameter name="group" type="boolean"/>
+        <parameter name="records_only" type="boolean"/>
+        <parameter name="buildentries" type="boolean"/>
+        <parameter name="element_names" type="array"/>
+      </parameters>
+      <location line="543">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Returns an array of Entry objects, with some basic pagination given
+ the number of Entry's to return and the current starting offset. This
+ function in turn calls the fetch function that does alot of the heavy
+ lifting. For instance, if there are 60 entries in a section and the pagination
+ dictates that per page, 15 entries are to be returned, by passing 2 to
+ the $page parameter you could return entries 15-30</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="page"><description><p>The page to return, defaults to 1</p></description></tag>
+        <tag group="Parameters" name="section_id"><description><p>The ID of the Section that these entries are contained in</p></description></tag>
+        <tag group="Parameters" name="entriesPerPage"><description><p>The number of entries to return per page.</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>Any custom WHERE clauses</p></description></tag>
+        <tag group="Parameters" name="joins"><description><p>Any custom JOIN's</p></description></tag>
+        <tag group="Parameters" name="group"><description><p>Whether the entries need to be grouped by Entry ID or not</p></description></tag>
+        <tag group="Parameters" name="records_only"><description><p>If this is set to true, an array of Entry objects will be returned without any basic pagination information. Defaults to false</p></description></tag>
+        <tag group="Parameters" name="buildentries"><description><p>Whether to return an array of entry ID's or Entry objects. Defaults to true, which will return Entry objects</p></description></tag>
+        <tag group="Parameters" name="element_names"><description><p>Choose whether to get data from a subset of fields or all fields in a section, by providing an array of field names. Defaults to null, which will load data from all fields in a section.</p></description></tag>
+        <tag group="Returns"><description><p>Either an array of Entry objects, or an associative array containing the total entries, the start position, the entries per page and the Entry objects</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchCount" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="section_id" type="integer"/>
+        <parameter name="where" type="string"/>
+        <parameter name="joins" type="string"/>
+        <parameter name="group" type="boolean"/>
+      </parameters>
+      <location line="495">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Return the count of the number of entries in a particular section.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="section_id"><description><p>The ID of the Section where the Entries are to be counted</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>Any custom WHERE clauses</p></description></tag>
+        <tag group="Parameters" name="joins"><description><p>Any custom JOIN's</p></description></tag>
+        <tag group="Parameters" name="group"><description><p>Whether the entries need to be grouped by Entry ID or not</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchEntrySectionID" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="entry_id" type="integer"/>
+      </parameters>
+      <location line="478">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Given an Entry ID, return the Section ID that it belongs to</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="entry_id"><description><p>The ID of the Entry to return it's section</p></description></tag>
+        <tag group="Returns"><description><p>The Section ID for this Entry's section</p></description></tag>
+      </tags>
+    </method>
+    <method name="getFetchSorting" return="StdClass">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="123">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Returns an object representation of the sorting for the
+ EntryManager, with the field and direction provided</p>
+      </description>
+    </method>
+    <method name="setFetchSorting" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="field_id" type="integer"/>
+        <parameter name="direction" type="string"/>
+      </parameters>
+      <location line="112">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Convenience function that will set sorting field and direction
+ by calling <code>setFetchSortingField()</code> &amp; <code>setFetchSortingDirection()</code></p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="EntryManager" docblock="setFetchSortingField" path="toolkit.EntryManager#setFetchSortingField()">toolkit.EntryManager#setFetchSortingField()</tag>
+        <tag group="See Also" package="toolkit" class="EntryManager" docblock="setFetchSortingDirection" path="toolkit.EntryManager#setFetchSortingDirection()">toolkit.EntryManager#setFetchSortingDirection()</tag>
+        <tag group="Parameters" name="field_id"><description><p>The ID of the Field that should be sorted on</p></description></tag>
+        <tag group="Parameters" name="direction"><description><p>The direction that entries should be sorted in, available options are RAND, ASC or DESC. Defaults to ASC</p></description></tag>
+      </tags>
+    </method>
+    <method name="setFetchSortingDirection" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="direction" type="string"/>
+      </parameters>
+      <location line="83">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Setter function for the default sorting direction of the Fetch
+ function. Available options are RAND, ASC or DESC.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="direction"><description><p>The direction that entries should be sorted in, available options are RAND, ASC or DESC.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setFetchSortingField" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="field_id" type="integer"/>
+      </parameters>
+      <location line="96">lib/toolkit/class.entrymanager.php</location>
+      <description>
+        <p>Sets the field to applying the sorting direction on when fetching
+ entries</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="field_id"><description><p>The ID of the Field that should be sorted on</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

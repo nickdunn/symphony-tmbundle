@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<class type="class" name="Entry" handle="entry">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="13">lib/toolkit/class.entry.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>An entry is a combination of data that is stored in several Fields
+ typically contained in one Section. Entries are created by the
+ Authors of Symphony and hold all the content for the website.
+ Entries are typically created from the Symphony backend, but
+ can also be created using Events from the Frontend.</p>
+  </description>
+  <fields>
+    <field name="$_Parent" type="mixed" value="76">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="19">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>The class that initialised the Entry, usually the EntryManager</p>
+      </description>
+    </field>
+    <field name="$_data" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="38">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>An associative array of the data for each of the Fields that make up
+ this Entry. The key is the Field ID, and the value is typically an array</p>
+      </description>
+    </field>
+    <field name="$_engine" type="Symphony">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="25">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>An instance of the Symphony class, either Frontend or Administration</p>
+      </description>
+    </field>
+    <field name="$_fields" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="31">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>An associative array of basic metadata/settings for this Entry</p>
+      </description>
+    </field>
+    <field name="$creationDate" type="string" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="45">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>An ISO 8601 representation of when this Entry was created
+ eg. <code>2004-02-12T15:19:21+00:00</code></p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="mixed"/>
+      </parameters>
+      <location line="54">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Construct a new instance of an Entry.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The class that created this Entry object, usually the EntryManager, passed by reference.</p></description></tag>
+      </tags>
+    </method>
+    <method name="assignEntryId" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="103">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Creates the initial entry row in tbl_entries and returns the resulting
+ Entry ID using <code>getInsertID()</code>.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="MySQL" docblock="getInsertID" path="toolkit.MySQL#getInsertID()">toolkit.MySQL#getInsertID()</tag>
+      </tags>
+    </method>
+    <method name="checkPostData" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="array"/>
+        <parameter name="errors" type="mixed"/>
+        <parameter name="ignore_missing_fields" type="boolean"/>
+        <parameter name="error" type="array"/>
+      </parameters>
+      <location line="234">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Given a array of data from a form, this function will iterate over all the fields
+ in this Entry's Section and call their <code>checkPostFieldData()</code> function.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>An associative array of the data for this entry where they key is the Field's handle for this Section and the value is the data from the form</p></description></tag>
+        <tag group="Parameters" name="error"><description><p>An array of errors, by reference. Defaults to empty</p></description></tag>
+        <tag group="Parameters" name="ignore_missing_fields"><description><p>This parameter allows Entries to be updated, rather than replaced. This is useful if the input form only contains a couple of the fields for this Entry. Defaults to false, which will check all Fields even if they are not provided in the $data</p></description></tag>
+        <tag group="Returns"><description><p>Either <code>__ENTRY_OK__</code> or <code>__ENTRY_FIELD_ERROR__</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="commit" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="292">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Commits this Entry's data to the database, by utilising the EntryManager's
+ add/edit functions. The commit function first finds all the default data for this
+ before calling it's Manager</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Entry" docblock="findDefaultData" path="toolkit.Entry#findDefaultData()">toolkit.Entry#findDefaultData()</tag>
+        <tag group="Returns"><description><p>true if the commit was successful, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchAllAssociatedEntryCounts" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="associated_sections" type="array"/>
+      </parameters>
+      <location line="310">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Entries may link to other Entries through fields. This function will return the
+ number of entries that are associated with the current entry as an associative
+ array. If there are no associated entries, null will be returned.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="associated_sections"><description><p>An associative array of sections to return the Entry counts from. Defaults to null, which will fetch all the associations of this Entry.</p></description></tag>
+        <tag group="Returns"><description><p>An associative array with the key being the associated Section's ID and the value being the number of entries associated with this Entry.</p></description></tag>
+      </tags>
+    </method>
+    <method name="findDefaultData" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="264">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Iterates over all the Fields in this Entry calling their <code>processRawFieldData()</code>
+ function to set default values for this Entry.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Field" docblock="processRawFieldData" path="toolkit.Field#processRawFieldData()">toolkit.Field#processRawFieldData()</tag>
+      </tags>
+    </method>
+    <method name="get" return="null|mixed|array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="setting" type="string"/>
+      </parameters>
+      <location line="88">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Accessor to the a setting by name. If no setting is provided all the
+ settings of this Entry instance are returned.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="setting"><description><p>(optional) the name of the setting to access the value for. This is optional and defaults to null in which case all settings are returned.</p></description></tag>
+        <tag group="Returns"><description><p>the value of the setting if there is one, all settings if the input setting was omitted or null if the setting was supplied but there is no value for that setting.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getData" return="array|object">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="field_id" type="integer"/>
+        <parameter name="asObject" type="boolean"/>
+      </parameters>
+      <location line="212">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Accessor function to return data from this Entry for a particular
+ field. Optional parameter to return this data as an object instead
+ of an array. If a Field is not provided, an associative array of all data
+ assigned to this Entry will be returned.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="field_id"><description><p>The ID of the Field whose data you want</p></description></tag>
+        <tag group="Parameters" name="asObject"><description><p>If true, the data will be returned as an object instead of an array. Defaults to false.</p></description></tag>
+        <tag group="Returns"><description><p>Depending on the value of <code>$asObject</code>, return the field's data as either an array or an object</p></description></tag>
+      </tags>
+    </method>
+    <method name="set" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="setting" type="string"/>
+        <parameter name="value" type="mixed"/>
+      </parameters>
+      <location line="72">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Entries have some basic metadata settings such as the Entry ID, the Author ID
+ who created it and the Section that the Entry sits in. This function will set a
+ setting to a value overwriting any existing value for this setting</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="setting"><description><p>the setting key.</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>the value of the setting.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setData" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="field_id" type="integer"/>
+        <parameter name="data" type="mixed"/>
+      </parameters>
+      <location line="126">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>Set the data for a Field in this Entry, given the Field ID and it's data</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="field_id"><description><p>The ID of the Field this data is for</p></description></tag>
+        <tag group="Parameters" name="data"><description><p>Often an array</p></description></tag>
+      </tags>
+    </method>
+    <method name="setDataFromPost" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="array"/>
+        <parameter name="error" type="array"/>
+        <parameter name="simulate" type="boolean"/>
+        <parameter name="ignore_missing_fields" type="boolean"/>
+      </parameters>
+      <location line="154">lib/toolkit/class.entry.php</location>
+      <description>
+        <p>When an entry is saved from a form (either Frontend/Backend) this
+ function will find all the fields in this set and loop over them, setting
+ the data to each of the fields for processing. If any errors occur during
+ this, <code>_ENTRY_FIELD_ERROR_</code> is returned, and an array is available with
+ the errors.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>An associative array of the data for this entry where they key is the Field's handle for this Section and the value is the data from the form</p></description></tag>
+        <tag group="Parameters" name="error"><description><p>An array of errors, by reference. Defaults to empty</p></description></tag>
+        <tag group="Parameters" name="simulate"><description><p>If $simulate is given as true, a dry run of this function will occur, where regardless of errors, an Entry will not be saved in the database. Defaults to false</p></description></tag>
+        <tag group="Parameters" name="ignore_missing_fields"><description><p>This parameter allows Entries to be updated, rather than replaced. This is useful if the input form only contains a couple of the fields for this Entry. Defaults to false, which will set Fields to their default values if they are not provided in the $data</p></description></tag>
+        <tag group="Returns"><description><p>Either <code>__ENTRY_OK__</code> or <code>__ENTRY_FIELD_ERROR__</code></p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>command</key>
+	<string>export TM_YEAR=`date +%Y`
+export TM_DATE=`date +%Y-%m-%d`
+export TM_EXTENSION_NAME=${TM_NEW_FILE_DIRECTORY##*/}
+export TM_HEADER="$TM_NEW_FILE_DIRECTORY/$TM_NEW_FILE_BASENAME.h"
+
+if [[ ! -f "$TM_NEW_FILE" ]]; then
+   TM_DATE=`date +%Y-%m-%d` \
+   perl -pe 's/\$\{([^}]*)\}/$ENV{$1}/g' &lt;extension.driver.php&gt; "$TM_NEW_FILE"
+fi</string>
+	<key>extension</key>
+	<string>php</string>
+	<key>name</key>
+	<string>Extension Driver</string>
+	<key>scope</key>
+	<string>source</string>
+	<key>uuid</key>
+	<string>08977A4E-6C9A-4D99-9307-0F99FCDC2167</string>
+</dict>
+</plist>

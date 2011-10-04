@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<class type="class" name="SendmailGateway" handle="sendmailgateway">
+  <package name="email-gateways" handle="email-gateways"/>
+  <location line="14">lib/toolkit/email-gateways/email.sendmail.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="email-gateways">EmailGateway</superclass>
+  <description>
+    <p>The basic gateway sending emails using Sendmail, php's mail function.</p>
+  </description>
+  <tags>
+    <tag group="Author">Michael Eichelsdoerfer, Huib Keemink</tag>
+    <tag group="Todo">add validation to all set functions.</tag>
+  </tags>
+  <inherited-fields>
+    <class name="EmailGateway" package="email-gateways">
+      <field name="_attachments"/>
+      <field name="_body"/>
+      <field name="_boundary_alter"/>
+      <field name="_boundary_mixed"/>
+      <field name="_header_fields"/>
+      <field name="_recipients"/>
+      <field name="_reply_to_email_address"/>
+      <field name="_reply_to_name"/>
+      <field name="_sender_email_address"/>
+      <field name="_sender_name"/>
+      <field name="_subject"/>
+      <field name="_text_encoding"/>
+      <field name="_text_html"/>
+      <field name="_text_plain"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="32">lib/toolkit/email-gateways/email.sendmail.php</location>
+      <description>
+        <p>Constructor. Sets basic default values based on preferences.</p>
+      </description>
+    </method>
+    <method name="about" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="21">lib/toolkit/email-gateways/email.sendmail.php</location>
+      <description>
+        <p>Returns the name, used in the dropdown menu in the preferences pane.</p>
+      </description>
+    </method>
+    <method name="getPreferencesPane" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="131">lib/toolkit/email-gateways/email.sendmail.php</location>
+      <description>
+        <p>Builds the preferences pane, shown in the symphony backend.</p>
+      </description>
+    </method>
+    <method name="send" return="bool">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="52">lib/toolkit/email-gateways/email.sendmail.php</location>
+      <description>
+        <p>Send an email using the PHP mail() function</p>
+        <p>Please note that 'encoded-words' should be used according to
+ RFC2047. Basically this means that the subject should be
+ encoded if necessary, as well as (real) names in 'From', 'To'
+ or 'Reply-To' header field bodies. For details see RFC2047.</p>
+        <p>The parts of a message body should be encoded (quoted-printable
+ or base64) to make non-US-ASCII text work with the widest range
+ of email transports and clients.</p>
+      </description>
+    </method>
+  </methods>
+  <inherited-methods package="email-gateways" class="EmailGateway">
+    <class name="EmailGateway" package="email-gateways">
+      <method name="__construct"/>
+      <method name="__fromCamel"/>
+      <method name="__set"/>
+      <method name="__toCamel"/>
+      <method name="appendHeaderField"/>
+      <method name="appendHeaderFields"/>
+      <method name="boundaryDelimiterLine"/>
+      <method name="contentInfoArray"/>
+      <method name="contentInfoString"/>
+      <method name="finalBoundaryDelimiterLine"/>
+      <method name="getBoundary"/>
+      <method name="getPreferencesPane"/>
+      <method name="getSectionAttachments"/>
+      <method name="getSectionMultipartAlternative"/>
+      <method name="getSectionTextHtml"/>
+      <method name="getSectionTextPlain"/>
+      <method name="prepareMessageBody"/>
+      <method name="send"/>
+      <method name="setAttachments"/>
+      <method name="setFrom"/>
+      <method name="setRecipients"/>
+      <method name="setReplyToEmailAddress"/>
+      <method name="setReplyToName"/>
+      <method name="setSenderEmailAddress"/>
+      <method name="setSenderName"/>
+      <method name="setSubject"/>
+      <method name="setTextEncoding"/>
+      <method name="setTextHtml"/>
+      <method name="setTextPlain"/>
+      <method name="validate"/>
+    </class>
+  </inherited-methods>
+</class>

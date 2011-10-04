@@ -1,0 +1,321 @@
+<?xml version="1.0"?>
+<class type="class" name="Lang" handle="lang">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="148">lib/toolkit/class.lang.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Lang class loads and manages languages</p>
+  </description>
+  <fields>
+    <field name="$_dates" type="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="178">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Array of months and weekday for localized date output</p>
+      </description>
+    </field>
+    <field name="$_dictionary" type="Dictionary">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="166">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Instance of the current Dictionary</p>
+      </description>
+    </field>
+    <field name="$_lang" type="string" value="NULL">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="154">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Code of active language</p>
+      </description>
+    </field>
+    <field name="$_languages" type="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="160">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Context information of all available languages</p>
+      </description>
+    </field>
+    <field name="$_transliterations" type="array">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="172">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Array of transliterations</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="Dictionary" return="Dictionary">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="186">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Get dictionary</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>Return the current dictionary</p></description></tag>
+      </tags>
+    </method>
+    <method name="Transliterations" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="196">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Get transliterations</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>Returns the array of transliterations</p></description></tag>
+      </tags>
+    </method>
+    <method name="activate" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="enabled" type="boolean"/>
+      </parameters>
+      <location line="247">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Activate language, load translations for core and extensions. If the specified language
+ cannot be found, Symphony will default to English. If no language is available at all,
+ Symphony will throw an error.</p>
+        <p>Note: Beginning with Symphony 2.2 translations bundled with extensions will only be loaded
+ when the core dictionary of the specific language is available.</p>
+      </description>
+    </method>
+    <method name="createFilename" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+        <parameter name="delim" type="string"/>
+        <parameter name="apply_transliteration" type="boolean"/>
+      </parameters>
+      <location line="595">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Given a string, this will clean it for use as a filename. Preserves multi-byte characters.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>String to be cleaned up</p></description></tag>
+        <tag group="Parameters" name="delim"><description><p>Replacement for invalid characters</p></description></tag>
+        <tag group="Parameters" name="apply_transliteration"><description><p>If true, umlauts and special characters will be substituted</p></description></tag>
+        <tag group="Returns"><description><p>Returns created filename</p></description></tag>
+      </tags>
+    </method>
+    <method name="createHandle" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+        <parameter name="max_length" type="int"/>
+        <parameter name="delim" type="string"/>
+        <parameter name="uriencode" type="boolean"/>
+        <parameter name="apply_transliteration" type="boolean"/>
+        <parameter name="additional_rule_set" type="array"/>
+      </parameters>
+      <location line="576">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Given a string, this will clean it for use as a Symphony handle. Preserves multi-byte characters.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>String to be cleaned up</p></description></tag>
+        <tag group="Parameters" name="max_length"><description><p>The maximum number of characters in the handle</p></description></tag>
+        <tag group="Parameters" name="delim"><description><p>All non-valid characters will be replaced with this</p></description></tag>
+        <tag group="Parameters" name="uriencode"><description><p>Force the resultant string to be uri encoded making it safe for URLs</p></description></tag>
+        <tag group="Parameters" name="apply_transliteration"><description><p>If true, this will run the string through an array of substitution characters</p></description></tag>
+        <tag group="Parameters" name="additional_rule_set"><description><p>An array of REGEX patterns that should be applied to the <code>$string</code>. This occurs after the string has been trimmed and joined with the <code>$delim</code></p></description></tag>
+        <tag group="Returns"><description><p>Returns resultant handle</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetch" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="303">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Fetch all languages available in the core language folder and the language extensions.
+ The function stores all language information in the public variable <code>$_languages</code>.
+ It contains an array with the name, source, path and status of each language.
+ Furthermore it add an array of all extensions available in a specific language. The language
+ status (enabled/disabled) can only be determined when the Extension Manager has been
+ initialized before. During installation all extension status are set to disabled.</p>
+      </description>
+    </method>
+    <method name="fetchLanguage" return="array">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="source" type="string"/>
+        <parameter name="folder" type="string"/>
+        <parameter name="file" type="string"/>
+        <parameter name="enabled" type="array"/>
+      </parameters>
+      <location line="381">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Fetch language information for a single language.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="source"><description><p>The filename of the extension driver where this language file was found</p></description></tag>
+        <tag group="Parameters" name="folder"><description><p>The folder where this language file exists</p></description></tag>
+        <tag group="Parameters" name="file"><description><p>The filename of the language</p></description></tag>
+        <tag group="Parameters" name="enabled"><description><p>An associative array of enabled extensions from <code>tbl_extensions</code></p></description></tag>
+        <tag group="Returns"><description><p>Returns a multidimensional array of language information</p></description></tag>
+      </tags>
+    </method>
+    <method name="get" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="233">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Get current language</p>
+      </description>
+    </method>
+    <method name="getAvailableLanguages" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="enabled" type="boolean"/>
+      </parameters>
+      <location line="484">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Get an array of the codes and names of all languages that are available system wide.</p>
+        <p>Note: Beginning with Symphony 2.2 language files are only available
+ when the language extension is explicitly enabled.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>Returns an associative array of language codes and names, e. g. 'en' =&gt; 'English'</p></description></tag>
+      </tags>
+    </method>
+    <method name="initialize" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="203">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Initialize dictionary, transliterations and dates array</p>
+      </description>
+    </method>
+    <method name="isLocalized" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="504">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Check if Symphony is localised.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>Returns true for localized system, false for English system</p></description></tag>
+      </tags>
+    </method>
+    <method name="load" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="path" type="string"/>
+        <parameter name="clear" type="boolean"/>
+      </parameters>
+      <location line="420">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Load language file. Each language file contains three arrays:
+ about, dictionary and transliterations.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="path"><description><p>Path of the language file that should be loaded</p></description></tag>
+        <tag group="Parameters" name="clear"><description><p>True, if the current dictionary should be cleared, defaults to false</p></description></tag>
+      </tags>
+    </method>
+    <method name="localizeDate" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+      </parameters>
+      <location line="516">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Localize dates.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>Standard date that should be localized</p></description></tag>
+        <tag group="Returns"><description><p>Return the given date with translated month and day names</p></description></tag>
+      </tags>
+    </method>
+    <method name="set" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="lang" type="string"/>
+        <parameter name="enabled" type="boolean"/>
+      </parameters>
+      <location line="216">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Set system language.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="lang"><description><p>Language code, e. g. 'en' or 'pt-br'</p></description></tag>
+        <tag group="Parameters"></tag>
+      </tags>
+    </method>
+    <method name="standardizeDate" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+      </parameters>
+      <location line="536">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Standardize dates.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>Localized date that should be standardized</p></description></tag>
+        <tag group="Returns"><description><p>Returns the given date with English month and day names</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

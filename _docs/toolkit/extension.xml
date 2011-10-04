@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<class type="class" name="Extension" handle="extension">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="12">lib/toolkit/class.extension.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+    <modifier>abstract</modifier>
+  </modifiers>
+  <description>
+    <p>The abstract Extension class contains common methods that most
+ extensions require to get started in the Symphony environment. They
+ include the installation updating and uninstallation, as well as a
+ delegate subscription hook so an extension can perform custom logic
+ at various times during Symphony execution.</p>
+  </description>
+  <constants>
+    <constant name="CRLF" type="string" value="PHP_EOL">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="19">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This will be removed in the next version of Symphony</p></description></tag>
+      </tags>
+    </constant>
+    <constant name="$NAV_CHILD" type="integer">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="38">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>Determines that a new item is to be added to an existing navigation
+ group in the Symphony backend</p>
+      </description>
+    </constant>
+    <constant name="NAV_GROUP" type="integer" value="1">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="31">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>Determines that a new navigation group is to created in the Symphony backend</p>
+      </description>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_Parent" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="25">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>The class that initialised the Entry, usually the EntryManager</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="args" type="array"/>
+      </parameters>
+      <location line="49">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>The extension constructor takes an associative array of arguments
+ and sets the <code>$this-&gt;_Parent</code> variable using the 'parent' key. It appears that
+ this is the only key set in the <code>$args</code> array by Symphony</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="args"><description><p>An associative array of arguments, but default this will contain one, 'parent'.</p></description></tag>
+      </tags>
+    </method>
+    <method name="about" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>abstract</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="138">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>The about method allows an extension to provide
+ information about itself as an associative array. eg.
+ <code>'name' =&gt; 'Name of Extension',
+        'version' =&gt; '1.8',
+        'release-date' =&gt; 'YYYY-MM-DD',
+        'author' =&gt; array(
+            'name' =&gt; 'Author Name',
+            'website' =&gt; 'Author Website',
+            'email' =&gt; 'Author Email'
+        ),
+        'description' =&gt; 'A description about this extension'</code></p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>An associative array describing this extension.</p></description></tag>
+      </tags>
+    </method>
+    <method name="disable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="117">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>This method runs when a user selects Disable from the Symphony
+ backend.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="enable" path="toolkit.ExtensionManager#enable()">toolkit.ExtensionManager#enable()</tag>
+      </tags>
+    </method>
+    <method name="enable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="106">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>Extensions can be disabled in the backend which stops them from
+ functioning by removing their delegate subscription information
+ but keeps their settings intact (usually stored in the database).
+ This method runs when a user selects Enable from the Symphony
+ backend.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="enable" path="toolkit.ExtensionManager#enable()">toolkit.ExtensionManager#enable()</tag>
+      </tags>
+    </method>
+    <method name="fetchNavigation" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="197">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>When the Symphony navigation is being generated, this method will be
+ called to allow extension to inject any custom backend pages into the
+ navigation. If an extension wants to create a new group in the navigation
+ it is possible by returning an array with the group information and then an
+ array of links for this group. The extension can also inject link items into existing
+ group's of the navigation using the 'location' key, which will accept a numeric
+ index of the existing group, or the handle of an existing group.  Navigation items
+ in Symphony are initially provided from the <code>ASSETS . /navigation.xml</code> file
+ which defines the default Blueprints and System groups. The indexes for these
+ groups are 100 and 200 respectively. Groups cannot provide a link, this is done
+ by the children. All links are relative to the Extension by default
+ (ie. <code>EXTENSIONS . /extension_handle/</code>. An example of a returned navigation
+ array is provided below. Note that if an extension wants to edit the current navigation,
+ this is not possible through this function and rather it should be done using the
+ <code>NavigationPreRender</code> delegate.</p>
+        <p>
+          <code>array(
+    'name' =&gt; 'New Group',
+        'children' =&gt; array(
+            array(
+                'name' =&gt; 'Extension Name',
+                'link' =&gt; '/link/relative/to/extension/handle/'
+            )
+        )
+ )</code>
+        </p>
+      </description>
+      <tags>
+        <tag group="See Also">http://github.com/symphonycms/symphony-2/blob/master/symphony/assets/navigation.xml</tag>
+        <tag group="Returns"><description><p>An associative array of navigation items to add to the Navigation. This function defaults to returning null, which adds nothing to the Symphony navigation</p></description></tag>
+      </tags>
+    </method>
+    <method name="getSubscribedDelegates" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="161">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>Extensions use delegates to perform logic at certain times
+ throughout Symphony. This function allows an extension to
+ subscribe to a delegate which will notify the extension when it
+ is used so that it can perform it's custom logic.
+ This method returns an array with the delegate name, delegate
+ namespace, and then name of the method that should be called.
+ The method that is called is passed an associative array containing
+ the current context which is the <code>$this-&gt;_Parent</code>, current page object
+ and any other variables that is passed via this delegate. eg.</p>
+        <p>
+          <code>array(
+        array(
+            'page' =&gt; '/current/path/',
+            'delegate' =&gt; 'DelegateName',
+            'callback' =&gt; 'funtionToCall'
+        )
+    )</code>
+        </p>
+      </description>
+    </method>
+    <method name="install" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="61">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>Any logic that assists this extension in being installed such as
+ table creation, checking for dependancies etc.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="install" path="toolkit.ExtensionManager#install()">toolkit.ExtensionManager#install()</tag>
+        <tag group="Returns"><description><p>True if the install completely successfully, false otherwise</p></description></tag>
+      </tags>
+    </method>
+    <method name="uninstall" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="92">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>Any logic that should be run when an extension is to be uninstalled
+ such as the removal of database tables.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="uninstall" path="toolkit.ExtensionManager#uninstall()">toolkit.ExtensionManager#uninstall()</tag>
+      </tags>
+    </method>
+    <method name="update" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="previousVersion" type="string"/>
+      </parameters>
+      <location line="81">lib/toolkit/class.extension.php</location>
+      <description>
+        <p>Logic that should take place when an extension is to be been updated
+ when a user runs the 'Enable' action from the backend. The currently
+ installed version of this extension is provided so that it can be
+ compared to the current version of the extension in the file system.
+ This is commonly done using PHP's version_compare function. Common
+ logic done by this method is to update differences between extension
+ tables.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="update" path="toolkit.ExtensionManager#update()">toolkit.ExtensionManager#update()</tag>
+        <tag group="Parameters" name="previousVersion"><description><p>The currently installed version of this extension from the <code>tbl_extensions</code> table. The current version of this extension is provided by the about() method.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<class type="class" name="TextformatterManager" handle="textformattermanager">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="16">lib/toolkit/class.textformattermanager.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Manager</superclass>
+  <description>
+    <p>The TextformatterManager class is responsible for managing all Text
+ Formatter objects in Symphony. Text Formatter's are stored on the file
+ system either in the <code>TEXTFORMATTERS</code> folder or provided by
+ an extension in an /text-formatters/ folder. All formatters provide one
+ simple method, run, which applies the formatting to an unformatted
+ string and returns it.</p>
+  </description>
+  <fields>
+    <field name="$_pool" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="23">lib/toolkit/class.textformattermanager.php</location>
+      <description>
+        <p>An array of all the objects that the Manager is responsible for.
+ Defaults to an empty array.</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Manager" package="toolkit">
+      <field name="_Parent"/>
+      <field name="_pool"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__getClassName" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="handle" type="string"/>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="45">lib/toolkit/class.textformattermanager.php</location>
+      <description>
+        <p>Given a name, returns the full class name of a Text Formatter.
+ Text Formatters use a 'formatter' prefix.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="handle"><description><p>The formatter handle</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getClassPath" return="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="handle" type="string"/>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="60">lib/toolkit/class.textformattermanager.php</location>
+      <description>
+        <p>Finds a Text Formatter by name by searching the <code>TEXTFORMATTERS</code> folder
+ and in all installed extension folders and returns the path to it's folder.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="handle"><description><p>The handle of the Text Formatter free from any Symphony conventions such as <code>formatter.*.php</code></p></description></tag>
+        <tag group="Returns"><description><p>If the Text Formatter is found, the function returns the path it's folder, otherwise false.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getDriverPath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="handle" type="string"/>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="85">lib/toolkit/class.textformattermanager.php</location>
+      <description>
+        <p>Given a name, return the path to the driver of the Text Formatter.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__getClassPath" path="__getClassPath()">__getClassPath()</tag>
+        <tag group="Parameters" name="handle"><description><p>The handle of the Text Formatter free from any Symphony conventions such as <code>formatter.*.php</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="__getHandleFromFilename" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="filename" type="string"/>
+      </parameters>
+      <location line="33">lib/toolkit/class.textformattermanager.php</location>
+      <description>
+        <p>Given the filename of a Text Formatter return it's handle. This will remove
+ the Symphony convention of <code>formatter.*.php</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="filename"><description><p>The filename of the Text Formatter</p></description></tag>
+      </tags>
+    </method>
+    <method name="create" return="TextFormatter">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="handle" type="string"/>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="139">lib/toolkit/class.textformattermanager.php</location>
+      <description>
+        <p>Creates an instance of a given class and returns it. Adds the instance
+ to the <code>$_pool</code> array with the key being the handle.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="handle"><description><p>The handle of the Text Formatter to create</p></description></tag>
+      </tags>
+    </method>
+    <method name="listAll" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="98">lib/toolkit/class.textformattermanager.php</location>
+      <description>
+        <p>Finds all available Text Formatter's by searching the <code>TEXTFORMATTERS</code> folder
+ and in all installed extension folders. Returns an associative array of formatters.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Manager" docblock="about" path="toolkit.Manager#about()">toolkit.Manager#about()</tag>
+        <tag group="Returns"><description><p>Associative array of formatters with the key being the handle of the formatter and the value being the text formatter's description.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Manager">
+    <class name="Manager" package="toolkit">
+      <method name="__construct"/>
+      <method name="__getClassName"/>
+      <method name="__getClassPath"/>
+      <method name="__getDriverPath"/>
+      <method name="__getHandleFromFilename"/>
+      <method name="about"/>
+      <method name="create"/>
+      <method name="flush"/>
+      <method name="listAll"/>
+    </class>
+  </inherited-methods>
+</class>

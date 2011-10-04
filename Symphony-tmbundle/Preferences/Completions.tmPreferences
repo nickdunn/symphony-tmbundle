@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Completions</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>settings</key>
+	<dict>
+		<key>completions</key>
+		<array>
+			<string>ACTIVITY_LOG</string>
+<string>ASSETS</string>
+<string>BOOT</string>
+<string>CACHE</string>
+<string>CONFIG</string>
+<string>CONTENT</string>
+<string>CORE</string>
+<string>DATASOURCES</string>
+<string>EMAILGATEWAYS</string>
+<string>EVENTS</string>
+<string>EXTENSIONS</string>
+<string>HTTPS</string>
+<string>HTTP_HOST</string>
+<string>HTTP_USER_AGENT</string>
+<string>LANG</string>
+<string>LIBRARY</string>
+<string>LOGS</string>
+<string>MANIFEST</string>
+<string>PAGES</string>
+<string>PHP_VERSION_ID</string>
+<string>REMOTE_ADDR</string>
+<string>STARTTIME</string>
+<string>SYMPHONY</string>
+<string>SYMPHONY_URL</string>
+<string>TEMPLATE</string>
+<string>TEXTFORMATTERS</string>
+<string>TMP</string>
+<string>TOOLKIT</string>
+<string>TWO_WEEKS</string>
+<string>URL</string>
+<string>UTILITIES</string>
+<string>WORKSPACE</string>
+<string>__SECURE__</string>
+<string>define_safe</string>
+<string>getCurrentPage</string>
+<string>getcwd_safe</string>
+<string>ini_size_to_bytes</string>
+<string>precision_timer</string>
+<string>redirect</string>
+<string>__IN_SYMPHONY__</string>
+<string>symphony-page</string>
+<string>version</string>
+<string>Symphony</string>
+<string>Administration</string>
+<string>Frontend</string>
+<string>Cacheable</string>
+<string>Configuration</string>
+<string>Cookie</string>
+<string>GenericExceptionHandler</string>
+<string>DatabaseExceptionHandler</string>
+<string>SymphonyErrorPageHandler</string>
+<string>FrontendPageNotFoundExceptionHandler</string>
+<string>DateTimeObj</string>
+<string>GenericErrorHandler</string>
+<string>Log</string>
+<string>Session</string>
+<string>Singleton</string>
+<string>FrontendPageNotFoundException</string>
+<string>SymphonyErrorPage</string>
+<string>__SYM_COOKIE_PATH__</string>
+<string>__SYM_COOKIE_PREFIX_</string>
+<string>__SYM_DATETIME_FORMAT__</string>
+<string>__SYM_DATE_FORMAT__</string>
+<string>__SYM_TIME_FORMAT__</string>
+<string>EmailGateway</string>
+<string>SMTPGateway</string>
+<string>SendmailGateway</string>
+<string>Page</string>
+<string>HTMLPage</string>
+<string>AdministrationPage</string>
+<string>DevKit</string>
+<string>AjaxPage</string>
+<string>XSLTPage</string>
+<string>FrontendPage</string>
+<string>Alert</string>
+<string>Author</string>
+<string>Manager</string>
+<string>AuthorManager</string>
+<string>DatasourceManager</string>
+<string>EmailGatewayManager</string>
+<string>EventManager</string>
+<string>ExtensionManager</string>
+<string>FieldManager</string>
+<string>TextformatterManager</string>
+<string>DataSource</string>
+<string>Dictionary</string>
+<string>Email</string>
+<string>EmailHelper</string>
+<string>Entry</string>
+<string>EntryManager</string>
+<string>Event</string>
+<string>Extension</string>
+<string>Field</string>
+<string>fieldAuthor</string>
+<string>fieldCheckbox</string>
+<string>fieldDate</string>
+<string>fieldInput</string>
+<string>fieldSelect</string>
+<string>fieldTagList</string>
+<string>fieldTextarea</string>
+<string>fieldUpload</string>
+<string>Gateway</string>
+<string>General</string>
+<string>Lang</string>
+<string>Mutex</string>
+<string>MySQL</string>
+<string>Profiler</string>
+<string>SMTP</string>
+<string>Section</string>
+<string>SectionManager</string>
+<string>TextFormatter</string>
+<string>Widget</string>
+<string>XMLElement</string>
+<string>XsltProcess</string>
+<string>iEvent</string>
+<string>DatabaseException</string>
+<string>EmailException</string>
+<string>EmailGatewayException</string>
+<string>SMTPException</string>
+<string>__</string>
+<string>_t</string>
+<string>DS_FILTER_AND</string>
+<string>DS_FILTER_OR</string>
+<string>EXTENSION_DISABLED</string>
+<string>EXTENSION_ENABLED</string>
+<string>EXTENSION_NOT_INSTALLED</string>
+<string>EXTENSION_REQUIRES_UPDATE</string>
+<string>LANGUAGE_DISABLED</string>
+<string>LANGUAGE_ENABLED</string>
+<string>PROFILE_LAP</string>
+<string>PROFILE_RUNNING_TOTAL</string>
+<string>__ENTRY_FIELD_ERROR__</string>
+<string>__ENTRY_OK__</string>
+
+		</array>
+	</dict>
+	<key>uuid</key>
+	<string>ACA1EC98-F156-2324-F1D3-0E7FC2E88D2A</string>
+</dict>
+</plist>

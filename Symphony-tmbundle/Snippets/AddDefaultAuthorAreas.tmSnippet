@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/system/authors/',
+	'delegate' => 'AddDefaultAuthorAreas',
+	'callback' => 'addDefaultAuthorAreas'
+),
+</string>
+	<key>name</key>
+	<string>AddDefaultAuthorAreas</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>8644BA11-537A-6E28-ABA3-7B407038C78B</string>
+</dict>
+</plist>

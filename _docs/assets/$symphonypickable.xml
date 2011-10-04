@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+
+
+
+
+
+
+
+<class type="class" name="$.symphonyPickable" handle="$.symphonyPickable">
+	
+	<package name="assets" handle="assets"/>
+	
+	
+		<location>assets/symphony.pickable.js</location>
+	
+	
+	<modifiers>
+		<modifier>public</modifier>
+	</modifiers>
+	
+	<!--description>
+		<p></p>
+	</description-->
+	
+			
+		<description>
+			<p>This plugin shows and hides elements based on the value of a select box. 
+If there is only one option, the select box will be hidden and 
+the single element will be shown.</p>
+			
+				
+					<pre class="code">
+			$('.picker').symphonyPickable();</pre>
+				
+			
+		</description>
+	
+	
+	
+	
+	
+	
+	
+	<methods>
+	
+		
+	
+		<method
+			name="symphonyPickable"
+			 
+			
+		>
+		
+			<modifiers>
+				<modifier>public</modifier><modifier>static</modifier>
+			</modifiers>
+			
+			<location>assets/symphony.pickable.js</location>
+			
+			<description>
+				<p>This plugin shows and hides elements based on the value of a select box. 
+If there is only one option, the select box will be hidden and 
+the single element will be shown.</p>
+				
+					
+						<pre class="code">
+			$('.picker').symphonyPickable();</pre>
+					
+				
+			</description>
+			
+			<tags>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					
+						<tag group="Parameters" name="custom_settings">
+							<description>
+								<p>An object specifying containing the attributes specified below</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.pickables">
+							<description>
+								<p>Selector to find items to be pickable</p>
+							</description>
+						</tag>
+					
+				
+				
+			</tags>
+			
+			
+				<parameters>
+					
+						<parameter name="custom_settings" type="Object" />
+					
+						<parameter name="custom_settings.pickables" type="String" />
+					
+				</parameters>
+			
+			
+		</method>
+		
+		
+		
+		
+		
+	</methods>
+			
+	
+	
+	
+</class>

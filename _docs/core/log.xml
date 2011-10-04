@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<class type="class" name="Log" handle="log">
+  <package name="core" handle="core"/>
+  <location line="13">lib/core/class.log.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Log class acts a simple wrapper to write errors to a file so that it can
+ be read at a later date. There is one Log file in Symphony, stored in the main
+ <code>LOGS</code> directory.</p>
+  </description>
+  <constants>
+    <constant name="APPEND" type="integer" value="10">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="19">lib/core/class.log.php</location>
+      <description>
+        <p>A constant for if this message should add to an existing log file</p>
+      </description>
+    </constant>
+    <constant name="OVERWRITE" type="integer" value="11">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="25">lib/core/class.log.php</location>
+      <description>
+        <p>A constant for if this message should overwrite the existing log</p>
+      </description>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_archive" type="string" value="false">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="51">lib/core/class.log.php</location>
+      <description>
+        <p>Whether to archive olds logs or not, by default they will not be archived.</p>
+      </description>
+    </field>
+    <field name="$_datetime_format" type="string" value="'Y/m/d H:i:s'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="58">lib/core/class.log.php</location>
+      <description>
+        <p>The date format that this Log entries will be written as. Defaults to
+ Y/m/d H:i:s.</p>
+      </description>
+    </field>
+    <field name="$_log" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="37">lib/core/class.log.php</location>
+      <description>
+        <p>An array of log messages to write to the log.</p>
+      </description>
+    </field>
+    <field name="$_log_path" type="string" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="31">lib/core/class.log.php</location>
+      <description>
+        <p>The path to this log file</p>
+      </description>
+    </field>
+    <field name="$_max_size" type="integer" value="-1">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="45">lib/core/class.log.php</location>
+      <description>
+        <p>The maximise size of the log can reach before it is rotated and a new
+ Log file written started. The units are bytes. Default is -1, which
+ means that the log will never be rotated.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="path" type="string"/>
+      </parameters>
+      <location line="67">lib/core/class.log.php</location>
+      <description>
+        <p>The log constructor takes a path to the folder where the Log should be
+ written to.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="path"><description><p>The path to the folder where the Log files should be written</p></description></tag>
+      </tags>
+    </method>
+    <method name="__defineNameString" return="string">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="integer"/>
+      </parameters>
+      <location line="144">lib/core/class.log.php</location>
+      <description>
+        <p>Given a PHP error constant, return a human readable name. Uses the
+ <code>GenericErrorHandler::$errorTypeStrings</code> array to return
+ the name</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="GenericErrorHandler" docblock="errorTypeStrings" path="core.GenericErrorHandler::$errorTypeStrings">core.GenericErrorHandler::$errorTypeStrings</tag>
+        <tag group="Parameters" name="type"><description><p>A PHP error constant</p></description></tag>
+        <tag group="Returns"><description><p>A human readable name of the error constant, or if the type is not found, UNKNOWN.</p></description></tag>
+      </tags>
+    </method>
+    <method name="close" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="286">lib/core/class.log.php</location>
+      <description>
+        <p>Writes a end of file block at the end of the log file with a datetime
+ stamp of when the log file was closed.</p>
+      </description>
+    </method>
+    <method name="getLog" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="95">lib/core/class.log.php</location>
+      <description>
+        <p>Accessor for the <code>$_log</code>.</p>
+      </description>
+    </method>
+    <method name="getLogPath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="86">lib/core/class.log.php</location>
+      <description>
+        <p>Accessor for the <code>$_log_path</code>.</p>
+      </description>
+    </method>
+    <method name="open" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="flag" type="integer"/>
+        <parameter name="mode" type="integer"/>
+      </parameters>
+      <location line="246">lib/core/class.log.php</location>
+      <description>
+        <p>The function handles the rotation of the log files. By default it will open
+ the current log file, 'main', which is written to <code>$_log_path</code> and
+ check it's file size doesn't exceed <code>$_max_size</code>. If it does, the log
+ is appended with a date stamp and if <code>$_archive</code> has been set, it will
+ be archived and stored. If a log file has exceeded it's size, or <code>Log::OVERWRITE</code>
+ flag is set, the existing log file is removed and a new one created. Essentially,
+ if a log file has not reached it's <code>$_max_size</code> and the the flag is not
+ set to <code>Log::OVERWRITE</code>, this function does nothing.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au.php.net/manual/en/function.intval.php</tag>
+        <tag group="Parameters" name="flag"><description><p>One of the Log constants, either <code>Log::APPEND</code> or <code>Log::OVERWRITE</code> By default this is <code>Log::APPEND</code></p></description></tag>
+        <tag group="Parameters" name="mode"><description><p>The file mode used to apply to the archived log, by default this is 0777. Note that this parameter is modified using PHP's intval function with base 8.</p></description></tag>
+        <tag group="Returns"><description><p>Returns 1 if the log was overwritten, or 2 otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="popFromLog" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="160">lib/core/class.log.php</location>
+      <description>
+        <p>Function will return the last message added to <code>$_log</code> and remove
+ it from the array.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>Returns an associative array of a log message, containing the type of the log message, the actual message and the time at the which it was added to the log</p></description></tag>
+      </tags>
+    </method>
+    <method name="pushToLog" return="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="message" type="string"/>
+        <parameter name="type" type="integer"/>
+        <parameter name="writeToLog" type="boolean"/>
+        <parameter name="addbreak" type="boolean"/>
+        <parameter name="append" type="boolean"/>
+      </parameters>
+      <location line="190">lib/core/class.log.php</location>
+      <description>
+        <p>Given a message, this function will add it to the internal <code>$_log</code>
+ so that it can be written to the Log. Optional parameters all the message to
+ be immediately written, insert line breaks or add to the last log message</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="message"><description><p>The message to add to the Log</p></description></tag>
+        <tag group="Parameters" name="type"><description><p>A PHP error constant for this message, defaults to E_NOTICE</p></description></tag>
+        <tag group="Parameters" name="writeToLog"><description><p>If set to true, this message will be immediately written to the log. By default this is set to false, which means that it will only be added to the array ready for writing</p></description></tag>
+        <tag group="Parameters" name="addbreak"><description><p>To be used in conjunction with <code>$writeToLog</code>, this will add a line break before writing this message in the log file. Defaults to true.</p></description></tag>
+        <tag group="Parameters" name="append"><description><p>If set to true, the given <code>$message</code> will be append to the previous log message found in the <code>$_log</code> array</p></description></tag>
+        <tag group="Returns"><description><p>If <code>$writeToLog</code> is passed, this function will return boolean, otherwise void</p></description></tag>
+      </tags>
+    </method>
+    <method name="setArchive" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="archive" type="boolean"/>
+      </parameters>
+      <location line="106">lib/core/class.log.php</location>
+      <description>
+        <p>Setter for the <code>$_archive</code>.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="archive"><description><p>If true, Log files will be archived using gz when they are rotated, otherwise they will just be overwritten when they are due for rotation</p></description></tag>
+      </tags>
+    </method>
+    <method name="setDateTimeFormat" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="format" type="string"/>
+      </parameters>
+      <location line="128">lib/core/class.log.php</location>
+      <description>
+        <p>Setter for the <code>$_date_format</code>.</p>
+      </description>
+      <tags>
+        <tag group="Since">Symphony 2.2</tag>
+        <tag group="See Also">http://au.php.net/manual/en/function.date.php</tag>
+        <tag group="Parameters" name="format"><description><p>Takes a valid date format using the PHP date tokens</p></description></tag>
+      </tags>
+    </method>
+    <method name="setLogPath" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="path" type="string"/>
+      </parameters>
+      <location line="77">lib/core/class.log.php</location>
+      <description>
+        <p>Setter for the <code>$_log_path</code>.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="path"><description><p>The path to the folder where the Log files should be written</p></description></tag>
+      </tags>
+    </method>
+    <method name="setMaxSize" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="size" type="integer"/>
+      </parameters>
+      <location line="116">lib/core/class.log.php</location>
+      <description>
+        <p>Setter for the <code>$_max_size</code>.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="size"><description><p>The size, in bytes, that the Log can reach before it is rotated.</p></description></tag>
+      </tags>
+    </method>
+    <method name="writeToLog" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="message" type="string"/>
+        <parameter name="addbreak" type="boolean"/>
+      </parameters>
+      <location line="216">lib/core/class.log.php</location>
+      <description>
+        <p>This function will write the given message to the log file. Messages will be appended
+ the existing log file.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="message"><description><p>The message to add to the Log</p></description></tag>
+        <tag group="Parameters" name="addbreak"><description><p>To be used in conjunction with <code>$writeToLog</code>, this will add a line break before writing this message in the log file. Defaults to true.</p></description></tag>
+        <tag group="Returns"><description><p>Returns true if the message was written successfully, false otherwise</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

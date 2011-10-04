@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<class type="class" name="Page" handle="page">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="9">lib/toolkit/class.page.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+    <modifier>abstract</modifier>
+  </modifiers>
+  <description>
+    <p>Page is an abstract class that holds an object representation
+ of a page's headers.</p>
+  </description>
+  <constants>
+    <constant name="CRLF" type="string" value="PHP_EOL">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="15">lib/toolkit/class.page.php</location>
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This will be removed in the next version of Symphony</p></description></tag>
+      </tags>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_headers" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="22">lib/toolkit/class.page.php</location>
+      <description>
+        <p>This stores the headers that will be sent when this page is
+ generated as an associative array of header=&gt;value.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="27">lib/toolkit/class.page.php</location>
+      <description>
+        <p>Initialises the Page object by setting the headers to empty</p>
+      </description>
+    </method>
+    <method name="__renderHeaders" return="result">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="68">lib/toolkit/class.page.php</location>
+      <description>
+        <p>Iterates over the <code>$_headers</code> for this page
+ and outputs them using PHP's header() function.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>of header();</p></description></tag>
+      </tags>
+    </method>
+    <method name="addHeaderToPage" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="40">lib/toolkit/class.page.php</location>
+      <description>
+        <p>Adds a header to the $_headers array using the $name
+ as the key.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The header name, eg. Content-Type.</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>(optional) The value for the header, eg. text/xml. Defaults to null.</p></description></tag>
+      </tags>
+    </method>
+    <method name="generate" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="58">lib/toolkit/class.page.php</location>
+      <description>
+        <p>This function calls <code>__renderHeaders()</code>.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__renderHeaders" path="__renderHeaders()">__renderHeaders()</tag>
+      </tags>
+    </method>
+    <method name="headers" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="49">lib/toolkit/class.page.php</location>
+      <description>
+        <p>Accessor function for <code>$_headers</code></p>
+      </description>
+    </method>
+  </methods>
+</class>

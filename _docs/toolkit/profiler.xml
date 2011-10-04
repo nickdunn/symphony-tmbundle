@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<class type="class" name="Profiler" handle="profiler">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="13">lib/toolkit/class.profiler.php</location>
+  <interfaces>
+    <interface package="core">Singleton</interface>
+  </interfaces>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Profiler class tracks various performance metrics while a Symphony
+ page is being generated. It provides a basic stopwatch functionality and
+ memory usage statistics. Profiling occurs in both the Frontend and
+ Administration execution. The Profiler implements the Singleton interface.</p>
+  </description>
+  <fields>
+    <field name="$_instance" type="Profiler" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="43">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>An instance of the Profiler class</p>
+      </description>
+    </field>
+    <field name="$_samples" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="28">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>An array of arrays containing profiling samples. A record contains a
+ profile message, the time since <code>$_starttime</code> timestamp, the end timestamp,
+ the group for this record, the number of SQL queries and the result of
+ memory<em>get</em>usage()</p>
+      </description>
+    </field>
+    <field name="$_seed" type="integer" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="37">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>A seed holds a start time to be used in profiling. If this is not null
+ the profiler will use this as the start time instead of <code>$_starttime</code>. This
+ is set with the seed function.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="seed" path="seed()">seed()</tag>
+      </tags>
+    </field>
+    <field name="$_starttime" type="integer">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="19">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>Holds the timestamp from when the profiler was first initialised</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="60">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>The constructor for the profile function sets the start time</p>
+      </description>
+    </method>
+    <method name="instance" return="Profiler">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="50">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>Returns the Profiler instance, creating one if it does not exist</p>
+      </description>
+    </method>
+    <method name="retrieve" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="index" type="integer"/>
+      </parameters>
+      <location line="123">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>Given an index, return the sample at that position otherwise just
+ return all samples.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="index"><description><p>The array index to return the sample for</p></description></tag>
+        <tag group="Returns"><description><p>If no <code>$index</code> is passed an array of all the sample arrays are returned otherwise just the sample at the given <code>$index</code> will be returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="retrieveByMessage" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="msg" type="string"/>
+      </parameters>
+      <location line="135">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>Returns a sample by message, if no sample is found, an empty
+ array is returned</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="msg"><description><p>The name of the sample to return</p></description></tag>
+      </tags>
+    </method>
+    <method name="retrieveGroup" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="group" type="string"/>
+      </parameters>
+      <location line="149">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>Returns all the samples that belong to a particular group.</p>
+      </description>
+    </method>
+    <method name="retrieveLast" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="164">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>Returns the last record from the <code>$_records</code> array</p>
+      </description>
+    </method>
+    <method name="retrieveTotalMemoryUsage" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="187">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>Returns the total memory usage from all samples taken by comparing
+ each sample to the base memory sample.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>Memory usage in bytes.</p></description></tag>
+      </tags>
+    </method>
+    <method name="retrieveTotalRunningTime" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="174">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>Returns the difference between when the Profiler was initialised
+ (aka <code>$_starttime</code>) and the last record the Profiler has.</p>
+      </description>
+    </method>
+    <method name="sample" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="msg" type="string"/>
+        <parameter name="type" type="integer"/>
+        <parameter name="group" type="string"/>
+        <parameter name="queries" type="integer"/>
+      </parameters>
+      <location line="94">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>This function creates a new report in the <code>$_samples</code> array where the message
+ is the name of this report. By default, all samples are compared to the <code>$_starttime</code>
+ but if the <code>PROFILE_LAP</code> constant is passed, it will be compared to specific <code>$_seed</code>
+ timestamp. Samples can grouped by type (ie. Datasources, Events), but by default
+ are grouped by 'General'. Optionally, the number of SQL queries that have occurred
+ since either <code>$_starttime</code> or <code>$_seed</code> can be passed. Memory usage is taken with each
+ sample which measures the amount of memory used by this script by PHP at the
+ time of sampling.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="msg"><description><p>A description for this sample</p></description></tag>
+        <tag group="Parameters" name="type"><description><p>Either <code>PROFILE_RUNNING_TOTAL</code> or <code>PROFILE_LAP</code></p></description></tag>
+        <tag group="Parameters" name="group"><description><p>Allows samples to be grouped together, defaults to General.</p></description></tag>
+        <tag group="Parameters" name="queries"><description><p>The number of MySQL queries that occurred since the <code>$_starttime</code> or <code>$_seed</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="seed" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="time" type="integer"/>
+      </parameters>
+      <location line="71">lib/toolkit/class.profiler.php</location>
+      <description>
+        <p>Sets the seed to be a timestamp so that time profiling will use this
+ as a starting point</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="time"><description><p>The time in seconds</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

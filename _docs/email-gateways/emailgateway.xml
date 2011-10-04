@@ -1,0 +1,516 @@
+<?xml version="1.0"?>
+<class type="class" name="EmailGateway" handle="emailgateway">
+  <package name="email-gateways" handle="email-gateways"/>
+  <location line="48">lib/toolkit/class.emailgateway.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+    <modifier>abstract</modifier>
+  </modifiers>
+  <description>
+    <p>A base class for email gateways.
+ All email-gateways should extend this class in order to work.</p>
+  </description>
+  <tags>
+    <tag group="Todo">add validation to all set functions.</tag>
+  </tags>
+  <fields>
+    <field name="$_attachments" type="mixed" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="57">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_body" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="54">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_boundary_alter" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="62">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_boundary_mixed" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="61">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_header_fields" type="mixed" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="60">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_recipients" type="mixed" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="50">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_reply_to_email_address" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="59">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_reply_to_name" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="58">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_sender_email_address" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="52">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_sender_name" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="51">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_subject" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="53">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_text_encoding" type="mixed" value="'quoted-printable'">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="63">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_text_html" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="56">lib/toolkit/class.emailgateway.php</location>
+    </field>
+    <field name="$_text_plain" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="55">lib/toolkit/class.emailgateway.php</location>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="68">lib/toolkit/class.emailgateway.php</location>
+    </method>
+    <method name="__fromCamel" return="string">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+      </parameters>
+      <location line="562">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>The reverse of the __toCamel function.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>The string to convert</p></description></tag>
+      </tags>
+    </method>
+    <method name="__set" return="void|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="510">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Sets a property.</p>
+        <p>Magic function, supplied by php.
+ This function will try and find a method of this class, by
+ camelcasing the name, and appending it with set.
+ If the function can not be found, an exception will be thrown.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The property name.</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>The property value;</p></description></tag>
+      </tags>
+    </method>
+    <method name="__toCamel" return="string">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+        <parameter name="caseFirst" type="boolean"/>
+      </parameters>
+      <location line="545">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Internal function to turn underscored variables into camelcase, for
+ use in methods.
+ Because Symphony has a difference in naming between properties and
+ methods (underscored vs camelcased) and the Email class uses the
+ magic __set function to find property-setting-methods, this
+ conversion is needed.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>The string to convert</p></description></tag>
+        <tag group="Parameters" name="caseFirst"><description><p>If this is true, the first character will be uppercased. Useful for method names (setName). If set to false, the first character will be lowercased. This is default behaviour.</p></description></tag>
+      </tags>
+    </method>
+    <method name="appendHeaderField" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="body" type="string"/>
+      </parameters>
+      <location line="244">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Appends a single header field to the header fields array.
+ The header field should be presented as a name/body pair.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The header field name. Examples are From, X-Sender and Reply-to.</p></description></tag>
+        <tag group="Parameters" name="body"><description><p>The header field body.</p></description></tag>
+      </tags>
+    </method>
+    <method name="appendHeaderFields" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="header_array" type="array"/>
+      </parameters>
+      <location line="259">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Appends one or more header fields to the header fields array.
+ Header fields should be presented as an array with name/body pairs.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="header_array"><description><p>The header fields. Examples are From, X-Sender and Reply-to.</p></description></tag>
+      </tags>
+    </method>
+    <method name="boundaryDelimiterLine" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="mixed"/>
+      </parameters>
+      <location line="486">lib/toolkit/class.emailgateway.php</location>
+    </method>
+    <method name="contentInfoArray" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="mixed"/>
+        <parameter name="file" type="mixed"/>
+      </parameters>
+      <location line="435">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Builds the right content-type/encoding types based on file and
+ content-type.</p>
+        <p>Will return a string containing the section, or an empty array on
+ failure. Can be used to send to an email server directly.</p>
+      </description>
+    </method>
+    <method name="contentInfoString" return="string">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="mixed"/>
+        <parameter name="file" type="mixed"/>
+      </parameters>
+      <location line="467">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>TODO</p>
+      </description>
+    </method>
+    <method name="finalBoundaryDelimiterLine" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="mixed"/>
+      </parameters>
+      <location line="492">lib/toolkit/class.emailgateway.php</location>
+    </method>
+    <method name="getBoundary" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="mixed"/>
+      </parameters>
+      <location line="475">lib/toolkit/class.emailgateway.php</location>
+    </method>
+    <method name="getPreferencesPane" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="524">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>The preferences to add to the preferences pane in the admin area.</p>
+      </description>
+    </method>
+    <method name="getSectionAttachments" return="string">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="378">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Builds the attachment section of a multipart email.</p>
+        <p>Will return a string containing the section. Can be used to send to
+ an email server directly.</p>
+      </description>
+    </method>
+    <method name="getSectionMultipartAlternative" return="string">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="359">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Build multipart email section. Used by sendmail and smtp classes to
+ send multipart email.</p>
+        <p>Will return a string containing the section. Can be used to send to
+ an email server directly.</p>
+      </description>
+    </method>
+    <method name="getSectionTextHtml" return="string">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="415">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Builds the html section of a text/html email.</p>
+        <p>Will return a string containing the section. Can be used to send to
+ an email server directly.</p>
+      </description>
+    </method>
+    <method name="getSectionTextPlain" return="string">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="396">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Builds the text section of a text/plain email.</p>
+        <p>Will return a string containing the section. Can be used to send to
+ an email server directly.</p>
+      </description>
+    </method>
+    <method name="prepareMessageBody" return="boolean">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="305">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Build the message body and the content-describing header fields</p>
+        <p>The result of this building is an updated body variable in the
+ gateway itself.</p>
+      </description>
+    </method>
+    <method name="send" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="80">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Sends the actual email.
+ This function should be set on the email-gateway itself.
+ See the default gateway for an example.</p>
+      </description>
+    </method>
+    <method name="setAttachments" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="file" type="string|array"/>
+      </parameters>
+      <location line="167">lib/toolkit/class.emailgateway.php</location>
+      <tags>
+        <tag group="Todo">Document this function</tag>
+      </tags>
+    </method>
+    <method name="setFrom" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="email" type="string"/>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="92">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Sets the sender-email and sender-name.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="email"><description><p>The email-address emails will be sent from.</p></description></tag>
+        <tag group="Parameters" name="name"><description><p>The name the emails will be sent from.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setRecipients" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="email" type="string|array"/>
+      </parameters>
+      <location line="132">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Sets the recipients.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="email"><description><p>The email-address(es) to send the email to.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setReplyToEmailAddress" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="email" type="string"/>
+      </parameters>
+      <location line="213">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Sets the reply-to-email.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="email"><description><p>The email-address emails should be replied to.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setReplyToName" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="227">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Sets the reply-to-name.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name emails should be replied to.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setSenderEmailAddress" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="email" type="string"/>
+      </parameters>
+      <location line="104">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Sets the sender-email.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="email"><description><p>The email-address emails will be sent from.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setSenderName" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="118">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Sets the sender-name.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name emails will be sent from.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setSubject" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="subject" type="string"/>
+      </parameters>
+      <location line="201">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Sets the subject.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="subject"><description><p>The subject that the email will have.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setTextEncoding" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="encoding" type="string"/>
+      </parameters>
+      <location line="179">lib/toolkit/class.emailgateway.php</location>
+      <tags>
+        <tag group="Todo">Document this function</tag>
+        <tag group="Parameters" name="encoding"><description><p>Must be either <code>quoted-printable</code> or <code>base64</code>.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setTextHtml" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="text_html" type="string"/>
+      </parameters>
+      <location line="159">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>This functions takes a string to be used as the HTML
+ content for the Email</p>
+      </description>
+      <tags>
+        <tag group="Todo">sanitizing and security checking</tag>
+      </tags>
+    </method>
+    <method name="setTextPlain" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="text_plain" type="string"/>
+      </parameters>
+      <location line="147">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>This functions takes a string to be used as the plaintext
+ content for the Email</p>
+      </description>
+      <tags>
+        <tag group="Todo">sanitizing and security checking</tag>
+      </tags>
+    </method>
+    <method name="validate" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="269">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Check to see if all required data is set.</p>
+      </description>
+    </method>
+  </methods>
+</class>

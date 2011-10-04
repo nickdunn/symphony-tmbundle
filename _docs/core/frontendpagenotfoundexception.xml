@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<class type="class" name="FrontendPageNotFoundException" handle="frontendpagenotfoundexception">
+  <package name="core" handle="core"/>
+  <location line="122">lib/core/class.frontend.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass>Exception</superclass>
+  <description>
+    <p>FrontendPageNotFoundException extends a default Exception, it adds nothing
+ but allows a different Handler to be used to render the Exception</p>
+  </description>
+  <tags>
+    <tag group="See Also" package="core" class="FrontendPageNotFoundExceptionHandler" path="core.FrontendPageNotFoundExceptionHandler">core.FrontendPageNotFoundExceptionHandler</tag>
+  </tags>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="128">lib/core/class.frontend.php</location>
+      <description>
+        <p>The constructor for FrontendPageNotFoundException sets the default
+ error message and code for Logging purposes</p>
+      </description>
+    </method>
+  </methods>
+</class>

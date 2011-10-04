@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/frontend/',
+	'delegate' => 'FrontendPageResolved',
+	'callback' => 'frontendPageResolved'
+),
+</string>
+	<key>name</key>
+	<string>FrontendPageResolved</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>C0B93C6A-41B0-F129-A445-AC114FFDE516</string>
+</dict>
+</plist>

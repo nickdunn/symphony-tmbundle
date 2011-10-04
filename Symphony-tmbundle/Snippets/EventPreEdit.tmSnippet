@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/blueprints/events/',
+	'delegate' => 'EventPreEdit',
+	'callback' => 'eventPreEdit'
+),
+</string>
+	<key>name</key>
+	<string>EventPreEdit</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>15137EE5-79BE-B7C9-F18C-5AE13C7CFDF1</string>
+</dict>
+</plist>

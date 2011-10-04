@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<class type="class" name="DateTimeObj" handle="datetimeobj">
+  <package name="core" handle="core"/>
+  <location line="12">lib/core/class.datetimeobj.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The DateTimeObj provides static functions regarding dates in Symphony.
+ Symphony will set the default timezone of the system using it's configuration
+ values.</p>
+  </description>
+  <methods>
+    <method name="dateFormatToStrftime" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="dateFormat" type="string"/>
+      </parameters>
+      <location line="170">lib/core/class.datetimeobj.php</location>
+      <description>
+        <p>Convert a date format to a <code>strftime</code> format</p>
+        <p>Timezone conversion is done for unix. Windows users must exchange %z and %Z.</p>
+        <p>Unsupported date formats : S, n, t, L, B, G, u, e, I, P, Z, c, r
+ Unsupported strftime formats : %U, %W, %C, %g, %r, %R, %T, %X, %c, %D, %F, %x</p>
+      </description>
+      <tags>
+        <tag group="Since">Symphony 2.2.1</tag>
+        <tag group="See Also">http://www.php.net/manual/en/function.strftime.php#96424</tag>
+        <tag group="Parameters" name="dateFormat"><description><p>a date format</p></description></tag>
+      </tags>
+    </method>
+    <method name="format" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+        <parameter name="format" type="string"/>
+        <parameter name="localize" type="boolean"/>
+        <parameter name="timezone" type="string"/>
+      </parameters>
+      <location line="93">lib/core/class.datetimeobj.php</location>
+      <description>
+        <p>Formats the given date and time <code>$string</code> based on the given <code>$format</code>.
+ Optionally the result will be localized and respect a timezone differing
+ from the system default. The default output is ISO 8601.</p>
+      </description>
+      <tags>
+        <tag group="Since">Symphony 2.2.1</tag>
+        <tag group="Parameters" name="string"><description><p>(optional) A string containing date and time, defaults to the current date and time</p></description></tag>
+        <tag group="Parameters" name="format"><description><p>(optional) A valid PHP date format, defaults to ISO 8601</p></description></tag>
+        <tag group="Parameters" name="localize"><description><p>(optional) Localizes the output, if true, defaults to true</p></description></tag>
+        <tag group="Parameters" name="timezone"><description><p>(optional) The timezone associated with the timestamp</p></description></tag>
+        <tag group="Returns"><description><p>The formatted date</p></description></tag>
+      </tags>
+    </method>
+    <method name="get" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="format" type="string"/>
+        <parameter name="timestamp" type="integer"/>
+        <parameter name="timezone" type="string"/>
+      </parameters>
+      <location line="72">lib/core/class.datetimeobj.php</location>
+      <description>
+        <p>Given a <code>$format</code>, and a <code>$timestamp</code>,
+ return the date in the format provided. This function is a basic
+ wrapper for PHP's DateTime object. If the <code>$timestamp</code> is omitted,
+ the current timestamp will be used. Optionally, you pass a
+ timezone identifier with this function to localise the output</p>
+        <p>If you like to display a date in the backend, please make use
+ of <code>DateTimeObj::format()</code> which allows date and time localization</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="class.datetimeobj" class="php" docblock="format" path="class.datetimeobj.php#format()">class.datetimeobj.php#format()</tag>
+        <tag group="See Also">http://www.php.net/manual/en/book.datetime.php</tag>
+        <tag group="Parameters" name="format"><description><p>A valid PHP date format</p></description></tag>
+        <tag group="Parameters" name="timestamp"><description><p>(optional) A unix timestamp to format. 'now' or omitting this parameter will result in the current time being used</p></description></tag>
+        <tag group="Parameters" name="timezone"><description><p>(optional) The timezone associated with the timestamp</p></description></tag>
+        <tag group="Returns"><description><p>The formatted date</p></description></tag>
+      </tags>
+    </method>
+    <method name="getGMT" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="format" type="string"/>
+        <parameter name="timestamp" type="integer"/>
+      </parameters>
+      <location line="203">lib/core/class.datetimeobj.php</location>
+      <description>
+        <p>A wrapper for get, this function will force the GMT timezone.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="format"><description><p>A valid PHP date format</p></description></tag>
+        <tag group="Parameters" name="timestamp"><description><p>(optional) A unix timestamp to format. Omitting this parameter will result in the current time being used</p></description></tag>
+        <tag group="Returns"><description><p>The formatted date in GMT</p></description></tag>
+      </tags>
+    </method>
+    <method name="getTimeAgo" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="format" type="string"/>
+      </parameters>
+      <location line="221">lib/core/class.datetimeobj.php</location>
+      <description>
+        <p>A wrapper for get, this function will return a HTML string representing
+ an <code>&lt;abbr&gt;</code> element which contained the formatted date of now, and an
+ RFC 2822 formatted date (Thu, 21 Dec 2000 16:01:07 +0200) as the title
+ attribute. Symphony uses this in it's status messages so that it can
+ dynamically update how long ago the action took place using Javascript.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="format"><description><p>A valid PHP date format</p></description></tag>
+        <tag group="Returns"><description><p>A HTML string of an <code>&lt;abbr&gt;</code> element with a class of 'timeago' and the current date (RFC 2822) as the title element. The value is the current time as specified by the <code>$format</code>.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setDefaultTimezone" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="timezone" type="string"/>
+      </parameters>
+      <location line="24">lib/core/class.datetimeobj.php</location>
+      <description>
+        <p>Uses PHP's date<em>default</em>timezone_set function to set the system
+ timezone. If the timezone provided is invalid, a <code>E_USER_WARNING</code> will be
+ raised.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://php.net/manual/en/function.date-default-timezone-set.php</tag>
+        <tag group="See Also">http://www.php.net/manual/en/timezones.php</tag>
+        <tag group="Parameters" name="timezone"><description><p>A valid timezone identifier, such as UTC or Europe/Lisbon</p></description></tag>
+      </tags>
+    </method>
+    <method name="validate" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+      </parameters>
+      <location line="36">lib/core/class.datetimeobj.php</location>
+      <description>
+        <p>Validate a given date and time string</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>A date and time string to validate</p></description></tag>
+        <tag group="Returns"><description><p>Returns true for valid dates, otherwise false</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

@@ -1,0 +1,762 @@
+<?xml version="1.0"?>
+<packages>
+  <package name="Unknown" handle="unknown">
+    <constants>
+      <constant name="ACTIVITY_LOG">
+        <description>
+          <p>The filesystem path to the <code>main</code> file which is contained within
+ the <code>manifest/logs</code> folder. </p>
+        </description>
+      </constant>
+      <constant name="ASSETS">
+        <description>
+          <p>The filesystem path to the <code>assets</code> folder which is contained within
+ the <code>symphony</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="BOOT">
+        <description>
+          <p>The filesystem path to the <code>boot</code> folder which is contained within
+ the <code>symphony/lib</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="CACHE">
+        <description>
+          <p>The filesystem path to the <code>cache</code> folder which is contained within
+ the <code>manifest</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="CONFIG">
+        <description>
+          <p>The filesystem path to the <code>config.php</code> file which is contained within
+ the <code>manifest</code> folder. </p>
+        </description>
+      </constant>
+      <constant name="CONTENT">
+        <description>
+          <p>The filesystem path to the <code>content</code> folder which is contained within
+ the <code>symphony</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="CORE">
+        <description>
+          <p>The filesystem path to the <code>core</code> folder which is contained within
+ the <code>symphony/lib</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="DATASOURCES">
+        <description>
+          <p>The filesystem path to the <code>data-sources</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="EMAILGATEWAYS">
+        <description>
+          <p>The filesystem path to the <code>email-gateways</code> folder which is contained within
+ the <code>symphony/lib/toolkit</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="EVENTS">
+        <description>
+          <p>The filesystem path to the <code>events</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="EXTENSIONS">
+        <description>
+          <p>The filesystem path to the <code>extensions</code> folder</p>
+        </description>
+      </constant>
+      <constant name="HTTPS">
+        <description>
+          <p>Returns the environmental variable if HTTPS is in use.</p>
+        </description>
+      </constant>
+      <constant name="HTTP_HOST">
+        <description>
+          <p>Returns the current host, ie. </p>
+        </description>
+      </constant>
+      <constant name="HTTP_USER_AGENT">
+        <description>
+          <p>Returns the User Agent string of the browser that is viewing the current page</p>
+        </description>
+      </constant>
+      <constant name="LANG">
+        <description>
+          <p>The filesystem path to the <code>lang</code> folder which is contained within
+ the <code>symphony/lib</code> folder. </p>
+        </description>
+      </constant>
+      <constant name="LIBRARY">
+        <description>
+          <p>The filesystem path to the <code>lib</code> folder which is contained within
+ the <code>symphony</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="LOGS">
+        <description>
+          <p>The filesystem path to the <code>logs</code> folder which is contained within
+ the <code>manifest</code> folder. </p>
+        </description>
+      </constant>
+      <constant name="MANIFEST">
+        <description>
+          <p>The filesystem path to the <code>manifest</code> folder</p>
+        </description>
+      </constant>
+      <constant name="PAGES">
+        <description>
+          <p>The filesystem path to the <code>pages</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="PHP_VERSION_ID">
+        <description>
+          <p>For versions of PHP below 5.2.7, the PHP<em>VERSION</em>ID constant, doesn't
+ exist, so this will just mimic the functionality as described on the
+ PHP documentation</p>
+        </description>
+      </constant>
+      <constant name="REMOTE_ADDR">
+        <description>
+          <p>Returns the IP address of the machine that is viewing the current page.</p>
+        </description>
+      </constant>
+      <constant name="STARTTIME">
+        <description>
+          <p>Used as a default seed, this returns the time in seconds that Symphony started
+ to load. </p>
+        </description>
+      </constant>
+      <constant name="SYMPHONY">
+        <description>
+          <p>The filesystem path to the <code>symphony</code> folder</p>
+        </description>
+      </constant>
+      <constant name="SYMPHONY_URL">
+        <description>
+          <p>Returns the URL + /symphony. </p>
+        </description>
+      </constant>
+      <constant name="TEMPLATE">
+        <description>
+          <p>The filesystem path to the <code>template</code> folder which is contained within
+ the <code>symphony</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="TEXTFORMATTERS">
+        <description>
+          <p>The filesystem path to the <code>text-formatters</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="TMP">
+        <description>
+          <p>The filesystem path to the <code>tmp</code> folder which is contained within
+ the <code>manifest</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="TOOLKIT">
+        <description>
+          <p>The filesystem path to the <code>toolkit</code> folder which is contained within
+ the <code>symphony/lib</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="TWO_WEEKS">
+        <description>
+          <p>Returns the number of seconds that represent two weeks.</p>
+        </description>
+      </constant>
+      <constant name="URL">
+        <description>
+          <p>The base URL of this Symphony install, minus the symphony path.</p>
+        </description>
+      </constant>
+      <constant name="UTILITIES">
+        <description>
+          <p>The filesystem path to the <code>utilities</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+        </description>
+      </constant>
+      <constant name="WORKSPACE">
+        <description>
+          <p>The filesystem path to the <code>workspace</code> folder</p>
+        </description>
+      </constant>
+      <constant name="__SECURE__">
+        <description>
+          <p>If HTTPS is on, <code>__SECURE__</code> will be set to true, otherwise false</p>
+        </description>
+      </constant>
+    </constants>
+  </package>
+  <package name="boot" handle="boot">
+    <functions>
+      <function name="define_safe">
+        <description>
+          <p>Checks that a constant has not been defined before defining
+ it. </p>
+        </description>
+      </function>
+      <function name="getCurrentPage">
+        <description>
+          <p>Returns the current URL string from within the Administration
+ context. </p>
+        </description>
+      </function>
+      <function name="getcwd_safe">
+        <description>
+          <p>Returns the current working directory, replacing any \
+    with /. </p>
+        </description>
+      </function>
+      <function name="ini_size_to_bytes">
+        <description>
+          <p>Convert php.ini size format to bytes</p>
+        </description>
+      </function>
+      <function name="precision_timer">
+        <description>
+          <p>Used as a basic stopwatch for profiling. </p>
+        </description>
+      </function>
+      <function name="redirect">
+        <description>
+          <p>Redirects the browser to a specified location. </p>
+        </description>
+      </function>
+    </functions>
+    <constants>
+      <constant name="__IN_SYMPHONY__">
+        <description>
+          <p>Used to determine if Symphony has been loaded, useful to prevent
+ files from being accessed directly.</p>
+        </description>
+      </constant>
+      <constant name="symphony-page"/>
+      <constant name="version"/>
+    </constants>
+  </package>
+  <package name="core" handle="core">
+    <classes>
+      <class name="Symphony" handle="symphony">
+        <description>
+          <p>The Symphony class is an abstract class that implements the
+ Singleton interface. </p>
+        </description>
+        <class name="Administration" handle="administration">
+          <description>
+            <p>The Administration class is an instance of Symphony that controls
+ all backend pages. </p>
+          </description>
+        </class>
+        <class name="Frontend" handle="frontend">
+          <description>
+            <p>The Frontend class is the renderer that is used to display FrontendPage's.</p>
+          </description>
+        </class>
+      </class>
+      <class name="Cacheable" handle="cacheable">
+        <description>
+          <p>The Cacheable class is used to store data in the dedicated Symphony
+ cache table. </p>
+        </description>
+      </class>
+      <class name="Configuration" handle="configuration">
+        <description>
+          <p>The Configuration class acts as a property =&gt; value store for settings
+ used throughout Symphony. </p>
+        </description>
+      </class>
+      <class name="Cookie" handle="cookie">
+        <description>
+          <p>The Cookie class is a wrapper to save Symphony cookies. </p>
+        </description>
+      </class>
+      <class name="GenericExceptionHandler" handle="genericexceptionhandler">
+        <description>
+          <p>GenericExceptionHandler will handle any uncaught exceptions thrown in Symphony.</p>
+        </description>
+        <class name="DatabaseExceptionHandler" handle="databaseexceptionhandler">
+          <description>
+            <p>The DatabaseExceptionHandler provides a render function to provide
+ customised output for Database exceptions. </p>
+          </description>
+        </class>
+        <class name="SymphonyErrorPageHandler" handle="symphonyerrorpagehandler">
+          <description>
+            <p>The SymphonyErrorPageHandler extends the GenericExceptionHandler
+ to allow the template for the Exception to be provided from the <code>TEMPLATES</code>
+ directory</p>
+          </description>
+          <class name="FrontendPageNotFoundExceptionHandler" handle="frontendpagenotfoundexceptionhandler">
+            <description>
+              <p>The FrontendPageNotFoundExceptionHandler attempts to find a Symphony
+ page that has been given the '404' page type to render the SymphonyErrorPage
+ error, instead of using the Symphony default.</p>
+            </description>
+          </class>
+        </class>
+      </class>
+      <class name="DateTimeObj" handle="datetimeobj">
+        <description>
+          <p>The DateTimeObj provides static functions regarding dates in Symphony.</p>
+        </description>
+      </class>
+      <class name="GenericErrorHandler" handle="genericerrorhandler">
+        <description>
+          <p><code>GenericErrorHandler</code> will catch any warnings or notices thrown by PHP and
+ raise the errors to Exceptions so they can be dealt with by the
+ <code>GenericExceptionHandler</code>. </p>
+        </description>
+      </class>
+      <class name="Log" handle="log">
+        <description>
+          <p>The Log class acts a simple wrapper to write errors to a file so that it can
+ be read at a later date. </p>
+        </description>
+      </class>
+      <class name="Session" handle="session">
+        <description>
+          <p>The Session class is a handler for all Session related logic in PHP. </p>
+        </description>
+      </class>
+    </classes>
+    <interfaces>
+      <interface name="Singleton">
+        <description>
+          <p>The Singleton interface contains one function, <code>instance()</code>,
+ the will return an instance of an Object that implements this
+ interface.</p>
+        </description>
+      </interface>
+    </interfaces>
+    <exceptions>
+      <exception name="FrontendPageNotFoundException">
+        <description>
+          <p>FrontendPageNotFoundException extends a default Exception, it adds nothing
+ but allows a different Handler to be used to render the Exception</p>
+        </description>
+      </exception>
+      <exception name="SymphonyErrorPage">
+        <description>
+          <p>The SymphonyErrorPage extends the default Exception class. </p>
+        </description>
+      </exception>
+    </exceptions>
+    <constants>
+      <constant name="__SYM_COOKIE_PATH__"/>
+      <constant name="__SYM_COOKIE_PREFIX_"/>
+      <constant name="__SYM_DATETIME_FORMAT__"/>
+      <constant name="__SYM_DATE_FORMAT__"/>
+      <constant name="__SYM_TIME_FORMAT__"/>
+    </constants>
+  </package>
+  <package name="email-gateways" handle="email-gateways">
+    <classes>
+      <class name="EmailGateway" handle="emailgateway">
+        <description>
+          <p>A base class for email gateways.</p>
+        </description>
+        <class name="SMTPGateway" handle="smtpgateway">
+          <description>
+            <p>One of the two core email gateways.</p>
+          </description>
+        </class>
+        <class name="SendmailGateway" handle="sendmailgateway">
+          <description>
+            <p>The basic gateway sending emails using Sendmail, php's mail function.</p>
+          </description>
+        </class>
+      </class>
+    </classes>
+  </package>
+  <package name="toolkit" handle="toolkit">
+    <classes>
+      <class name="Page" handle="page">
+        <description>
+          <p>Page is an abstract class that holds an object representation
+ of a page's headers.</p>
+        </description>
+        <class name="HTMLPage" handle="htmlpage">
+          <description>
+            <p>HTMLPage extends the Page class to provide an object representation
+ of a Symphony backend page.</p>
+          </description>
+          <class name="AdministrationPage" handle="administrationpage">
+            <description>
+              <p>The AdministrationPage class represents a Symphony backend page.</p>
+            </description>
+          </class>
+          <class name="DevKit" handle="devkit">
+            <description>
+              <p>Devkit extends the HTMLPage class to provide an object representation
+ of a Symphony Devkit page. </p>
+            </description>
+          </class>
+        </class>
+        <class name="AjaxPage" handle="ajaxpage">
+          <description>
+            <p>AjaxPage extends the Page class to provide an object representation
+ of a Symphony backend AJAX page.</p>
+          </description>
+        </class>
+        <class name="XSLTPage" handle="xsltpage">
+          <description>
+            <p>XSLTPage extends the Page class to provide an object representation
+ of a Page that will be generated using XSLT.</p>
+          </description>
+          <class name="FrontendPage" handle="frontendpage">
+            <description>
+              <p>The FrontendPage class represents a page of the website that is powered
+ by Symphony. </p>
+            </description>
+          </class>
+        </class>
+      </class>
+      <class name="Alert" handle="alert">
+        <description>
+          <p>The Alert class drives the standard Symphony notices that
+ appear at the top of the backend pages to alert the user of
+ something. </p>
+        </description>
+      </class>
+      <class name="Author" handle="author">
+        <description>
+          <p>The Author class represents a Symphony Author object. </p>
+        </description>
+      </class>
+      <class name="Manager" handle="manager">
+        <description>
+          <p>The abstract Manager class provides some generic functions
+ to assist the managers in cataloguing their children. </p>
+        </description>
+        <class name="AuthorManager" handle="authormanager">
+          <description>
+            <p>The AuthorManager class is responsible for managing all Author objects
+ in Symphony. </p>
+          </description>
+        </class>
+        <class name="DatasourceManager" handle="datasourcemanager">
+          <description>
+            <p>The DatasourceManager class is responsible for managing all Datasource objects
+ in Symphony. </p>
+          </description>
+        </class>
+        <class name="EmailGatewayManager" handle="emailgatewaymanager">
+          <description>
+            <p>A manager to standardize the finding and listing of installed gateways.</p>
+          </description>
+        </class>
+        <class name="EventManager" handle="eventmanager">
+          <description>
+            <p>The EventManager class is responsible for managing all Event objects
+ in Symphony. </p>
+          </description>
+        </class>
+        <class name="ExtensionManager" handle="extensionmanager">
+          <description>
+            <p>The ExtensionManager class is responsible for managing all extensions
+ in Symphony. </p>
+          </description>
+        </class>
+        <class name="FieldManager" handle="fieldmanager">
+          <description>
+            <p>The FieldManager class is responsible for managing all fields types in Symphony.</p>
+          </description>
+        </class>
+        <class name="TextformatterManager" handle="textformattermanager">
+          <description>
+            <p>The TextformatterManager class is responsible for managing all Text
+ Formatter objects in Symphony. </p>
+          </description>
+        </class>
+      </class>
+      <class name="DataSource" handle="datasource">
+        <description>
+          <p>The Datasource class provides functionality to mainly process any parameters
+ that the fields will use in filters find the relevant Entries and return these Entries
+ data as XML so that XSLT can be applied on it to create your website. </p>
+        </description>
+      </class>
+      <class name="Dictionary" handle="dictionary">
+        <description>
+          <p>The Dictionary class contains a dictionary of all strings of the active
+ system language. </p>
+        </description>
+      </class>
+      <class name="Email" handle="email">
+        <description>
+          <p>The Email class is a factory class to make it possible to send emails using different gateways.</p>
+        </description>
+      </class>
+      <class name="EmailHelper" handle="emailhelper">
+        <description>
+          <p>A helper class for various email functions.</p>
+        </description>
+      </class>
+      <class name="Entry" handle="entry">
+        <description>
+          <p>An entry is a combination of data that is stored in several Fields
+ typically contained in one Section. </p>
+        </description>
+      </class>
+      <class name="EntryManager" handle="entrymanager">
+        <description>
+          <p>The EntryManager is responsible for all Entry objects in Symphony.</p>
+        </description>
+      </class>
+      <class name="Event" handle="event">
+        <description>
+          <p>The abstract Event classes defines some base methods that all Events inherit.</p>
+        </description>
+      </class>
+      <class name="Extension" handle="extension">
+        <description>
+          <p>The abstract Extension class contains common methods that most
+ extensions require to get started in the Symphony environment. </p>
+        </description>
+      </class>
+      <class name="Field" handle="field">
+        <description>
+          <p>The Field class represents a Symphony Field object. </p>
+        </description>
+        <class name="fieldAuthor" handle="fieldauthor">
+          <description>
+            <p>The Author field allows Symphony Authors to be selected in your entries.</p>
+          </description>
+        </class>
+        <class name="fieldCheckbox" handle="fieldcheckbox">
+          <description>
+            <p>Checkbox field simulates a HTML checkbox field, in that it represents a
+ simple yes/no field. </p>
+          </description>
+        </class>
+        <class name="fieldDate" handle="fielddate">
+          <description>
+            <p>A simple Date field that stores a full ISO date. </p>
+          </description>
+        </class>
+        <class name="fieldInput" handle="fieldinput">
+          <description>
+            <p>A simple Input field that essentially maps to HTML's ``.</p>
+          </description>
+        </class>
+        <class name="fieldSelect" handle="fieldselect">
+          <description>
+            <p>A simple Select field that essentially maps to HTML's ``. </p>
+          </description>
+        </class>
+        <class name="fieldTagList" handle="fieldtaglist">
+          <description>
+            <p>The Tag List field is really a different interface for the Select Box
+ field, offering a tag interface that can have static suggestions,
+ suggestions from another field or a dynamic list based on what an Author
+ has previously used for this field.</p>
+          </description>
+        </class>
+        <class name="fieldTextarea" handle="fieldtextarea">
+          <description>
+            <p>A simple Textarea field that essentially maps to HTML's ``.</p>
+          </description>
+        </class>
+        <class name="fieldUpload" handle="fieldupload">
+          <description>
+            <p>A simple Upload field that essentially maps to HTML's ``.</p>
+          </description>
+        </class>
+      </class>
+      <class name="Gateway" handle="gateway">
+        <description>
+          <p>The Gateway class provides a standard way to interact with other pages.</p>
+        </description>
+      </class>
+      <class name="General" handle="general">
+        <description>
+          <p>General is a utility class that offers a number miscellaneous of
+ functions that are used throughout Symphony.</p>
+        </description>
+      </class>
+      <class name="Lang" handle="lang">
+        <description>
+          <p>The Lang class loads and manages languages</p>
+        </description>
+      </class>
+      <class name="Mutex" handle="mutex">
+        <description>
+          <p>The Mutex class is a crude locking class that generates files
+ with a specific time to live. </p>
+        </description>
+      </class>
+      <class name="MySQL" handle="mysql">
+        <description>
+          <p>The MySQL class acts as a wrapper for connecting to the Database
+ in Symphony. </p>
+        </description>
+      </class>
+      <class name="Profiler" handle="profiler">
+        <description>
+          <p>The Profiler class tracks various performance metrics while a Symphony
+ page is being generated. </p>
+        </description>
+      </class>
+      <class name="SMTP" handle="smtp">
+        <description>
+          <p>A SMTP client class, for sending text/plain emails.</p>
+        </description>
+      </class>
+      <class name="Section" handle="section">
+        <description>
+          <p>The Section class represents a Symphony Section object. </p>
+        </description>
+      </class>
+      <class name="SectionManager" handle="sectionmanager">
+        <description>
+          <p>The SectionManager is responsible for managing all Sections in a Symphony
+ installation. </p>
+        </description>
+      </class>
+      <class name="TextFormatter" handle="textformatter">
+        <description>
+          <p>The abstract TextFormatter classes defines two methods
+ that must be implemented by any Symphony text formatter.</p>
+        </description>
+      </class>
+      <class name="Widget" handle="widget">
+        <description>
+          <p>Widget is a utility class that offers a number miscellaneous of
+ functions to help generate common HTML Forms elements as XMLElement
+ objects for inclusion in Symphony backend pages.</p>
+        </description>
+      </class>
+      <class name="XMLElement" handle="xmlelement">
+        <description>
+          <p>XMLElement is a class used to simulate PHP's DOMElement
+ class. </p>
+        </description>
+      </class>
+      <class name="XsltProcess" handle="xsltprocess">
+        <description>
+          <p>The XsltProcess class is responsible for taking a chunk of XML
+ and applying an XSLT stylesheet to it. </p>
+        </description>
+      </class>
+    </classes>
+    <interfaces>
+      <interface name="iEvent">
+        <description>
+          <p>The iEvent interface provides two functions, about and load that
+ Events can implement.</p>
+        </description>
+      </interface>
+    </interfaces>
+    <exceptions>
+      <exception name="DatabaseException">
+        <description>
+          <p>The DatabaseException class extends a normal Exception to add in
+ debugging information when a SQL query fails such as the internal
+ database error code and message in additional to the usual
+ Exception information. </p>
+        </description>
+      </exception>
+      <exception name="EmailException">
+        <description>
+          <p>The Exception to be thrown by the Email class.</p>
+        </description>
+      </exception>
+      <exception name="EmailGatewayException">
+        <description>
+          <p>The standard exception to be thrown by all email gateways.</p>
+        </description>
+      </exception>
+      <exception name="SMTPException">
+        <description>
+          <p>Exceptions to be thrown by the SMTP Client class</p>
+        </description>
+      </exception>
+    </exceptions>
+    <functions>
+      <function name="__">
+        <description>
+          <p>The translation function accepts an English string and returns its translation
+ to the active system language. </p>
+        </description>
+      </function>
+      <function name="_t">
+        <description>
+          <p>The transliteration function replaces special characters.</p>
+        </description>
+      </function>
+    </functions>
+    <constants>
+      <constant name="DS_FILTER_AND">
+        <description>
+          <p>A constant that represents if this filter is an AND filter in which
+ an Entry must match all these filters</p>
+        </description>
+      </constant>
+      <constant name="DS_FILTER_OR">
+        <description>
+          <p>A constant that represents if this filter is an OR filter in which an
+ entry can match any or all of these filters</p>
+        </description>
+      </constant>
+      <constant name="EXTENSION_DISABLED">
+        <description>
+          <p>Status when an extension is disabled</p>
+        </description>
+      </constant>
+      <constant name="EXTENSION_ENABLED">
+        <description>
+          <p>Status when an extension is installed and enabled</p>
+        </description>
+      </constant>
+      <constant name="EXTENSION_NOT_INSTALLED">
+        <description>
+          <p>Status when an extension is in the file system, but has not been installed.</p>
+        </description>
+      </constant>
+      <constant name="EXTENSION_REQUIRES_UPDATE">
+        <description>
+          <p>Status when an extension version in the file system is different to
+ the version stored in the database for the extension</p>
+        </description>
+      </constant>
+      <constant name="LANGUAGE_DISABLED">
+        <description>
+          <p>Status when a language is disabled</p>
+        </description>
+      </constant>
+      <constant name="LANGUAGE_ENABLED">
+        <description>
+          <p>Status when a language is installed and enabled</p>
+        </description>
+      </constant>
+      <constant name="PROFILE_LAP">
+        <description>
+          <p>Defines a constant for when a snapshot should be between two points,
+ usually when a start time has been given</p>
+        </description>
+      </constant>
+      <constant name="PROFILE_RUNNING_TOTAL">
+        <description>
+          <p>Defines a constant for when the Profiler should be a complete snapshot of
+ the page load, from the very start, to the very end.</p>
+        </description>
+      </constant>
+      <constant name="__ENTRY_FIELD_ERROR__">
+        <description>
+          <p>The constant for an Entry if there is an error is raised by any of
+ it's Fields.</p>
+        </description>
+      </constant>
+      <constant name="__ENTRY_OK__">
+        <description>
+          <p>The constant for when an Entry is ok, that is, no errors have
+ been raised by any of it's Fields.</p>
+        </description>
+      </constant>
+    </constants>
+  </package>
+</packages>

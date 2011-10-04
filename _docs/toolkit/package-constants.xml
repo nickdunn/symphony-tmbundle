@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<constants package="toolkit">
+  <constant name="DS_FILTER_AND" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="354">lib/toolkit/class.datasource.php</location>
+    <description>
+      <p>A constant that represents if this filter is an AND filter in which
+ an Entry must match all these filters</p>
+    </description>
+  </constant>
+  <constant name="DS_FILTER_OR" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="361">lib/toolkit/class.datasource.php</location>
+    <description>
+      <p>A constant that represents if this filter is an OR filter in which an
+ entry can match any or all of these filters</p>
+    </description>
+  </constant>
+  <constant name="EXTENSION_DISABLED" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="681">lib/toolkit/class.extensionmanager.php</location>
+    <description>
+      <p>Status when an extension is disabled</p>
+    </description>
+  </constant>
+  <constant name="EXTENSION_ENABLED" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="675">lib/toolkit/class.extensionmanager.php</location>
+    <description>
+      <p>Status when an extension is installed and enabled</p>
+    </description>
+  </constant>
+  <constant name="EXTENSION_NOT_INSTALLED" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="687">lib/toolkit/class.extensionmanager.php</location>
+    <description>
+      <p>Status when an extension is in the file system, but has not been installed.</p>
+    </description>
+  </constant>
+  <constant name="EXTENSION_REQUIRES_UPDATE" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="694">lib/toolkit/class.extensionmanager.php</location>
+    <description>
+      <p>Status when an extension version in the file system is different to
+ the version stored in the database for the extension</p>
+    </description>
+  </constant>
+  <constant name="LANGUAGE_DISABLED" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="614">lib/toolkit/class.lang.php</location>
+    <description>
+      <p>Status when a language is disabled</p>
+    </description>
+  </constant>
+  <constant name="LANGUAGE_ENABLED" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="608">lib/toolkit/class.lang.php</location>
+    <description>
+      <p>Status when a language is installed and enabled</p>
+    </description>
+  </constant>
+  <constant name="PROFILE_LAP" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="211">lib/toolkit/class.profiler.php</location>
+    <description>
+      <p>Defines a constant for when a snapshot should be between two points,
+ usually when a start time has been given</p>
+    </description>
+  </constant>
+  <constant name="PROFILE_RUNNING_TOTAL" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="204">lib/toolkit/class.profiler.php</location>
+    <description>
+      <p>Defines a constant for when the Profiler should be a complete snapshot of
+ the page load, from the very start, to the very end.</p>
+    </description>
+  </constant>
+  <constant name="__ENTRY_FIELD_ERROR__" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="362">lib/toolkit/class.entry.php</location>
+    <description>
+      <p>The constant for an Entry if there is an error is raised by any of
+ it's Fields.</p>
+    </description>
+  </constant>
+  <constant name="__ENTRY_OK__" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="355">lib/toolkit/class.entry.php</location>
+    <description>
+      <p>The constant for when an Entry is ok, that is, no errors have
+ been raised by any of it's Fields.</p>
+    </description>
+  </constant>
+</constants>

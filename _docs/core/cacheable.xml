@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<class type="class" name="Cacheable" handle="cacheable">
+  <package name="core" handle="core"/>
+  <location line="15">lib/core/class.cacheable.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Cacheable class is used to store data in the dedicated Symphony
+ cache table. It is used by Symphony for Session management and by
+ the Dynamic XML datasource, but it can be used by extensions to store
+ anything. The cache table is <code>tbl_cache</code></p>
+  </description>
+  <fields>
+    <field name="$Database" type="MySQL" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="23">lib/core/class.cacheable.php</location>
+      <description>
+        <p>An instance of the MySQL class to store the cached
+ data in.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="Database" type="MySQL" package="toolkit" class="MySQL"/>
+      </parameters>
+      <location line="33">lib/core/class.cacheable.php</location>
+      <description>
+        <p>The constructor for the Cacheable takes an instance of the
+ MySQL class and assigns it to <code>$this-&gt;Database</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="Database"><description><p>An instance of the MySQL class to store the cached data in.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__optimise" return="void">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="160">lib/core/class.cacheable.php</location>
+      <description>
+        <p>Runs a MySQL OPTIMIZE query on <code>tbl_cache</code></p>
+      </description>
+    </method>
+    <method name="check" return="array|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="hash" type="string"/>
+      </parameters>
+      <location line="118">lib/core/class.cacheable.php</location>
+      <description>
+        <p>Given the hash of a some data, check to see whether it exists in
+ <code>tbl_cache</code>. If no cached object is found, this
+ function will return false, otherwise the cached object will be
+ returned as an array.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="hash"><description><p>The hash of the Cached object, as defined by the user</p></description></tag>
+        <tag group="Returns"><description><p>An associative array of the cached object including the creation time, expiry time, the hash and the data. If the object is not found, false will be returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="clean" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="152">lib/core/class.cacheable.php</location>
+      <description>
+        <p>Removes all cache objects from <code>tbl_cache</code> that have expired.
+ After removing, the function uses the optimise function</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Cacheable" docblock="optimise" path="core.Cacheable#optimise()">core.Cacheable#optimise()</tag>
+      </tags>
+    </method>
+    <method name="compressData" return="string|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="string"/>
+      </parameters>
+      <location line="86">lib/core/class.cacheable.php</location>
+      <description>
+        <p>Given some data, this function will compress it using gzcompress
+ and then base64_encodes the output. If this fails, false is returned
+ otherwise the compressed data</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>The data to compress</p></description></tag>
+        <tag group="Returns"><description><p>The compressed data, or false if an error occurred</p></description></tag>
+      </tags>
+    </method>
+    <method name="decompressData" return="string|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="string"/>
+      </parameters>
+      <location line="100">lib/core/class.cacheable.php</location>
+      <description>
+        <p>Given compressed data, this function will decompress it and return
+ the output.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>The data to decompress</p></description></tag>
+        <tag group="Returns"><description><p>The decompressed data, or false if an error occurred</p></description></tag>
+      </tags>
+    </method>
+    <method name="forceExpiry" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="hash" type="string"/>
+      </parameters>
+      <location line="142">lib/core/class.cacheable.php</location>
+      <description>
+        <p>Given the hash of a cacheable object, remove it from <code>tbl_cache</code>
+ regardless of if it has expired or not.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="hash"><description><p>The hash of the Cached object, as defined by the user</p></description></tag>
+      </tags>
+    </method>
+    <method name="write" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="hash" type="string"/>
+        <parameter name="data" type="string"/>
+        <parameter name="ttl" type="integer"/>
+      </parameters>
+      <location line="56">lib/core/class.cacheable.php</location>
+      <description>
+        <p>This function will compress data for storage in <code>tbl_cache</code>.
+ It is left to the user to define a unique hash for this data so that it can be
+ retrieved in the future. Optionally, a <code>$ttl</code> parameter can
+ be passed for this data. If this is omitted, it data is considered to be valid
+ forever. This function utilizes the Mutex class to act as a crude locking
+ mechanism.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Mutex" path="toolkit.Mutex">toolkit.Mutex</tag>
+        <tag group="Parameters" name="hash"><description><p>The hash of the Cached object, as defined by the user</p></description></tag>
+        <tag group="Parameters" name="data"><description><p>The data to be cached, this will be compressed prior to saving.</p></description></tag>
+        <tag group="Parameters" name="ttl"><description><p>A integer representing how long the data should be valid for in seconds. By default this is null, meaning the data is valid forever</p></description></tag>
+        <tag group="Returns"><description><p>If an error occurs, this function will return false otherwise true</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

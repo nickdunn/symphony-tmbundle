@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+
+
+
+
+
+	
+
+
+<class type="built-innamespace" name="_global_" handle="_global_">
+	
+	<package name="assets" handle="assets"/>
+	
+	
+	
+	<modifiers>
+		<modifier>public</modifier>
+	</modifiers>
+	
+	<!--description>
+		<p></p>
+	</description-->
+	
+	
+	
+	
+	
+	
+	
+	
+	<methods>
+	
+		
+		
+		
+
+				
+
+					<method
+						name="refresh"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier>
+						</modifiers>
+
+						
+							<location>assets/symphony.duplicator.js</location>
+						
+
+						<description>
+							<p></p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+
+						</tags>
+
+						
+
+					</method>
+
+				
+
+					<method
+						name="silence"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier>
+						</modifiers>
+
+						
+							<location>assets/symphony.duplicator.js</location>
+						
+
+						<description>
+							<p></p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+
+						</tags>
+
+						
+
+					</method>
+
+				
+
+		
+		
+	</methods>
+			
+	
+	
+	
+</class>

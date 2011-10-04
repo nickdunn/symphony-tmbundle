@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<class type="class" name="SMTPException" handle="smtpexception">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="9">lib/toolkit/class.smtp.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass>Exception</superclass>
+  <description>
+    <p>Exceptions to be thrown by the SMTP Client class</p>
+  </description>
+</class>

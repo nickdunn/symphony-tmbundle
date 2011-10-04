@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/frontend/',
+	'delegate' => 'EventFinalSaveFilter',
+	'callback' => 'eventFinalSaveFilter'
+),
+</string>
+	<key>name</key>
+	<string>EventFinalSaveFilter</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>4488E751-B9C2-86CE-8FA1-9BC8B66D7AA3</string>
+</dict>
+</plist>

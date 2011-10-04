@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<class type="class" name="TextFormatter" handle="textformatter">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="9">lib/toolkit/class.textformatter.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+    <modifier>abstract</modifier>
+  </modifiers>
+  <description>
+    <p>The abstract TextFormatter classes defines two methods
+ that must be implemented by any Symphony text formatter.</p>
+  </description>
+  <fields>
+    <field name="$_Parent" type="Administration" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="16">lib/toolkit/class.textformatter.php</location>
+      <description>
+        <p>An instance of the Administration class</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Administration" path="core.Administration">core.Administration</tag>
+      </tags>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="Administration" package="core" class="Administration"/>
+      </parameters>
+      <location line="26">lib/toolkit/class.textformatter.php</location>
+      <description>
+        <p>The Text Formatter constructor sets the <code>$this-&gt;_Parent</code> variable
+ to the <code>$parent</code> provided as a parameter.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The Administration object that this page has been created from passed by reference</p></description></tag>
+      </tags>
+    </method>
+    <method name="about" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>abstract</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="47">lib/toolkit/class.textformatter.php</location>
+      <description>
+        <p>The about method allows a text formatter to provide
+ information about itself as an associative array. eg.
+ <code>array(
+        'name' =&gt; 'Name of Formatter',
+        'version' =&gt; '1.8',
+        'release-date' =&gt; 'YYYY-MM-DD',
+        'author' =&gt; array(
+            'name' =&gt; 'Author Name',
+            'website' =&gt; 'Author Website',
+            'email' =&gt; 'Author Email'
+        ),
+        'description' =&gt; 'A description about this formatter'
+ )</code></p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>An associative array describing the text formatter.</p></description></tag>
+      </tags>
+    </method>
+    <method name="run" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>abstract</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+      </parameters>
+      <location line="55">lib/toolkit/class.textformatter.php</location>
+      <description>
+        <p>Given an input, apply the formatter and return the result</p>
+      </description>
+    </method>
+  </methods>
+</class>

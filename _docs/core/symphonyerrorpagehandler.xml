@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<class type="class" name="SymphonyErrorPageHandler" handle="symphonyerrorpagehandler">
+  <package name="core" handle="core"/>
+  <location line="531">lib/core/class.symphony.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="core">GenericExceptionHandler</superclass>
+  <description>
+    <p>The SymphonyErrorPageHandler extends the GenericExceptionHandler
+ to allow the template for the Exception to be provided from the <code>TEMPLATES</code>
+ directory</p>
+  </description>
+  <inherited-fields>
+    <class name="GenericExceptionHandler" package="core">
+      <field name="_Log"/>
+      <field name="enabled"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="render" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="e" type="SymphonyErrorPage" package="core" class="SymphonyErrorPage"/>
+      </parameters>
+      <location line="544">lib/core/class.symphony.php</location>
+      <description>
+        <p>The render function will take a SymphonyErrorPage Exception and
+ output a HTML page. This function first checks to see if their is a custom
+ template for this Exception otherwise it reverts to using the default
+ <code>tpl.error.php</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="e"><description><p>The Exception object</p></description></tag>
+        <tag group="Returns"><description><p>An HTML string</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="core" class="GenericExceptionHandler">
+    <class name="GenericExceptionHandler" package="core">
+      <method name="__nearbyLines"/>
+      <method name="handler"/>
+      <method name="initialise"/>
+      <method name="render"/>
+    </class>
+  </inherited-methods>
+</class>

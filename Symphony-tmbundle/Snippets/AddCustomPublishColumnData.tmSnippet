@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/publish/',
+	'delegate' => 'AddCustomPublishColumnData',
+	'callback' => 'addCustomPublishColumnData'
+),
+</string>
+	<key>name</key>
+	<string>AddCustomPublishColumnData</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>07FD929E-3618-6A3F-D3D9-B6915283AC2A</string>
+</dict>
+</plist>

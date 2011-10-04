@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/blueprints/sections/',
+	'delegate' => 'FieldPostCreate',
+	'callback' => 'fieldPostCreate'
+),
+</string>
+	<key>name</key>
+	<string>FieldPostCreate</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>0A549F7A-AFE8-EC8A-EA93-C784A7763BD1</string>
+</dict>
+</plist>

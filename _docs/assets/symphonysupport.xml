@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+
+
+
+
+	
+
+
+
+
+<class type="class" name="Symphony.Support" handle="Symphony.Support">
+	
+	<package name="assets" handle="assets"/>
+	
+	
+		<location>assets/admin.js</location>
+	
+	
+	<modifiers>
+		<modifier>public</modifier>
+	</modifiers>
+	
+	<!--description>
+		<p></p>
+	</description-->
+	
+			
+		<description>
+			<p>A collection of properties that represent the presence of
+different browser features and also contains the test results
+from jQuery.support.</p>
+			
+		</description>
+	
+	
+	
+	
+		
+		<fields>
+			
+			
+				
+				<field name="localStorage" type='Boolean' value='false*'>
+					<modifiers>
+						<modifier>public</modifier><modifier>static</modifier>
+					</modifiers>
+					
+					
+					
+					<description>
+						<p>Does the browser have support for the HTML5 localStorage API</p>
+						
+							
+								<pre class="code">
+				if(Symphony.Support.localStorage) { ... }</pre>
+							
+						
+					</description>
+					
+					<tags>
+						
+						
+						
+						
+
+					</tags>
+
+					
+				</field>
+
+			
+		
+		</fields>
+		
+	
+	
+	
+	
+	<methods>
+	
+		
+	
+		<method
+			name="Support"
+			 
+			
+		>
+		
+			<modifiers>
+				<modifier>public</modifier><modifier>static</modifier>
+			</modifiers>
+			
+			<location>assets/admin.js</location>
+			
+			<description>
+				<p>A collection of properties that represent the presence of
+different browser features and also contains the test results
+from jQuery.support.</p>
+				
+			</description>
+			
+			<tags>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</tags>
+			
+			
+			
+		</method>
+		
+		
+		
+		
+		
+	</methods>
+			
+	
+	
+	
+</class>

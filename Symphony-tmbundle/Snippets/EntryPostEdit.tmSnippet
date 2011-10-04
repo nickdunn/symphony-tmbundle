@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/publish/edit/',
+	'delegate' => 'EntryPostEdit',
+	'callback' => 'entryPostEdit'
+),
+</string>
+	<key>name</key>
+	<string>EntryPostEdit</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>D48242CD-C60B-1A6F-DA12-E33810937FCF</string>
+</dict>
+</plist>

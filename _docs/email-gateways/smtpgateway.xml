@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<class type="class" name="SMTPGateway" handle="smtpgateway">
+  <package name="email-gateways" handle="email-gateways"/>
+  <location line="17">lib/toolkit/email-gateways/email.smtp.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="email-gateways">EmailGateway</superclass>
+  <description>
+    <p>One of the two core email gateways.
+ Provides simple SMTP functionalities.
+ Supports AUTH LOGIN, SSL and TLS.</p>
+  </description>
+  <tags>
+    <tag group="Author">Huib Keemink, Michael Eichelsdoerfer</tag>
+    <tag group="Todo">add validation to all set functions.</tag>
+  </tags>
+  <fields>
+    <field name="$_SMTP" type="mixed" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="19">lib/toolkit/email-gateways/email.smtp.php</location>
+    </field>
+    <field name="$_auth" type="mixed" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="24">lib/toolkit/email-gateways/email.smtp.php</location>
+    </field>
+    <field name="$_host" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="20">lib/toolkit/email-gateways/email.smtp.php</location>
+    </field>
+    <field name="$_pass" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="26">lib/toolkit/email-gateways/email.smtp.php</location>
+    </field>
+    <field name="$_port" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="21">lib/toolkit/email-gateways/email.smtp.php</location>
+    </field>
+    <field name="$_protocol" type="mixed" value="'tcp'">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="22">lib/toolkit/email-gateways/email.smtp.php</location>
+    </field>
+    <field name="$_secure" type="mixed" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="23">lib/toolkit/email-gateways/email.smtp.php</location>
+    </field>
+    <field name="$_user" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="25">lib/toolkit/email-gateways/email.smtp.php</location>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="EmailGateway" package="email-gateways">
+      <field name="_attachments"/>
+      <field name="_body"/>
+      <field name="_boundary_alter"/>
+      <field name="_boundary_mixed"/>
+      <field name="_header_fields"/>
+      <field name="_recipients"/>
+      <field name="_reply_to_email_address"/>
+      <field name="_reply_to_name"/>
+      <field name="_sender_email_address"/>
+      <field name="_sender_name"/>
+      <field name="_subject"/>
+      <field name="_text_encoding"/>
+      <field name="_text_html"/>
+      <field name="_text_plain"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="44">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Constructor. Sets basic default values based on preferences.</p>
+      </description>
+    </method>
+    <method name="about" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="33">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Returns the name, used in the dropdown menu in the preferences pane.</p>
+      </description>
+    </method>
+    <method name="getPreferencesPane" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="229">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Builds the preferences pane, shown in the symphony backend.</p>
+      </description>
+    </method>
+    <method name="send" return="bool">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="63">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Send an email using an SMTP server</p>
+      </description>
+    </method>
+    <method name="setAuth" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="auth" type="bool"/>
+      </parameters>
+      <location line="199">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Use AUTH login or no auth.</p>
+      </description>
+    </method>
+    <method name="setHost" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="host" type="mixed"/>
+      </parameters>
+      <location line="144">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Sets the host to connect to.</p>
+      </description>
+    </method>
+    <method name="setPass" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="pass" type="string"/>
+      </parameters>
+      <location line="189">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Sets the password to use with AUTH LOGIN</p>
+      </description>
+    </method>
+    <method name="setPort" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="port" type="mixed"/>
+      </parameters>
+      <location line="161">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Sets the port, used in the connection.</p>
+      </description>
+    </method>
+    <method name="setSecure" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="secure" type="string|null|false"/>
+      </parameters>
+      <location line="209">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Sets the encryption used.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="secure"><description><p>The encryption used. Can be 'ssl', 'tls' or false</p></description></tag>
+      </tags>
+    </method>
+    <method name="setUser" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="user" type="string"/>
+      </parameters>
+      <location line="179">lib/toolkit/email-gateways/email.smtp.php</location>
+      <description>
+        <p>Sets the username to use with AUTH LOGIN</p>
+      </description>
+    </method>
+  </methods>
+  <inherited-methods package="email-gateways" class="EmailGateway">
+    <class name="EmailGateway" package="email-gateways">
+      <method name="__construct"/>
+      <method name="__fromCamel"/>
+      <method name="__set"/>
+      <method name="__toCamel"/>
+      <method name="appendHeaderField"/>
+      <method name="appendHeaderFields"/>
+      <method name="boundaryDelimiterLine"/>
+      <method name="contentInfoArray"/>
+      <method name="contentInfoString"/>
+      <method name="finalBoundaryDelimiterLine"/>
+      <method name="getBoundary"/>
+      <method name="getPreferencesPane"/>
+      <method name="getSectionAttachments"/>
+      <method name="getSectionMultipartAlternative"/>
+      <method name="getSectionTextHtml"/>
+      <method name="getSectionTextPlain"/>
+      <method name="prepareMessageBody"/>
+      <method name="send"/>
+      <method name="setAttachments"/>
+      <method name="setFrom"/>
+      <method name="setRecipients"/>
+      <method name="setReplyToEmailAddress"/>
+      <method name="setReplyToName"/>
+      <method name="setSenderEmailAddress"/>
+      <method name="setSenderName"/>
+      <method name="setSubject"/>
+      <method name="setTextEncoding"/>
+      <method name="setTextHtml"/>
+      <method name="setTextPlain"/>
+      <method name="validate"/>
+    </class>
+  </inherited-methods>
+</class>

@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<class type="class" name="Frontend" handle="frontend">
+  <package name="core" handle="core"/>
+  <location line="18">lib/core/class.frontend.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="core">Symphony</superclass>
+  <description>
+    <p>The Frontend class is the renderer that is used to display FrontendPage's.
+ A FrontendPage is one that is setup in Symphony and it's output is generated
+ by using XML and XSLT</p>
+  </description>
+  <fields>
+    <field name="$_page" type="FrontendPage" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="24">lib/core/class.frontend.php</location>
+      <description>
+        <p>An instance of the FrontendPage class</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Symphony" package="core">
+      <field name="Author"/>
+      <field name="Configuration"/>
+      <field name="Cookie"/>
+      <field name="Database"/>
+      <field name="ExtensionManager"/>
+      <field name="Log"/>
+      <field name="Profiler"/>
+      <field name="_instance"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="Page" return="FrontendPage">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="68">lib/core/class.frontend.php</location>
+      <description>
+        <p>Accessor for <code>$_page</code></p>
+      </description>
+    </method>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="52">lib/core/class.frontend.php</location>
+      <description>
+        <p>The constructor for Frontend calls the parent Symphony
+ constructor.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Symphony" docblock="__construct" path="core.Symphony#__construct()">core.Symphony#__construct()</tag>
+        <tag group="Deprecated"><description><p>The constructor creates backwards compatible references to <code>$this-&gt;Database</code>, <code>$this-&gt;ExtensionManager</code> and <code>$this-&gt;Configuration</code> that act as alias for <code>Symphony::Database()</code>, <code>Symphony::ExtensionManager()</code> and <code>Symphony::Configuration()</code>. These will be removed in the next Symphony release</p></description></tag>
+      </tags>
+    </method>
+    <method name="display" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="page" type="string"/>
+      </parameters>
+      <location line="102">lib/core/class.frontend.php</location>
+      <description>
+        <p>Called by index.php, this function is responsible for rendering the current
+ page on the Frontend. One delegate is fired, FrontendInitialised</p>
+      </description>
+      <tags>
+        <tag group="Uses" package="" class="FrontendInitialised" path="FrontendInitialised">FrontendInitialised</tag>
+        <tag group="See Also" package="boot" class="getCurrentPage" path="boot.getCurrentPage()">boot.getCurrentPage()</tag>
+        <tag group="Parameters" name="page"><description><p>The result of getCurrentPage, which returns the $_GET['symphony-page'] variable.</p></description></tag>
+        <tag group="Returns"><description><p>The HTML of the page to return</p></description></tag>
+      </tags>
+    </method>
+    <method name="instance" return="Frontend">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="33">lib/core/class.frontend.php</location>
+      <description>
+        <p>This function returns an instance of the Frontend
+ class. It is the only way to create a new Frontend, as
+ it implements the Singleton interface</p>
+      </description>
+    </method>
+    <method name="isLoggedIn" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="82">lib/core/class.frontend.php</location>
+      <description>
+        <p>Overrides the Symphony isLoggedIn function to allow Authors
+ to become logged into the frontend when <code>$_REQUEST['auth-token']</code>
+ is present. This logs an Author in using the loginFromToken function.
+ This function allows the use of 'admin' type pages, where a Frontend
+ page requires that the viewer be a Symphony Author</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Symphony" docblock="loginFromToken" path="core.Symphony#loginFromToken()">core.Symphony#loginFromToken()</tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="core" class="Symphony">
+    <class name="Symphony" package="core">
+      <method name="Configuration"/>
+      <method name="Database"/>
+      <method name="Engine"/>
+      <method name="ExtensionManager"/>
+      <method name="__construct"/>
+      <method name="customError"/>
+      <method name="initialiseCookie"/>
+      <method name="initialiseDatabase"/>
+      <method name="initialiseExtensionManager"/>
+      <method name="initialiseLog"/>
+      <method name="isLoggedIn"/>
+      <method name="login"/>
+      <method name="loginFromToken"/>
+      <method name="logout"/>
+      <method name="resolvePage"/>
+      <method name="resolvePagePath"/>
+      <method name="resolvePageTitle"/>
+    </class>
+  </inherited-methods>
+</class>

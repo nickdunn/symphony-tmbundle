@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/system/authors/',
+	'delegate' => 'AddElementstoAuthorForm',
+	'callback' => 'addElementstoAuthorForm'
+),
+</string>
+	<key>name</key>
+	<string>AddElementstoAuthorForm</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>64621982-6C84-6D12-F8CF-73A4E6C2BDD2</string>
+</dict>
+</plist>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<functions package="toolkit">
+  <function name="__" return="Returns">
+    <modifiers>
+      <modifier>public</modifier>
+    </modifiers>
+    <parameters>
+      <parameter name="string" type="string"/>
+      <parameter name="inserts" type="array"/>
+    </parameters>
+    <location line="18">lib/toolkit/class.lang.php</location>
+    <description>
+      <p>The translation function accepts an English string and returns its translation
+ to the active system language. If the given string is not available in the
+ current dictionary the original English string will be returned. Given an optional
+ array of inserts the function will also replace translation placeholders using vsprintf().</p>
+    </description>
+  </function>
+  <function name="_t" return="Returns">
+    <modifiers>
+      <modifier>public</modifier>
+    </modifiers>
+    <parameters>
+      <parameter name="string" type="string"/>
+    </parameters>
+    <location line="30">lib/toolkit/class.lang.php</location>
+    <description>
+      <p>The transliteration function replaces special characters.</p>
+    </description>
+  </function>
+</functions>

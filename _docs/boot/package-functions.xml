@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<functions package="boot">
+  <function name="define_safe" return="void">
+    <modifiers>
+      <modifier>public</modifier>
+    </modifiers>
+    <parameters>
+      <parameter name="name" type="string"/>
+      <parameter name="value" type="string"/>
+    </parameters>
+    <location line="50">lib/boot/func.utilities.php</location>
+    <description>
+      <p>Checks that a constant has not been defined before defining
+ it. If the constant is already defined, this function will do
+ nothing, otherwise, it will set the constant</p>
+    </description>
+  </function>
+  <function name="getCurrentPage" return="string">
+    <modifiers>
+      <modifier>public</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="60">lib/boot/func.utilities.php</location>
+    <description>
+      <p>Returns the current URL string from within the Administration
+ context. It omits the Symphony directory from the current URL.</p>
+    </description>
+  </function>
+  <function name="getcwd_safe" return="string">
+    <modifiers>
+      <modifier>public</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="36">lib/boot/func.utilities.php</location>
+    <description>
+      <p>Returns the current working directory, replacing any \
+    with /. Use for Windows compatibility.</p>
+    </description>
+  </function>
+  <function name="ini_size_to_bytes" return="integer">
+    <modifiers>
+      <modifier>public</modifier>
+    </modifiers>
+    <parameters>
+      <parameter name="val" type="string"/>
+    </parameters>
+    <location line="88">lib/boot/func.utilities.php</location>
+    <description>
+      <p>Convert php.ini size format to bytes</p>
+    </description>
+  </function>
+  <function name="precision_timer" return="integer">
+    <modifiers>
+      <modifier>public</modifier>
+    </modifiers>
+    <parameters>
+      <parameter name="action" type="string"/>
+      <parameter name="start_time" type="integer"/>
+    </parameters>
+    <location line="73">lib/boot/func.utilities.php</location>
+    <description>
+      <p>Used as a basic stopwatch for profiling. The default <code>$action</code>
+ starts the timer. Setting <code>$action</code> to 'stop' and passing the
+ start time returns the difference between now and that time.</p>
+    </description>
+  </function>
+  <function name="redirect" return="void">
+    <modifiers>
+      <modifier>public</modifier>
+    </modifiers>
+    <parameters>
+      <parameter name="url" type="string"/>
+    </parameters>
+    <location line="13">lib/boot/func.utilities.php</location>
+    <description>
+      <p>Redirects the browser to a specified location. Safer than using a
+ direct header() call</p>
+    </description>
+  </function>
+</functions>

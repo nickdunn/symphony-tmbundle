@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+
+
+
+
+
+
+	
+
+
+<class type="class" name="$.symphonyCollapsible" handle="$.symphonyCollapsible">
+	
+	<package name="assets" handle="assets"/>
+	
+	
+		<location>assets/symphony.collapsible.js</location>
+	
+	
+	<modifiers>
+		<modifier>public</modifier>
+	</modifiers>
+	
+	<!--description>
+		<p></p>
+	</description-->
+	
+			
+		<description>
+			<p>This plugin makes items callapsible.</p>
+			
+				
+					<pre class="code">
+			var collapsible = $('#duplicator').symphonyCollapsible({
+				items:		'.instance',
+				handles:	'.header span'
+			});
+			collapsible.collapseAll();</pre>
+				
+			
+		</description>
+	
+	
+	
+	
+	
+	
+	
+	<methods>
+	
+		
+	
+		<method
+			name="symphonyCollapsible"
+			 
+			
+		>
+		
+			<modifiers>
+				<modifier>public</modifier><modifier>static</modifier>
+			</modifiers>
+			
+			<location>assets/symphony.collapsible.js</location>
+			
+			<description>
+				<p>This plugin makes items callapsible.</p>
+				
+					
+						<pre class="code">
+			var collapsible = $('#duplicator').symphonyCollapsible({
+				items:		'.instance',
+				handles:	'.header span'
+			});
+			collapsible.collapseAll();</pre>
+					
+				
+			</description>
+			
+			<tags>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					
+						<tag group="Parameters" name="custom_settings">
+							<description>
+								<p>An object specifying containing the attributes specified below</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.items">
+							<description>
+								<p>Selector to find collapsible items within the container</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.handles">
+							<description>
+								<p>Selector to find clickable handles to trigger interaction</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.delay_initialize">
+							<description>
+								<p>Initialise plugin extensions before the collapsible itself is initialised</p>
+							</description>
+						</tag>
+					
+				
+				
+			</tags>
+			
+			
+				<parameters>
+					
+						<parameter name="custom_settings" type="Object" />
+					
+						<parameter name="custom_settings.items" type="String" />
+					
+						<parameter name="custom_settings.handles" type="String" />
+					
+						<parameter name="custom_settings.delay_initialize" type="Boolean" />
+					
+				</parameters>
+			
+			
+		</method>
+		
+		
+		
+		
+
+				
+
+					<method
+						name="cancel"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Cancel collapsing</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+
+						</tags>
+
+						
+
+					</method>
+
+				
+
+					<method
+						name="collapseAll"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Collapse all open items</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+
+						</tags>
+
+						
+
+					</method>
+
+				
+
+					<method
+						name="expandAll"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Expand all closed items</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+
+						</tags>
+
+						
+
+					</method>
+
+				
+
+					<method
+						name="initialize"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Set up the collapsible items and bind event handlers</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+
+						</tags>
+
+						
+
+					</method>
+
+				
+
+		
+		
+	</methods>
+			
+	
+	
+	
+</class>

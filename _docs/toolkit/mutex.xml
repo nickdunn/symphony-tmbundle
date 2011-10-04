@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<class type="class" name="Mutex" handle="mutex">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="10">lib/toolkit/class.mutex.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Mutex class is a crude locking class that generates files
+ with a specific time to live. It has basic functions to create a
+ lock, release a lock or refresh a lock.</p>
+  </description>
+  <methods>
+    <method name="__createLock" return="boolean">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="lockFile" type="string"/>
+      </parameters>
+      <location line="85">lib/toolkit/class.mutex.php</location>
+      <description>
+        <p>Private function that writes the lock to the file system with the
+ contents Mutex lock file - DO NOT DELETE</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="lockFile"><description><p>The obfuscated lock name</p></description></tag>
+      </tags>
+    </method>
+    <method name="__generateLockFileName" return="string">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="string"/>
+        <parameter name="path" type="string"/>
+      </parameters>
+      <location line="131">lib/toolkit/class.mutex.php</location>
+      <description>
+        <p>Generates a lock filename using an MD5 hash of the <code>$id</code> and
+ <code>$path</code>. Lock files are given a .lock extension</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>The name of the lock file to be obfuscated</p></description></tag>
+        <tag group="Parameters" name="path"><description><p>The path the lock should be written</p></description></tag>
+      </tags>
+    </method>
+    <method name="__lockExists" return="boolean">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="lockFile" type="string"/>
+      </parameters>
+      <location line="117">lib/toolkit/class.mutex.php</location>
+      <description>
+        <p>Checks if a lock exists, purely on the presence on the lock file</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="lockFile"><description><p>The obfuscated lock name</p></description></tag>
+      </tags>
+    </method>
+    <method name="acquire" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="string"/>
+        <parameter name="ttl" type="integer"/>
+        <parameter name="path" type="string"/>
+      </parameters>
+      <location line="29">lib/toolkit/class.mutex.php</location>
+      <description>
+        <p>Creates a lock file if one does not already exist with a certain
+ time to live (TTL) at a specific path. If a lock already exists,
+ false will be returned otherwise boolean depending if a lock
+ file was created successfully or not.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>The name of the lock file, which gets obfuscated using generateLockFileName.</p></description></tag>
+        <tag group="Parameters" name="ttl"><description><p>The length, in seconds, that the lock should exist for. Defaults to 5.</p></description></tag>
+        <tag group="Parameters" name="path"><description><p>The path the lock should be written, defaults to the current working directory</p></description></tag>
+      </tags>
+    </method>
+    <method name="lockExists" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="string"/>
+        <parameter name="path" type="string"/>
+      </parameters>
+      <location line="104">lib/toolkit/class.mutex.php</location>
+      <description>
+        <p>Checks if a lock exists, purely on the presence on the lock file.
+ This function takes the unobfuscated lock name</p>
+      </description>
+      <tags>
+        <tag group="Since">Symphony 2.2</tag>
+        <tag group="Parameters" name="id"><description><p>The name of the lock file, which gets obfuscated using generateLockFileName.</p></description></tag>
+        <tag group="Parameters" name="path"><description><p>The path the lock should be written, defaults to the current working directory</p></description></tag>
+      </tags>
+    </method>
+    <method name="refresh" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="string"/>
+        <parameter name="ttl" type="integer"/>
+        <parameter name="path" type="string"/>
+      </parameters>
+      <location line="73">lib/toolkit/class.mutex.php</location>
+      <description>
+        <p>Updates a lock file to 'keep alive' for another 'x' seconds.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>The name of the lock file, which gets obfuscated using <code>__generateLockFileName()</code>.</p></description></tag>
+        <tag group="Parameters" name="ttl"><description><p>The length, in seconds, that the lock should be extended by. Defaults to 5.</p></description></tag>
+        <tag group="Parameters" name="path"><description><p>The path to the lock, defaults to the current working directory</p></description></tag>
+      </tags>
+    </method>
+    <method name="release" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="string"/>
+        <parameter name="path" type="string"/>
+      </parameters>
+      <location line="52">lib/toolkit/class.mutex.php</location>
+      <description>
+        <p>Removes a lock file. This is the only way a lock file can be removed</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>The original name of the lock file (note that this will be different from the name of the file saved on the file system)</p></description></tag>
+        <tag group="Parameters" name="path"><description><p>The path to the lock, defaults to the current working directory</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

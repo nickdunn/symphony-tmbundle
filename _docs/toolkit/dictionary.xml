@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<class type="class" name="Dictionary" handle="dictionary">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="44">lib/toolkit/class.lang.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Dictionary class contains a dictionary of all strings of the active
+ system language. It allows strings to be added, removed, found or translated.
+ It also offers a function to merge different dictionaries which is used to combine
+ core and extension translations. The Dictionary class should only be used internally:
+ for string translations and languages activation please use the translation function
+ and make use of the Lang class provided in this file.</p>
+  </description>
+  <fields>
+    <field name="$_strings" type="array" value="NULL">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="50">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>An associative array mapping English strings and their translations</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="strings" type="array"/>
+      </parameters>
+      <location line="58">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>The constructor for Dictionary.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="strings"><description><p>Associative array mapping English strings and their translations, defaults to an empty array</p></description></tag>
+      </tags>
+    </method>
+    <method name="add" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="source" type="string"/>
+        <parameter name="translation" type="string"/>
+      </parameters>
+      <location line="117">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Given a source string an its translation, add both to the current dictionary.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="source"><description><p>English string</p></description></tag>
+        <tag group="Parameters" name="translation"><description><p>Translation</p></description></tag>
+      </tags>
+    </method>
+    <method name="find" return="string|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+      </parameters>
+      <location line="101">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Given a string, return its translation.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>The string to look for</p></description></tag>
+        <tag group="Returns"><description><p>Returns either the translation of the string or false if it could not be found</p></description></tag>
+      </tags>
+    </method>
+    <method name="merge" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="strings" type="mixed"/>
+        <parameter name="string" type="array"/>
+      </parameters>
+      <location line="127">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Given an associative array of strings, merge it with the current dictionary.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>Associative array containing English strings and their translations</p></description></tag>
+      </tags>
+    </method>
+    <method name="remove" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+      </parameters>
+      <location line="139">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>Given an English string, remove it from the current dictionary.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>String to be removed from the dictionary.</p></description></tag>
+      </tags>
+    </method>
+    <method name="translate" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+        <parameter name="inserts" type="array"/>
+      </parameters>
+      <location line="77">lib/toolkit/class.lang.php</location>
+      <description>
+        <p>The translation function accepts an English string and returns its translation
+ to the active system language. If the given string is not available in the
+ current dictionary the original English string will be returned. Given an optional
+ array of inserts the function will also replace translation placeholders using vsprintf().</p>
+        <p>Note: If you like to translate strings, please use __() which is the common alias for this function.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>The string that should be translated</p></description></tag>
+        <tag group="Parameters" name="inserts"><description><p>Optional array used to replace translation placeholders, defaults to NULL</p></description></tag>
+        <tag group="Returns"><description><p>Returns the translated string</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

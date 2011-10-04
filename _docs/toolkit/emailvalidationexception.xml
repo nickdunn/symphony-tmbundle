@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<class type="class" name="EmailValidationException" handle="emailvalidationexception">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="37">lib/toolkit/class.emailgateway.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">EmailGatewayException</superclass>
+  <description>
+    <p>The validation exception to be thrown by all email gateways.
+ This exception is thrown if data does not pass validation.</p>
+  </description>
+  <inherited-fields/>
+  <inherited-methods package="toolkit" class="EmailGatewayException">
+    <class name="EmailGatewayException" package="toolkit">
+      <method name="__construct"/>
+    </class>
+  </inherited-methods>
+</class>

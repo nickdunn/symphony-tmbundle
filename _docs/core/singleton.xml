@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<class type="interface" name="Singleton" handle="singleton">
+  <package name="core" handle="core"/>
+  <location line="12">lib/core/interface.singleton.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Singleton interface contains one function, <code>instance()</code>,
+ the will return an instance of an Object that implements this
+ interface.</p>
+  </description>
+  <methods>
+    <method name="instance" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="13">lib/core/interface.singleton.php</location>
+    </method>
+  </methods>
+</class>

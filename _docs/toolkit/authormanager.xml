@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<class type="class" name="AuthorManager" handle="authormanager">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="15">lib/toolkit/class.authormanager.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Manager</superclass>
+  <description>
+    <p>The AuthorManager class is responsible for managing all Author objects
+ in Symphony. Unlike other Manager objects, Authors are stored in the
+ database, and not on the file system. CRUD methods are implemented to
+ allow Authors to be created (add), read (fetch), updated (edit) and
+ deleted (delete).</p>
+  </description>
+  <fields>
+    <field name="$_pool" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="22">lib/toolkit/class.authormanager.php</location>
+      <description>
+        <p>An array of all the objects that the Manager is responsible for.
+ Defaults to an empty array.</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Manager" package="toolkit">
+      <field name="_Parent"/>
+      <field name="_pool"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="activateAuthToken" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="author_id" type="integer"/>
+      </parameters>
+      <location line="231">lib/toolkit/class.authormanager.php</location>
+      <description>
+        <p>This function will allow an Author to sign into Symphony by using their
+ authentication token as well as username/password.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="author_id"><description><p>The Author ID to allow to use their authentication token.</p></description></tag>
+      </tags>
+    </method>
+    <method name="add" return="integer|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="fields" type="array"/>
+      </parameters>
+      <location line="34">lib/toolkit/class.authormanager.php</location>
+      <description>
+        <p>Given an associative array of fields, insert them into the database
+ returning the resulting AuthorID if successful, or false if there
+ was an error</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="fields"><description><p>Associative array of field names =&gt; values for the Author object</p></description></tag>
+        <tag group="Returns"><description><p>Returns an Author ID of the created Author on success, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="deactivateAuthToken" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="author_id" type="integer"/>
+      </parameters>
+      <location line="244">lib/toolkit/class.authormanager.php</location>
+      <description>
+        <p>This function will remove the ability for an Author to sign into Symphony
+ by using their authentication token</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="author_id"><description><p>The Author ID to allow to use their authentication token.</p></description></tag>
+      </tags>
+    </method>
+    <method name="delete" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="integer"/>
+      </parameters>
+      <location line="64">lib/toolkit/class.authormanager.php</location>
+      <description>
+        <p>Given an Author ID, delete an Author from Symphony.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>The ID of the Author that should be deleted</p></description></tag>
+      </tags>
+    </method>
+    <method name="edit" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="integer"/>
+        <parameter name="fields" type="array"/>
+      </parameters>
+      <location line="53">lib/toolkit/class.authormanager.php</location>
+      <description>
+        <p>Given an Author ID and associative array of fields, update an existing Author
+ row in the <code>tbl_authors</code> database table. Returns boolean for success/failure</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>The ID of the Author that should be updated</p></description></tag>
+        <tag group="Parameters" name="fields"><description><p>Associative array of field names =&gt; values for the Author object This array does need to contain every value for the author object, it can just be the changed values.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetch" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="sortby" type="string"/>
+        <parameter name="sortdirection" type="string"/>
+        <parameter name="limit" type="integer"/>
+        <parameter name="start" type="integer"/>
+      </parameters>
+      <location line="84">lib/toolkit/class.authormanager.php</location>
+      <description>
+        <p>The fetch method returns all Authors from Symphony with the option to sort
+ or limit the output. This method returns an array of Author objects.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="sortby"><description><p>The field to sort the authors by, defaults to 'id'</p></description></tag>
+        <tag group="Parameters" name="sortdirection"><description><p>Available values of ASC (Ascending) or DESC (Descending), which refer to the sort order for the query. Defaults to ASC (Ascending)</p></description></tag>
+        <tag group="Parameters" name="limit"><description><p>The number of rows to return</p></description></tag>
+        <tag group="Parameters" name="start"><description><p>The offset start point for limiting, maps to the LIMIT {x}, {y} MySQL functionality</p></description></tag>
+        <tag group="Returns"><description><p>An array of Author objects. If no Authors are found, null is returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchByID" return="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="integer|array"/>
+        <parameter name="sortby" type="string"/>
+        <parameter name="sortdirection" type="string"/>
+        <parameter name="limit" type="integer"/>
+        <parameter name="start" type="integer"/>
+      </parameters>
+      <location line="135">lib/toolkit/class.authormanager.php</location>
+      <description>
+        <p>Returns Author's that match the provided ID's with the option to sort or limit the
+ output. This function will search the <code>AuthorManager::$_pool</code> for Authors first before
+ querying <code>tbl_authors</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>A single ID or an array of ID's</p></description></tag>
+        <tag group="Parameters" name="sortby"><description><p>The field to sort the authors by, defaults to 'id'</p></description></tag>
+        <tag group="Parameters" name="sortdirection"><description><p>Available values of ASC (Ascending) or DESC (Descending), which refer to the sort order for the query. Defaults to ASC (Ascending)</p></description></tag>
+        <tag group="Parameters" name="limit"><description><p>The number of rows to return</p></description></tag>
+        <tag group="Parameters" name="start"><description><p>The offset start point for limiting, maps to the LIMIT {x}, {y} MySQL functionality</p></description></tag>
+        <tag group="Returns"><description><p>If <code>$id</code> was an integer, the result will be an Author object, otherwise an array of Author objects will be returned. If no Authors are found, or no <code>$id</code> is given null is returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchByUsername" return="Author|null">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="username" type="string"/>
+      </parameters>
+      <location line="197">lib/toolkit/class.authormanager.php</location>
+      <description>
+        <p>Returns an Author by Username. This function will search the
+ <code>AuthorManager::$_pool</code> for Authors first before querying <code>tbl_authors</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="username"><description><p>The Author's username</p></description></tag>
+        <tag group="Returns"><description><p>If an Author is found, an Author object is returned, otherwise null.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Manager">
+    <class name="Manager" package="toolkit">
+      <method name="__construct"/>
+      <method name="__getClassName"/>
+      <method name="__getClassPath"/>
+      <method name="__getDriverPath"/>
+      <method name="__getHandleFromFilename"/>
+      <method name="about"/>
+      <method name="create"/>
+      <method name="flush"/>
+      <method name="listAll"/>
+    </class>
+  </inherited-methods>
+</class>

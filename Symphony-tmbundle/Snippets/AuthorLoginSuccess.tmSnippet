@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/login/',
+	'delegate' => 'AuthorLoginSuccess',
+	'callback' => 'authorLoginSuccess'
+),
+</string>
+	<key>name</key>
+	<string>AuthorLoginSuccess</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>00785144-6F42-37F2-942E-69FD2043FD04</string>
+</dict>
+</plist>

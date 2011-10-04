@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<deprecated>
+  <fields type="Fields">
+    <field name="Database" class="Field" package="toolkit">
+      <description>
+        <p>A pointer to the <code>Symphony::Database()</code>.</p>
+      </description>
+      <location line="126">lib/toolkit/class.field.php</location>
+    </field>
+    <field name="_engine" class="Field" package="toolkit">
+      <description>
+        <p>An instance of the Symphony class, either Frontend or Administration</p>
+      </description>
+      <location line="116">lib/toolkit/class.field.php</location>
+    </field>
+    <field name="_fields" class="Field" package="toolkit">
+      <description>
+        <p>An associative array of the settings for this Field instance</p>
+      </description>
+      <location line="102">lib/toolkit/class.field.php</location>
+    </field>
+  </fields>
+  <constants type="Constants">
+    <constant name="CRLF" class="DataSource" package="toolkit">
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <location line="27">lib/toolkit/class.datasource.php</location>
+    </constant>
+    <constant name="CRLF" class="Event" package="toolkit">
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <location line="50">lib/toolkit/class.event.php</location>
+    </constant>
+    <constant name="CRLF" class="Extension" package="toolkit">
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <location line="19">lib/toolkit/class.extension.php</location>
+    </constant>
+    <constant name="CRLF" class="General" package="toolkit">
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <location line="15">lib/toolkit/class.general.php</location>
+    </constant>
+    <constant name="CRLF" class="Page" package="toolkit">
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <location line="15">lib/toolkit/class.page.php</location>
+    </constant>
+    <constant name="CRLF" class="Symphony" package="core">
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <location line="89">lib/core/class.symphony.php</location>
+    </constant>
+    <constant name="CRLF" class="XMLElement" package="toolkit">
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <location line="21">lib/toolkit/class.xmlelement.php</location>
+    </constant>
+  </constants>
+  <methods type="Methods">
+    <method name="__construct" class="Administration" package="core">
+      <description>
+        <p>The constructor for Administration calls the parent Symphony
+ constructor.</p>
+      </description>
+      <location line="74">lib/core/class.administration.php</location>
+    </method>
+    <method name="wrapFormElementWithError" class="AdministrationPage" package="toolkit">
+      <description>
+        <p>Will wrap a <code>&lt;div&gt;</code> around a desired element to trigger the default
+ Symphony error styling.</p>
+      </description>
+      <location line="906">lib/toolkit/class.administrationpage.php</location>
+    </method>
+    <method name="loadAuthor" class="Author" package="toolkit">
+      <description>
+        <p>This function will load an Author by ID into the current Author object</p>
+      </description>
+      <location line="226">lib/toolkit/class.author.php</location>
+    </method>
+    <method name="loadAuthorFromUsername" class="Author" package="toolkit">
+      <description>
+        <p>This function will load an Author by Username into the current Author object</p>
+      </description>
+      <location line="251">lib/toolkit/class.author.php</location>
+    </method>
+    <method name="verifyToken" class="Author" package="toolkit">
+      <description>
+        <p>This function compares a given token to an Author's actual token.</p>
+      </description>
+      <location line="206">lib/toolkit/class.author.php</location>
+    </method>
+    <method name="buildDSRetrivalSQL" class="Field" package="toolkit">
+      <location line="1196">lib/toolkit/class.field.php</location>
+    </method>
+    <method name="canImport" class="Field" package="toolkit">
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <location line="235">lib/toolkit/class.field.php</location>
+    </method>
+    <method name="fetchHandleFromElementName" class="FieldManager" package="toolkit">
+      <location line="369">lib/toolkit/class.fieldmanager.php</location>
+    </method>
+    <method name="__construct" class="Frontend" package="core">
+      <description>
+        <p>The constructor for Frontend calls the parent Symphony
+ constructor.</p>
+      </description>
+      <location line="52">lib/core/class.frontend.php</location>
+    </method>
+    <method name="sendEmail" class="General" package="toolkit">
+      <description>
+        <p>Allows you to send emails. It initializes the core email class.</p>
+      </description>
+      <location line="330">lib/toolkit/class.general.php</location>
+    </method>
+    <method name="fetchFilterableFields" class="Section" package="toolkit">
+      <description>
+        <p>Returns an array of all the fields that can be filtered.</p>
+      </description>
+      <location line="138">lib/toolkit/class.section.php</location>
+    </method>
+    <method name="canImport" class="fieldAuthor" package="toolkit">
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <location line="34">lib/toolkit/fields/field.author.php</location>
+    </method>
+    <method name="canImport" class="fieldCheckbox" package="toolkit">
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <location line="55">lib/toolkit/fields/field.checkbox.php</location>
+    </method>
+    <method name="buildSimpleFilterSQL" class="fieldDate" package="toolkit">
+      <location line="440">lib/toolkit/fields/field.date.php</location>
+    </method>
+    <method name="canImport" class="fieldDate" package="toolkit">
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <location line="46">lib/toolkit/fields/field.date.php</location>
+    </method>
+    <method name="canImport" class="fieldInput" package="toolkit">
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <location line="72">lib/toolkit/fields/field.input.php</location>
+    </method>
+    <method name="canImport" class="fieldSelect" package="toolkit">
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <location line="43">lib/toolkit/fields/field.select.php</location>
+    </method>
+    <method name="canImport" class="fieldTagList" package="toolkit">
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <location line="36">lib/toolkit/fields/field.taglist.php</location>
+    </method>
+    <method name="canImport" class="fieldTextarea" package="toolkit">
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <location line="26">lib/toolkit/fields/field.textarea.php</location>
+    </method>
+    <method name="canImport" class="fieldUpload" package="toolkit">
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <location line="32">lib/toolkit/fields/field.upload.php</location>
+    </method>
+  </methods>
+</deprecated>

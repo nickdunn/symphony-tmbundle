@@ -1,0 +1,559 @@
+<?xml version="1.0"?>
+<class type="class" name="AdministrationPage" handle="administrationpage">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="18">lib/toolkit/class.administrationpage.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">HTMLPage</superclass>
+  <description>
+    <p>The AdministrationPage class represents a Symphony backend page.
+ It extends the HTMLPage class and unlike the Frontend, is generated
+ using a number XMLElement objects. Instances of this class override
+ the view, switchboard and action functions to construct the page. These
+ functions act as pseudo MVC, with the switchboard being controller,
+ and the view/action being the view.</p>
+  </description>
+  <fields>
+    <field name="$Alert" type="Alert" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="32">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>An instance of the Alert class. Used to display page level
+ messages to Symphony users.</p>
+      </description>
+    </field>
+    <field name="$Contents" type="XMLElement" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="52">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>A <code>&lt;div&gt;</code> that contains the content of a Symphony backend page.</p>
+      </description>
+    </field>
+    <field name="$Footer" type="XMLElement" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="59">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>A <code>&lt;div&gt;</code> that contains the Symphony footer, typically the version and
+ the current Author's details.</p>
+      </description>
+    </field>
+    <field name="$Header" type="XMLElement" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="46">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>A <code>&lt;div&gt;</code> that contains the header of a Symphony backend page, which
+ typically contains the Site title and the navigation.</p>
+      </description>
+    </field>
+    <field name="$Wrapper" type="XMLElement" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="39">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>As the name suggests, a <code>&lt;div&gt;</code> that holds the following <code>$Header</code>,
+ <code>$Contents</code> and <code>$Footer</code>.</p>
+      </description>
+    </field>
+    <field name="$_Parent" type="Administration" value="NULL">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="25">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>An instance of the Administration class</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Administration" path="core.Administration">core.Administration</tag>
+      </tags>
+    </field>
+    <field name="$_body_class" type="string" value="''">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="90">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>The class attribute of the <code>&lt;body&gt;</code> element for this page. Defaults
+ to an empty string</p>
+      </description>
+    </field>
+    <field name="$_context" type="array" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="83">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>An associative array describing this pages context. This
+  can include the section handle, the current entry_id, the page
+  name and any flags such as 'saved' or 'created'. This variable
+ often provided in delegates so extensions can manipulate based
+ off the current context or add new keys.</p>
+      </description>
+    </field>
+    <field name="$_navigation" type="array" value="array()">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="73">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>An associative array of the navigation where the key is the group
+ index, and the value is an associative array of 'name', 'index' and
+ 'children'. Name is the name of the this group, index is the same as
+ the key and children is an associative array of navigation items containing
+ the keys 'link', 'name' and 'visible'. In Symphony, all navigation items
+ are contained within a group, and the group has no 'default' link, therefore
+ it is up to the children to provide the link to pages. This link should be
+ relative to the Symphony path, although it is possible to provide an
+ absolute link by providing a key, 'relative' with the value false.</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="HTMLPage" package="toolkit">
+      <field name="Body"/>
+      <field name="Form"/>
+      <field name="Head"/>
+      <field name="Html"/>
+      <field name="_head"/>
+    </class>
+    <class name="Page" package="toolkit">
+      <field name="_headers"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__appendBodyClass" return="void">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="context" type="array"/>
+      </parameters>
+      <location line="378">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Given the context of the current page, loop over all the values
+ of the array and append them to the page's body class. If an
+ context value is numeric it will be prepended by 'id-'.</p>
+      </description>
+    </method>
+    <method name="__appendBodyId" return="void">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="361">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Uses this pages PHP classname as the <code>&lt;body&gt;</code> ID attribute.
+ This function removes 'content' from the start of the classname
+ and converts all uppercase letters to lowercase and prefixes them
+ with a hyphen.</p>
+      </description>
+    </method>
+    <method name="__buildNavigation" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="579">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>This function populates the <code>$_navigation</code> array with an associative array
+ of all the navigation groups and their links. Symphony only supports one
+ level of navigation, so children links cannot have children links. The default
+ Symphony navigation is found in the <code>ASSETS/navigation.xml</code> folder. This is
+ loaded first, and then the Section navigation is built, followed by the Extension
+ navigation. Additionally, this function will set the active group of the navigation
+ by checking the current page against the array of links.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://github.com/symphonycms/symphony-2/blob/master/symphony/assets/navigation.xml</tag>
+      </tags>
+    </method>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="Administration" package="core" class="Administration"/>
+      </parameters>
+      <location line="102">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Constructor takes the Administration instance and sets it
+ to be the <code>$this-&gt;_Parent</code>. Calls the parent constructor to set up
+ the basic HTML, Head and Body XMLElements. This function
+ also sets the XMLElement type to be HTML, instead of XML</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The Administration object that this page has been created from passed by reference</p></description></tag>
+      </tags>
+    </method>
+    <method name="__fetchAvailablePageTypes" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="context" type="string"/>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+      </parameters>
+      <location line="884">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Returns all the page types that exist in this Symphony install.
+ There are 5 default system page types, and new types can be added
+ by Developers via the Page Editor.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>An array of strings of the page types used in this Symphony install. At the minimum, this will be an array with the values 'index', 'XML', 'admin', '404' and '403'.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__findActiveNavigationGroup" return="boolean">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="nav" type="array"/>
+        <parameter name="pageroot" type="string"/>
+        <parameter name="pattern" type="boolean"/>
+      </parameters>
+      <location line="816">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Given the navigation array, this function will loop over all the items
+ to determine which is the 'active' navigation group, or in other words,
+ what group best represents the current page <code>$this-&gt;Author</code> is viewing.
+ This is done by checking the current page's link against all the links
+ provided in the <code>$nav</code>, and then flagging the group of the found link
+ with an 'active' CSS class. The current page's link omits any flags or
+ URL parameters and just uses the root page URL.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="nav"><description><p>An associative array of the navigation where the key is the group index, and the value is an associative array of 'name', 'index' and 'children'. Name is the name of the this group, index is the same as the key and children is an associative array of navigation items containing the keys 'link', 'name' and 'visible'. The 'haystack'. This parameter is passed by reference to this function.</p></description></tag>
+        <tag group="Parameters" name="pageroot"><description><p>The current page the Author is the viewing, minus any flags or URL parameters such as a Symphony object ID. eg. Section ID, Entry ID. This parameter is also be a regex, but this is highly unlikely.</p></description></tag>
+        <tag group="Parameters" name="pattern"><description><p>If set to true, the <code>$pageroot</code> represents a regex, and preg_match is invoked to determine the active navigation item. Defaults to false</p></description></tag>
+        <tag group="Returns"><description><p>Returns true if an active link was found, false otherwise. If true, the navigation group of the active link will be given the CSS class 'active'</p></description></tag>
+      </tags>
+    </method>
+    <method name="__navigationFindGroupIndex" return="integer|boolean">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="nav" type="array"/>
+        <parameter name="group" type="string"/>
+      </parameters>
+      <location line="782">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Given an associative array representing the navigation, and a group,
+ this function will attempt to return the index of the group in the navigation
+ array. If it is found, it will return the index, otherwise it will return false.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="nav"><description><p>An associative array of the navigation where the key is the group index, and the value is an associative array of 'name', 'index' and 'children'. Name is the name of the this group, index is the same as the key and children is an associative array of navigation items containing the keys 'link', 'name' and 'visible'. The 'haystack'.</p></description></tag>
+        <tag group="Parameters" name="group"><description><p>The group name to find, the 'needle'.</p></description></tag>
+        <tag group="Returns"><description><p>If the group is found, the index will be returned, otherwise false.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__switchboard" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="string"/>
+      </parameters>
+      <location line="426">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>The <code>__switchboard</code> function acts as a controller to display content
+ based off the $type. By default, the <code>$type</code> is 'view' but it can be set
+ also set to 'action'. The <code>$type</code> is prepended by __ and the context is
+ append to the $type to create the name of the function that will provide
+ that logic. For example, if the $type was action and the context of the
+ current page was new, the resulting function to be called would be named
+ <code>__actionNew()</code>. If an action function is not provided by the Page, this function
+ returns nothing, however if a view function is not provided, a 404 page
+ will be returned.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="type"><description><p>Either 'view' or 'action', by default this will be 'view'</p></description></tag>
+      </tags>
+    </method>
+    <method name="action" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="408">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>This function is called when <code>$_REQUEST</code> contains a key of 'action'.
+ Any logic that needs to occur immediately for the action to complete
+ should be contained within this function. By default this calls the
+ <code>__switchboard</code> with the type set to 'action'.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__switchboard" path="__switchboard()">__switchboard()</tag>
+      </tags>
+    </method>
+    <method name="appendAlert" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="451">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>If <code>$this-&gt;Alert</code> is set, it will be prepended to the Form of this page.
+ A delegate is fired here to allow extensions to provide their
+ their own Alert messages to the page. Note that only one Alert
+ is allowed per page at any one time.</p>
+      </description>
+      <tags>
+        <tag group="Uses" package="" class="AppendPageAlert" path="AppendPageAlert">AppendPageAlert</tag>
+      </tags>
+    </method>
+    <method name="appendFooter" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="843">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Creates the Symphony footer for an Administration page. By default
+ this includes the installed Symphony version and the currently logged
+ in Author. A delegate is provided to allow extensions to manipulate the
+ footer HTML, which is an XMLElement of a <code>&lt;ul&gt;</code> element.</p>
+      </description>
+      <tags>
+        <tag group="Uses" package="" class="AddElementToFooter" path="AddElementToFooter">AddElementToFooter</tag>
+      </tags>
+    </method>
+    <method name="appendNavigation" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="context" type="string"/>
+      </parameters>
+      <location line="479">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>This function will append the Navigation to the AdministrationPage.
+ It fires a delegate, NavigationPreRender, to allow extensions to manipulate
+ the navigation. Extensions should not use this to add their own navigation,
+ they should provide the navigation through their fetchNavigation function.
+ Note with the Section navigation groups, if there is only one section in a group
+ and that section is set to visible, the group will not appear in the navigation.</p>
+      </description>
+      <tags>
+        <tag group="Uses" package="" class="NavigationPreRender" path="NavigationPreRender">NavigationPreRender</tag>
+        <tag group="See Also" package="" class="getNavigationArray" path="getNavigationArray()">getNavigationArray()</tag>
+        <tag group="See Also" package="toolkit" class="Extension" docblock="fetchNavigation" path="toolkit.Extension#fetchNavigation()">toolkit.Extension#fetchNavigation()</tag>
+      </tags>
+    </method>
+    <method name="appendSubheading" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+        <parameter name="html" type="XMLElement|string"/>
+      </parameters>
+      <location line="174">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Appends the heading of this Symphony page to the Form element.
+ If a link is provided, it will be append to <code>$value</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>The heading text</p></description></tag>
+        <tag group="Parameters" name="html"><description><p>Some HTML to append to the heading, this can be provided as an XMLElement or as a string. traditionally Symphony uses this to append a link to the heading</p></description></tag>
+      </tags>
+    </method>
+    <method name="build" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="context" type="array"/>
+      </parameters>
+      <location line="198">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>This function initialises a lot of the basic elements that make up a Symphony
+ backend page such as the default stylesheets and scripts, the navigation and
+ the footer. Any alerts are also appended by this function. view() is called to
+ build the actual content of the page. Delegates fire to allow extensions to add
+ elements to the <code>&lt;head&gt;</code> and footer.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="view" path="view()">view()</tag>
+        <tag group="Uses" package="" class="InitaliseAdminPageHead" path="InitaliseAdminPageHead">InitaliseAdminPageHead</tag>
+        <tag group="Uses" package="" class="AppendElementBelowView" path="AppendElementBelowView">AppendElementBelowView</tag>
+        <tag group="Parameters" name="context"><description><p>An associative array describing this pages context. This can include the section handle, the current entry_id, the page name and any flags such as 'saved' or 'created'. This list is not exhaustive and extensions can add their own keys to the array.</p></description></tag>
+      </tags>
+    </method>
+    <method name="canAccessPage" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="context" type="string"/>
+      </parameters>
+      <location line="289">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Checks the current Symphony Author can access the current page.
+ This includes the check to ensure that an Author cannot access a
+ hidden section.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>True if the Author can access the current page, false otherwise</p></description></tag>
+      </tags>
+    </method>
+    <method name="generate" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="343">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Appends the <code>$this-&gt;Header</code>, <code>$this-&gt;Contents</code> and <code>$this-&gt;Footer</code>
+ to <code>$this-&gt;Wrapper</code> before adding the ID and class attributes for
+ the <code>&lt;body&gt;</code> element. After this has completed the parent's generate
+ function is called which will convert the <code>XMLElement</code>'s into strings
+ ready for output</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__renderHeaders" path="__renderHeaders()">__renderHeaders()</tag>
+      </tags>
+    </method>
+    <method name="getNavigationArray" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="context" type="string"/>
+        <parameter name="nav" type="array"/>
+      </parameters>
+      <location line="563">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Returns the <code>$_navigation</code> variable of this Page. If it is empty,
+ it will be built by <code>__buildNavigation</code></p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__buildNavigation" path="__buildNavigation()">__buildNavigation()</tag>
+      </tags>
+    </method>
+    <method name="pageAlert" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="message" type="string"/>
+        <parameter name="type" type="string"/>
+      </parameters>
+      <location line="148">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Sets this page's <code>$Alert</code> to an instance of the Alert class of a
+ given Alter type. Unless the Alert is an Error, it is required
+ the a message be passed to this function.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="message"><description><p>The message to display to users</p></description></tag>
+        <tag group="Parameters" name="type"><description><p>An Alert constant, being <code>Alert::NOTICE</code>, <code>Alert::ERROR</code> or <code>Alert::SUCCESS</code>. The differing types will show the error in a different style in the backend.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setBodyClass" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="class" type="string"/>
+      </parameters>
+      <location line="130">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Setter function to set the class attribute on the <code>&lt;body&gt;</code> element.
+ This function will respect any previous classes that have been added
+ to this <code>&lt;body&gt;</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="class"><description><p>The string of the classname, multiple classes can be specified by uses a space separator</p></description></tag>
+      </tags>
+    </method>
+    <method name="setPageType" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="string"/>
+      </parameters>
+      <location line="117">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Adds either the tables or forms stylesheet to the page. By default
+ this is forms, but can be override by passing 'table' to the function.
+ The stylesheets reside in the <code>ASSETS</code> folder</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="type"><description><p>Either 'form' or 'table'. Defaults to 'form'</p></description></tag>
+      </tags>
+    </method>
+    <method name="view" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="396">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Called to build the content for the page. This function immediately calls
+ <code>__switchboard()</code> which acts a bit of a controller to show content based on
+ off a type, such as 'view' or 'action'. <code>AdministrationPages</code> can override this
+ function to just display content if they do not need the switchboard functionality</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__switchboard" path="__switchboard()">__switchboard()</tag>
+      </tags>
+    </method>
+    <method name="wrapFormElementWithError" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="element" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="message" type="string"/>
+      </parameters>
+      <location line="906">lib/toolkit/class.administrationpage.php</location>
+      <description>
+        <p>Will wrap a <code>&lt;div&gt;</code> around a desired element to trigger the default
+ Symphony error styling.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This function is deprecated and will be removed in the next version of Symphony. This preferred way to wrap an element with an error is using <code>Widget::wrapFormElementWithError</code></p></description></tag>
+        <tag group="See Also" package="toolkit" class="Widget" docblock="wrapFormElementWithError" path="toolkit.Widget::wrapFormElementWithError()">toolkit.Widget::wrapFormElementWithError()</tag>
+        <tag group="Parameters" name="element"><description><p>The element that should be wrapped with an error</p></description></tag>
+        <tag group="Parameters" name="message"><description><p>The text for this error. This will be appended after the <code>$element</code>, but inside the wrapping <code>&lt;div&gt;</code></p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Page">
+    <class name="HTMLPage" package="toolkit">
+      <method name="__build"/>
+      <method name="__buildQueryString"/>
+      <method name="__construct"/>
+      <method name="__generateHead"/>
+      <method name="addElementToHead"/>
+      <method name="addScriptToHead"/>
+      <method name="addStylesheetToHead"/>
+      <method name="checkElementsInHead"/>
+      <method name="generate"/>
+      <method name="removeFromHead"/>
+      <method name="setTitle"/>
+    </class>
+    <class name="Page" package="toolkit">
+      <method name="__construct"/>
+      <method name="__renderHeaders"/>
+      <method name="addHeaderToPage"/>
+      <method name="generate"/>
+      <method name="headers"/>
+    </class>
+  </inherited-methods>
+</class>

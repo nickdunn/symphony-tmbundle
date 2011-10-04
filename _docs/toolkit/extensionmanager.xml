@@ -1,0 +1,486 @@
+<?xml version="1.0"?>
+<class type="class" name="ExtensionManager" handle="extensionmanager">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="16">lib/toolkit/class.extensionmanager.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Manager</superclass>
+  <description>
+    <p>The ExtensionManager class is responsible for managing all extensions
+ in Symphony. Extensions are stored on the file system in the <code>EXTENSIONS</code>
+ folder. They are autodiscovered where the Extension class name is the same
+ as it's folder name (excluding the extension prefix).</p>
+  </description>
+  <fields>
+    <field name="$_enabled_extensions" type="array" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="29">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>An array of all extensions whose status is enabled</p>
+      </description>
+    </field>
+    <field name="$_extensions" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="43">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>An associative array of all the extensions in tbl_extensions where
+ the key is the extension name and the value is an array
+ representation of it's accompanying database row.</p>
+      </description>
+    </field>
+    <field name="$_pool" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="23">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>An array of all the objects that the Manager is responsible for.
+ Defaults to an empty array.</p>
+      </description>
+    </field>
+    <field name="$_subscriptions" type="array" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="35">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>An array of all the subscriptions to Symphony delegates made by extensions.</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Manager" package="toolkit">
+      <field name="_Parent"/>
+      <field name="_pool"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__buildExtensionList" return="void">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="update" type="boolean"/>
+      </parameters>
+      <location line="111">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Populates the <code>ExtensionManager::$_extensions</code> array with all the
+ extensions stored in <code>tbl_extensions</code>. If <code>ExtensionManager::$_extensions</code>
+ isn't empty, passing true as a parameter will force the array to update</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="update"><description><p>Updates the <code>ExtensionManager::$_extensions</code> array even if it was populated, defaults to false.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__canUninstallOrDisable" return="boolean">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="obj" type="Extension" package="toolkit" class="Extension"/>
+      </parameters>
+      <location line="444">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>This function checks that if the given extension has provided Fields,
+ Data Sources or Events, that they aren't in use before the extension
+ is uninstalled or disabled. This prevents exceptions from occurring when
+ accessing an object that was using something provided by this Extension
+ can't anymore because it has been removed.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="obj"><description><p>An extension object</p></description></tag>
+      </tags>
+    </method>
+    <method name="__cleanupDatabase" return="void">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="645">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>A utility function that is used by the ExtensionManager to ensure
+ stray delegates are not in <code>tbl_extensions_delegates</code>. It is called when
+ a new Delegate is added or removed.</p>
+      </description>
+    </method>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="Administration" package="core" class="Administration"/>
+      </parameters>
+      <location line="49">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>The constructor for ExtensionManager overrides the default Manager
+ constructor to prevent <code>$this-&gt;_Parent</code> from being set.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The Administration object that this manager has been created from passed by reference</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getClassName" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="59">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Given a name, returns the full class name of an Extension.
+ Extension use an 'extension' prefix.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The extension handle</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getClassPath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="71">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Finds an Extension by name by searching the <code>EXTENSIONS</code> folder and
+ returns the path to the folder.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The extension folder</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getDriverPath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="83">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Given a name, return the path to the driver of the Extension.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="__getClassPath" path="toolkit.ExtensionManager#__getClassPath()">toolkit.ExtensionManager#__getClassPath()</tag>
+        <tag group="Parameters" name="name"><description><p>The extension folder</p></description></tag>
+      </tags>
+    </method>
+    <method name="__requiresInstallation" return="boolean">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="224">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Determines whether the current extension is installed or not by checking
+ for an id in <code>tbl_extensions</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the Extension Class minus the extension prefix.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__requiresUpdate" return="boolean">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="info" type="array"/>
+      </parameters>
+      <location line="239">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Determines whether an extension needs to be updated or not using
+ PHP's version_compare function.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="info"><description><p>The about array from the extension</p></description></tag>
+      </tags>
+    </method>
+    <method name="about" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="139">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Returns information about an extension by it's name by calling
+ it's own about method. This method checks if an extension needs
+ to be updated or not.
+ <code>'name' =&gt; 'Name of Extension',
+        'version' =&gt; '1.8',
+        'release-date' =&gt; 'YYYY-MM-DD',
+        'author' =&gt; array(
+            'name' =&gt; 'Author Name',
+            'website' =&gt; 'Author Website',
+            'email' =&gt; 'Author Email'
+        ),
+        'description' =&gt; 'A description about this extension'</code></p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="__requiresUpdate" path="toolkit.ExtensionManager#__requiresUpdate()">toolkit.ExtensionManager#__requiresUpdate()</tag>
+        <tag group="Returns"><description><p>An associative array describing this extension</p></description></tag>
+        <tag group="Parameters" name="name"><description><p>The name of the object that has the about information. This should be lowercase and free from any Symphony conventions. eg. <code>author</code>, not <code>field.author.php</code>.</p></description></tag>
+      </tags>
+    </method>
+    <method name="create" return="Extension">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="616">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Creates an instance of a given class and returns it</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the Extension Class minus the extension prefix.</p></description></tag>
+      </tags>
+    </method>
+    <method name="disable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="310">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Disabling an extension will prevent it from executing but retain all it's
+ settings in the relevant tables. Symphony checks that an extension can
+ be disabled using the <code>canUninstallorDisable()</code> before removing
+ all delegate subscriptions from the database and calling the extension's
+ <code>disable()</code> function.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="removeDelegates" path="toolkit.ExtensionManager#removeDelegates()">toolkit.ExtensionManager#removeDelegates()</tag>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="__canUninstallOrDisable" path="toolkit.ExtensionManager#__canUninstallOrDisable()">toolkit.ExtensionManager#__canUninstallOrDisable()</tag>
+        <tag group="Parameters" name="name"><description><p>The name of the Extension Class minus the extension prefix.</p></description></tag>
+      </tags>
+    </method>
+    <method name="enable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="259">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Enabling an extension will re-register all it's delegates with Symphony.
+ It will also install or update the extension if needs be by calling the
+ extensions respective install and update methods. The enable method is
+ of the extension object is finally called.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="registerDelegates" path="toolkit.ExtensionManager#registerDelegates()">toolkit.ExtensionManager#registerDelegates()</tag>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="__canUninstallOrDisable" path="toolkit.ExtensionManager#__canUninstallOrDisable()">toolkit.ExtensionManager#__canUninstallOrDisable()</tag>
+        <tag group="Parameters" name="name"><description><p>The name of the Extension Class minus the extension prefix.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchExtensionID" return="int">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="199">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>A convenience method that returns an extension ID from it's name.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the extension as provided by it's about function</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchInstalledVersion" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="187">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>A convenience method that returns an extension version from it's name.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the extension as provided by it's about function</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchStatus" return="int">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="167">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Returns the status of an Extension by name</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the extension as provided by it's about function</p></description></tag>
+        <tag group="Returns"><description><p>An extension status, <code>EXTENSION_ENABLED</code>, <code>EXTENSION_DISABLED</code> <code>EXTENSION_NOT_INSTALLED</code> and <code>EXTENSION_REQUIRES_UPDATE</code>. If an extension doesn't exist, null will be returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getInstance" return="Extension">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="94">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>This function returns an instance of an extension from it's name</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the Extension Class minus the extension prefix.</p></description></tag>
+      </tags>
+    </method>
+    <method name="listAll" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="filter" type="string"/>
+      </parameters>
+      <location line="595">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Will return an associative array of all extensions and their about information</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="filter"><description><p>Allows a regular expression to be passed to return only extensions whose folders match the filter.</p></description></tag>
+        <tag group="Returns"><description><p>An associative array with the key being the extension folder and the value being the extension's about information</p></description></tag>
+      </tags>
+    </method>
+    <method name="listInstalledHandles" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="576">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Returns an array of all the enabled extensions available</p>
+      </description>
+    </method>
+    <method name="notifyMembers" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="delegate" type="string"/>
+        <parameter name="page" type="string"/>
+        <parameter name="context" type="array"/>
+      </parameters>
+      <location line="518">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Given a delegate name, notify all extensions that have registered to that
+ delegate to executing their callbacks with a <code>$context</code> array parameter
+ that contains information about the current Symphony state.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="delegate"><description><p>The delegate name</p></description></tag>
+        <tag group="Parameters" name="page"><description><p>The current page namespace that this delegate operates in</p></description></tag>
+        <tag group="Parameters" name="context"><description><p>The <code>$context</code> param is an associative array that at minimum will contain the current Administration class, the current page object and the delegate name. Other context information may be passed to this function when it is called. eg. array( 'parent' =&gt;&amp; $this-&gt;Parent, 'page' =&gt; $page, 'delegate' =&gt; $delegate );</p></description></tag>
+      </tags>
+    </method>
+    <method name="registerDelegates" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="368">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>This functions registers an extensions delegates in <code>tbl_extensions_delegates</code>.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the Extension Class minus the extension prefix.</p></description></tag>
+        <tag group="Returns"><description><p>The Extension ID</p></description></tag>
+      </tags>
+    </method>
+    <method name="removeDelegates" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="408">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>This function will remove all delegate subscriptions for an extension
+ given an extension's name. This triggers <code>__cleanupDatabase()</code></p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="__cleanupDatabase" path="toolkit.ExtensionManager#__cleanupDatabase()">toolkit.ExtensionManager#__cleanupDatabase()</tag>
+        <tag group="Parameters" name="name"><description><p>The name of the Extension Class minus the extension prefix.</p></description></tag>
+      </tags>
+    </method>
+    <method name="sortByName" return="int">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="a" type="array"/>
+        <parameter name="b" type="array"/>
+      </parameters>
+      <location line="212">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Custom user sorting function to sort extensions by name</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://php.net/manual/en/function.strnatcasecmp.php</tag>
+      </tags>
+    </method>
+    <method name="uninstall" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="346">lib/toolkit/class.extensionmanager.php</location>
+      <description>
+        <p>Uninstalling an extension will unregister all delegate subscriptions and
+ remove all extension settings. Symphony checks that an extension can
+ be uninstalled using the <code>canUninstallorDisable()</code> before calling
+ the extension's <code>uninstall()</code> function.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="removeDelegates" path="toolkit.ExtensionManager#removeDelegates()">toolkit.ExtensionManager#removeDelegates()</tag>
+        <tag group="See Also" package="toolkit" class="ExtensionManager" docblock="__canUninstallOrDisable" path="toolkit.ExtensionManager#__canUninstallOrDisable()">toolkit.ExtensionManager#__canUninstallOrDisable()</tag>
+        <tag group="Parameters" name="name"><description><p>The name of the Extension Class minus the extension prefix.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Manager">
+    <class name="Manager" package="toolkit">
+      <method name="__construct"/>
+      <method name="__getClassName"/>
+      <method name="__getClassPath"/>
+      <method name="__getDriverPath"/>
+      <method name="__getHandleFromFilename"/>
+      <method name="about"/>
+      <method name="create"/>
+      <method name="flush"/>
+      <method name="listAll"/>
+    </class>
+  </inherited-methods>
+</class>

@@ -1,0 +1,439 @@
+<?xml version="1.0"?>
+<class type="class" name="fieldUpload" handle="fieldupload">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="10">lib/toolkit/fields/field.upload.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Field</superclass>
+  <description>
+    <p>A simple Upload field that essentially maps to HTML's <code>&lt;input type='file '/&gt;</code>.</p>
+  </description>
+  <fields>
+    <field name="$imageMimeTypes" type="mixed" value="array(...)">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="12">lib/toolkit/fields/field.upload.php</location>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Field" package="toolkit">
+      <field name="Database"/>
+      <field name="_Parent"/>
+      <field name="_engine"/>
+      <field name="_fields"/>
+      <field name="_key"/>
+      <field name="_required"/>
+      <field name="_showassociation"/>
+      <field name="_showcolumn"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="mixed"/>
+      </parameters>
+      <location line="14">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Construct a new instance of this field.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The class that created this Field object, usually the FieldManager, passed by reference.</p></description></tag>
+      </tags>
+    </method>
+    <method name="appendFormattedElement" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="data" type="array"/>
+        <parameter name="encode" type="boolean"/>
+        <parameter name="mode" type="string"/>
+        <parameter name="entry_id" type="integer"/>
+      </parameters>
+      <location line="184">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Append the formatted xml output of this field as utilized as a data source.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="wrapper"><description><p>the xml element to append the xml representation of this to.</p></description></tag>
+        <tag group="Parameters" name="data"><description><p>the current set of values for this field. the values are structured as for displayPublishPanel.</p></description></tag>
+        <tag group="Parameters" name="encode"><description><p>(optional) flag as to whether this should be html encoded prior to output. this defaults to false.</p></description></tag>
+        <tag group="Parameters" name="mode"><description><p>A field can provide ways to output this field's data. For instance a mode could be 'items' or 'full' and then the function would display the data in a different way depending on what was selected in the datasource included elements.</p></description></tag>
+        <tag group="Parameters" name="entry_id"><description><p>(optional) the identifier of this field entry instance. defaults to null.</p></description></tag>
+      </tags>
+    </method>
+    <method name="buildDSRetrievalSQL" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="array"/>
+        <parameter name="joins" type="string"/>
+        <parameter name="where" type="string"/>
+        <parameter name="andOperation" type="bool"/>
+      </parameters>
+      <location line="41">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Construct the SQL statement fragments to use to retrieve the data of this
+ field when utilized as a data source.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>the supplied form data to use to construct the query from</p></description></tag>
+        <tag group="Parameters" name="joins"><description><p>the join sql statement fragment to append the additional join sql to.</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>the where condition sql statement fragment to which the additional where conditions will be appended.</p></description></tag>
+        <tag group="Parameters" name="andOperation"><description><p>(optional) true if the values of the input data should be appended as part of the where condition. this defaults to false.</p></description></tag>
+        <tag group="Returns"><description><p>true if the construction of the sql was successful, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="buildSortingSQL" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="joins" type="string"/>
+        <parameter name="where" type="string"/>
+        <parameter name="sort" type="string"/>
+        <parameter name="order" type="str"/>
+      </parameters>
+      <location line="36">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Build the SQL command to append to the default query to enable
+ sorting of this field. By default this will sort the results by
+ the entry id in ascending order.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="joins"><description><p>the join element of the query to append the custom join sql to.</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>the where condition of the query to append to the existing where clause.</p></description></tag>
+        <tag group="Parameters" name="sort"><description><p>the existing sort component of the sql query to append the custom sort sql code to.</p></description></tag>
+        <tag group="Parameters" name="order"><description><p>(optional) an optional sorting direction. this defaults to ascending. if this is declared either 'random' or 'rand' then a random sort is applied.</p></description></tag>
+      </tags>
+    </method>
+    <method name="canFilter" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="28">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Test whether this field can be filtered. This default implementation
+ prohibits filtering. Filtering allows the xml output results to be limited
+ according to an input parameter. Subclasses should override this if
+ filtering is supported.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>true if this can be filtered, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="canImport" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="32">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This function will be removed in the next major release. It is unused by Symphony.</p></description></tag>
+        <tag group="Returns"><description><p>true if this can be imported, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="canPrePopulate" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="24">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Test whether this field can be prepopulated with data. This default
+ implementation does not support pre-population and, thus, returns false.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>true if this can be pre-populated, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="checkFields" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="errors" type="array"/>
+        <parameter name="checkForDuplicates" type="bool"/>
+      </parameters>
+      <location line="137">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Check the field's settings to ensure they are valid on the section
+ editor</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="errors"><description><p>the array to populate with the errors found.</p></description></tag>
+        <tag group="Parameters" name="checkForDuplicates"><description><p>(optional) if set to true, duplicate Field name's in the same section will be flagged as errors. Defaults to true.</p></description></tag>
+        <tag group="Returns"><description><p>returns the status of the checking. if errors has been populated with any errors <code>self::__ERROR__</code>, <code>self::__OK__</code> otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="checkPostFieldData" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="array"/>
+        <parameter name="message" type="string"/>
+        <parameter name="entry_id" type="integer"/>
+      </parameters>
+      <location line="247">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Check the field data that has been posted from a form. This will set the
+ input message to the error message or to null if there is none. Any existing
+ message value will be overwritten.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>the input data to check.</p></description></tag>
+        <tag group="Parameters" name="message"><description><p>the place to set any generated error message. any previous value for this variable will be overwritten.</p></description></tag>
+        <tag group="Parameters" name="entry_id"><description><p>(optional) the optional id of this field entry instance. this defaults to null.</p></description></tag>
+        <tag group="Returns"><description><p><code>self::__MISSING_FIELDS__</code> if there are any missing required fields, <code>self::__OK__</code> otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="commit" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="150">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Commit the settings of this field from the section editor to
+ create an instance of this field in a section.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>true if the commit was successful, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="createTable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="512">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>The default field table construction method. This constructs the bare
+ minimum set of columns for a valid field table. Subclasses are expected
+ to overload this method to create a table structure that contains
+ additional columns to store the specific data created by the field.</p>
+      </description>
+    </method>
+    <method name="displayPublishPanel" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="data" type="array"/>
+        <parameter name="flagWithError" type="mixed"/>
+        <parameter name="fieldnamePrefix" type="string"/>
+        <parameter name="fieldnamePostfix" type="mixed"/>
+        <parameter name="entry_id" type="integer"/>
+        <parameter name="fieldnameSuffix" type="string"/>
+      </parameters>
+      <location line="94">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Display the publish panel for this field. The display panel is the
+ interface shown to Authors that allow them to input data into this 
+ field for an Entry.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="wrapper"><description><p>the xml element to append the html defined user interface to this field.</p></description></tag>
+        <tag group="Parameters" name="data"><description><p>(optional) any existing data that has been supplied for this field instance. this is encoded as an array of columns, each column maps to an array of row indexes to the contents of that column. this defaults to null.</p></description></tag>
+        <tag group="Parameters" name="flagWithError"><description><p>(optional) flag with error defaults to null.</p></description></tag>
+        <tag group="Parameters" name="fieldnamePrefix"><description><p>(optional) the string to be prepended to the display of the name of this field. this defaults to null.</p></description></tag>
+        <tag group="Parameters" name="fieldnameSuffix"><description><p>(optional) the string to be appended to the display of the name of this field. this defaults to null.</p></description></tag>
+        <tag group="Parameters" name="entry_id"><description><p>(optional) the entry id of this field. this defaults to null.</p></description></tag>
+      </tags>
+    </method>
+    <method name="displaySettingsPanel" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="errors" type="mixed"/>
+      </parameters>
+      <location line="209">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Display the default settings panel, calls the <code>buildSummaryBlock</code>
+ function after basic field settings are added to the wrapper.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="buildSummaryBlock" path="buildSummaryBlock()">buildSummaryBlock()</tag>
+        <tag group="Parameters" name="wrapper"><description><p>the input XMLElement to which the display of this will be appended.</p></description></tag>
+        <tag group="Parameters" name="errors"><description><p>(optional) the input error collection. this defaults to null.</p></description></tag>
+      </tags>
+    </method>
+    <method name="entryDataCleanup" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="entry_id" type="integer"/>
+        <parameter name="data" type="array"/>
+      </parameters>
+      <location line="125">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Remove the entry data of this field from the database.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="entry_id"><description><p>the id of the entry to delete.</p></description></tag>
+        <tag group="Parameters" name="data"><description><p>(optional) The entry data provided for fields to do additional cleanup This is an optional argument and defaults to null.</p></description></tag>
+        <tag group="Returns"><description><p>true if the cleanup was successful, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getExampleFormMarkup" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="529">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>The default method for constructing the example form markup containing this
+ field when utilized as part of an event. This displays in the event documentation
+ and serves as a basic guide for how markup should be constructed on the
+ Frontend to save this field</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>a label widget containing the formatted field element name of this.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getMetaInfo" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="file" type="mixed"/>
+        <parameter name="type" type="mixed"/>
+      </parameters>
+      <location line="497">lib/toolkit/fields/field.upload.php</location>
+    </method>
+    <method name="isSortable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="121">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Test whether this field can be sorted. This default implementation
+ returns false.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>true if this field is sortable, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="prepareTableValue" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="array"/>
+        <parameter name="link" type="XMLElement" package="toolkit" class="XMLElement"/>
+      </parameters>
+      <location line="169">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Format this field value for display in the publish index tables. By default,
+ Symphony will truncate the value to the configuration setting <code>cell_truncation_length</code>.
+ This function will attempt to use PHP's <code>mbstring</code> functions if they are available.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>an associative array of data for this string. At minimum this requires a key of 'value'.</p></description></tag>
+        <tag group="Parameters" name="link"><description><p>(optional) an xml link structure to append the content of this to provided it is not null. it defaults to null.</p></description></tag>
+        <tag group="Returns"><description><p>the formatted string summary of the values of this field instance.</p></description></tag>
+      </tags>
+    </method>
+    <method name="processRawFieldData" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="mixed"/>
+        <parameter name="status" type="integer"/>
+        <parameter name="simulate" type="bool"/>
+        <parameter name="entry_id" type="mixed"/>
+      </parameters>
+      <location line="389">lib/toolkit/fields/field.upload.php</location>
+      <description>
+        <p>Process the raw field data.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>post data from the entry form</p></description></tag>
+        <tag group="Parameters" name="status"><description><p>the status code resultant from processing the data.</p></description></tag>
+        <tag group="Parameters" name="simulate"><description><p>(optional) true if this will tell the CF's to simulate data creation, false otherwise. this defaults to false. this is important if clients will be deleting or adding data outside of the main entry object commit function.</p></description></tag>
+        <tag group="Parameters" name="entry_id"><description><p>(optional) the current entry. defaults to null.</p></description></tag>
+        <tag group="Returns"><description><p>the processed field data.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Field">
+    <class name="Field" package="toolkit">
+      <method name="__construct"/>
+      <method name="allowDatasourceOutputGrouping"/>
+      <method name="allowDatasourceParamOutput"/>
+      <method name="appendFormattedElement"/>
+      <method name="appendRequiredCheckbox"/>
+      <method name="appendShowAssociationCheckbox"/>
+      <method name="appendShowColumnCheckbox"/>
+      <method name="buildDSRetrievalSQL"/>
+      <method name="buildDSRetrivalSQL"/>
+      <method name="buildFormatterSelect"/>
+      <method name="buildLocationSelect"/>
+      <method name="buildSortingSQL"/>
+      <method name="buildSummaryBlock"/>
+      <method name="buildValidationSelect"/>
+      <method name="canFilter"/>
+      <method name="canImport"/>
+      <method name="canPrePopulate"/>
+      <method name="canShowTableColumn"/>
+      <method name="canToggle"/>
+      <method name="checkFields"/>
+      <method name="checkPostFieldData"/>
+      <method name="cleanValue"/>
+      <method name="commit"/>
+      <method name="createSectionAssociation"/>
+      <method name="createTable"/>
+      <method name="displayDatasourceFilterPanel"/>
+      <method name="displayPublishPanel"/>
+      <method name="displaySettingsPanel"/>
+      <method name="entryDataCleanup"/>
+      <method name="fetchAssociatedEntryCount"/>
+      <method name="fetchAssociatedEntryIDs"/>
+      <method name="fetchAssociatedEntrySearchValue"/>
+      <method name="fetchIncludableElements"/>
+      <method name="findDefaults"/>
+      <method name="get"/>
+      <method name="getExampleFormMarkup"/>
+      <method name="getParameterPoolValue"/>
+      <method name="getToggleStates"/>
+      <method name="groupRecords"/>
+      <method name="handle"/>
+      <method name="isFilterRegex"/>
+      <method name="isSortable"/>
+      <method name="mustBeUnique"/>
+      <method name="name"/>
+      <method name="prepareTableValue"/>
+      <method name="processRawFieldData"/>
+      <method name="remove"/>
+      <method name="removeSectionAssociation"/>
+      <method name="requiresSQLGrouping"/>
+      <method name="set"/>
+      <method name="setArray"/>
+      <method name="setFromPOST"/>
+      <method name="tearDown"/>
+      <method name="toggleFieldData"/>
+    </class>
+  </inherited-methods>
+</class>

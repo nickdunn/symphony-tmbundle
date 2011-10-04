@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<class type="class" name="XsltProcess" handle="xsltprocess">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="13">lib/toolkit/class.xsltprocess.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The XsltProcess class is responsible for taking a chunk of XML
+ and applying an XSLT stylesheet to it. Custom error handlers are
+ used to capture any errors that occurred during this process, and
+ are exposed to the ExceptionHandlers for output.</p>
+  </description>
+  <fields>
+    <field name="$_errors" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="31">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>Any errors that occur during the transformation are stored in this array.</p>
+      </description>
+    </field>
+    <field name="$_xml" type="string" value="false">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="19">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>The XML for the transformation to be applied to</p>
+      </description>
+    </field>
+    <field name="$_xsl" type="string">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="25">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>The XSL for the transformation</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="xml" type="string"/>
+        <parameter name="xsl" type="string"/>
+      </parameters>
+      <location line="45">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>The XsltProcess constructor takes a two parameters for the
+ XML and the XSL and initalises the <code>$this-&gt;_xml</code> and <code>$this-&gt;_xsl</code>.
+ It checks to see if there is an existing XSLTProcessor</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="xml"><description><p>The XML for the transformation to be applied to</p></description></tag>
+        <tag group="Parameters" name="xsl"><description><p>The XSL for the transformation</p></description></tag>
+        <tag group="Returns"><description><p>True if there is an existing XsltProcessor class, false otherwise</p></description></tag>
+      </tags>
+    </method>
+    <method name="__error" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="number" type="integer"/>
+        <parameter name="message" type="string"/>
+        <parameter name="file" type="string"/>
+        <parameter name="line" type="string"/>
+        <parameter name="type" type="string"/>
+      </parameters>
+      <location line="208">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>Writes an error to the <code>$_errors</code> array, which contains the error information
+ and some basic debugging information.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au.php.net/manual/en/function.set-error-handler.php</tag>
+        <tag group="Parameters"></tag>
+        <tag group="Parameters"></tag>
+        <tag group="Parameters"></tag>
+        <tag group="Parameters"></tag>
+        <tag group="Parameters" name="type"><description><p>Where the error occurred, can be either 'xml' or 'xsl'</p></description></tag>
+      </tags>
+    </method>
+    <method name="__process" return="string">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="XSLProc" type="XsltProcessor"/>
+        <parameter name="xml" type="string"/>
+        <parameter name="xsl" type="string"/>
+        <parameter name="parameters" type="array"/>
+      </parameters>
+      <location line="122">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>Uses DomDocument to transform the document. Any errors that
+ occur are trapped by custom error handlers, trapXMLError or
+ trapXSLError.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="XSLProc"><description><p>An instance of XsltProcessor</p></description></tag>
+        <tag group="Parameters" name="xml"><description><p>The XML for the transformation to be applied to</p></description></tag>
+        <tag group="Parameters" name="xsl"><description><p>The XSL for the transformation</p></description></tag>
+        <tag group="Parameters" name="parameters"><description><p>An array of available parameters the XSL will have access to</p></description></tag>
+      </tags>
+    </method>
+    <method name="getError" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="all" type="boolean"/>
+        <parameter name="rewind" type="bool"/>
+      </parameters>
+      <location line="247">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>Provides an Iterator interface to return an error from the <code>$_errors</code>
+ array. Repeat calls to this function to get all errors</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="all"><description><p>If true, return all errors instead of one by one. Defaults to false</p></description></tag>
+        <tag group="Rewind">boolean $rewind If rewind is true, resets the internal array pointer to the start of the $_errors array. Defaults to false.</tag>
+        <tag group="Returns"><description><p>Either an array of error array's or just an error array</p></description></tag>
+      </tags>
+    </method>
+    <method name="isErrors" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="231">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>Returns boolean if any errors occurred during the transformation.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="getError" path="getError">getError</tag>
+      </tags>
+    </method>
+    <method name="isXSLTProcessorAvailable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="61">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>Checks if there is an available XSLTProcessor</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>True if there is an existing XsltProcessor class, false otherwise</p></description></tag>
+      </tags>
+    </method>
+    <method name="process" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="xml" type="string"/>
+        <parameter name="xsl" type="string"/>
+        <parameter name="parameters" type="array"/>
+        <parameter name="register_functions" type="array"/>
+      </parameters>
+      <location line="83">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>This function will take a given XML file, a stylesheet and apply
+ the transformation. Any errors will call the error function to log
+ them into the <code>$_errors</code> array</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="XSLTProcess" docblock="__error" path="toolkit.XSLTProcess#__error()">toolkit.XSLTProcess#__error()</tag>
+        <tag group="See Also" package="toolkit" class="XSLTProcess" docblock="__process" path="toolkit.XSLTProcess#__process()">toolkit.XSLTProcess#__process()</tag>
+        <tag group="Parameters" name="xml"><description><p>The XML for the transformation to be applied to</p></description></tag>
+        <tag group="Parameters" name="xsl"><description><p>The XSL for the transformation</p></description></tag>
+        <tag group="Parameters" name="parameters"><description><p>An array of available parameters the XSL will have access to</p></description></tag>
+        <tag group="Parameters" name="register_functions"><description><p>An array of available PHP functions that the XSL can use</p></description></tag>
+        <tag group="Returns"><description><p>The string of the resulting transform.</p></description></tag>
+      </tags>
+    </method>
+    <method name="trapXMLError" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="errno" type="integer"/>
+        <parameter name="errstr" type="integer"/>
+        <parameter name="errfile" type="integer"/>
+        <parameter name="errline" type="integer"/>
+      </parameters>
+      <location line="179">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>A custom error handler especially for XML errors.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au.php.net/manual/en/function.set-error-handler.php</tag>
+      </tags>
+    </method>
+    <method name="trapXSLError" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="errno" type="integer"/>
+        <parameter name="errstr" type="integer"/>
+        <parameter name="errfile" type="integer"/>
+        <parameter name="errline" type="integer"/>
+      </parameters>
+      <location line="192">lib/toolkit/class.xsltprocess.php</location>
+      <description>
+        <p>A custom error handler especially for XSL errors.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au.php.net/manual/en/function.set-error-handler.php</tag>
+      </tags>
+    </method>
+  </methods>
+</class>

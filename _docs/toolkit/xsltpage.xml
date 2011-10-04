@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<class type="class" name="XSLTPage" handle="xsltpage">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="14">lib/toolkit/class.xsltpage.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Page</superclass>
+  <description>
+    <p>XSLTPage extends the Page class to provide an object representation
+ of a Page that will be generated using XSLT.</p>
+  </description>
+  <fields>
+    <field name="$Proc" type="XsltProcess" value="false">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="20">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>An instance of the XsltProcess class</p>
+      </description>
+    </field>
+    <field name="$_param" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="39">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>An array of all the parameters to be made available during the XSLT
+ transform</p>
+      </description>
+    </field>
+    <field name="$_registered_php_functions" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="45">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>An array of functions to be made available during the XSLT transform</p>
+      </description>
+    </field>
+    <field name="$_xml" type="string">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="26">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>The XML to be transformed</p>
+      </description>
+    </field>
+    <field name="$_xsl" type="string">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="32">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>The XSL to apply to the XML</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Page" package="toolkit">
+      <field name="_headers"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="52">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>The constructor for the XSLTPage ensures that an XSLTProcessor
+ is available, and then sets an instance of it to <code>$this-&gt;Proc</code>, otherwise
+ throws a SymphonyErrorPage.</p>
+      </description>
+    </method>
+    <method name="generate" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="153">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>The generate function calls on the XsltProcess to transform the
+ XML with the given XSLT passing any parameters or functions
+ If no errors occur, the parent generate function is called to add
+ the page headers and a string containing the transformed result
+ is result.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__renderHeaders" path="__renderHeaders()">__renderHeaders()</tag>
+      </tags>
+    </method>
+    <method name="getError" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="127">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>Returns an Iterator of errors from the XsltProcess. Use this function
+ inside a loop to get all the errors</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>An associative array containing the errors details from the XsltProcessor</p></description></tag>
+      </tags>
+    </method>
+    <method name="getXML" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="79">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>Accessor for the XML of this page</p>
+      </description>
+    </method>
+    <method name="getXSL" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="100">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>Accessor for the XSL of this page</p>
+      </description>
+    </method>
+    <method name="registerPHPFunction" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="function" type="mixed"/>
+      </parameters>
+      <location line="139">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>Allows the registration of PHP functions to be used on the Frontend
+ by passing the function name or an array of function names</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="function"><description><p>Either an array of function names, or just the function name as a string</p></description></tag>
+      </tags>
+    </method>
+    <method name="setRuntimeParam" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="param" type="array"/>
+      </parameters>
+      <location line="115">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>Sets the parameters that will output with the resulting page
+ and be accessible in the XSLT. This function translates all ' into
+ <code>&amp;apos;</code> to prevent the issue described on the setParameter page
+ http://www.php.net/manual/en/xsltprocessor.setparameter.php#81077
+ The tradeoff is that a <value-of select="$param"/> that has a '
+ will output <code>&amp;apos;</code>, the benefit is that both ' and " can be in the params</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="param"><description><p>An associative array of params for this page</p></description></tag>
+      </tags>
+    </method>
+    <method name="setXML" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="xml" type="string"/>
+        <parameter name="isFile" type="boolean"/>
+      </parameters>
+      <location line="70">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>Setter for <code>$this-&gt;_xml</code>, can optionally load the XML from a file.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="xml"><description><p>The XML for this XSLT page</p></description></tag>
+        <tag group="Parameters" name="isFile"><description><p>If set to true, the XML will be loaded from a file. It is false by default</p></description></tag>
+      </tags>
+    </method>
+    <method name="setXSL" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="xsl" type="string"/>
+        <parameter name="isFile" type="boolean"/>
+      </parameters>
+      <location line="91">lib/toolkit/class.xsltpage.php</location>
+      <description>
+        <p>Setter for <code>$this-&gt;_xsl</code>, can optionally load the XSLT from a file.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="xsl"><description><p>The XSLT for this XSLT page</p></description></tag>
+        <tag group="Parameters" name="isFile"><description><p>If set to true, the XSLT will be loaded from a file. It is false by default</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Page">
+    <class name="Page" package="toolkit">
+      <method name="__construct"/>
+      <method name="__renderHeaders"/>
+      <method name="addHeaderToPage"/>
+      <method name="generate"/>
+      <method name="headers"/>
+    </class>
+  </inherited-methods>
+</class>

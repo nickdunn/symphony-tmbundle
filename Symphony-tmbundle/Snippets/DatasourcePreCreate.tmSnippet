@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/blueprints/datasources/',
+	'delegate' => 'DatasourcePreCreate',
+	'callback' => 'datasourcePreCreate'
+),
+</string>
+	<key>name</key>
+	<string>DatasourcePreCreate</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>4617658B-DCE0-DE06-6979-BCE40ABCF44D</string>
+</dict>
+</plist>

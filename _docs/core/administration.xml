@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<class type="class" name="Administration" handle="administration">
+  <package name="core" handle="core"/>
+  <location line="19">lib/core/class.administration.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="core">Symphony</superclass>
+  <description>
+    <p>The Administration class is an instance of Symphony that controls
+ all backend pages. These pages are HTMLPages are usually generated
+ using XMLElement before being rendered as HTML. These pages do not
+ use XSLT. The Administration is only accessible by logged in Authors</p>
+  </description>
+  <fields>
+    <field name="$Page" type="HTMLPage">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="46">lib/core/class.administration.php</location>
+      <description>
+        <p>The class representation of the current Symphony backend page,
+ which is a subclass of the HTMLPage class. Symphony uses a convention
+ of prefixing backend page classes with 'content'. ie. 'contentBlueprintsSections'</p>
+      </description>
+    </field>
+    <field name="$_callback" type="array" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="38">lib/core/class.administration.php</location>
+      <description>
+        <p>An associative array of the page's callback, including the keys
+ 'driver', which is a lowercase version of <code>$this-&gt;_currentPage</code>
+ with any slashes removed, 'classname', which is the name of the class
+ for this page, 'pageroot', which is the root page for the given page, (ie.
+ excluding /saved/, /created/ or any sub pages of the current page that are
+ handled using the _switchboard function.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="AdministrationPage" docblock="__switchboard" path="toolkit.AdministrationPage#__switchboard()">toolkit.AdministrationPage#__switchboard()</tag>
+      </tags>
+    </field>
+    <field name="$_currentPage" type="string" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="25">lib/core/class.administration.php</location>
+      <description>
+        <p>The path of the current page, ie. '/blueprints/sections/'</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Symphony" package="core">
+      <field name="Author"/>
+      <field name="Configuration"/>
+      <field name="Cookie"/>
+      <field name="Database"/>
+      <field name="ExtensionManager"/>
+      <field name="Log"/>
+      <field name="Profiler"/>
+      <field name="_instance"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__buildPage" return="HTMLPage">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="page" type="string"/>
+      </parameters>
+      <location line="123">lib/core/class.administration.php</location>
+      <description>
+        <p>Given the URL path of a Symphony backend page, this function will
+ attempt to resolve the URL to a Symphony content page in the backend
+ or a page provided by an extension. This function checks to ensure a user
+ is logged in, otherwise it will direct them to the login page</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="page"><description><p>The URL path after the root of the Symphony installation, including a starting slash, such as '/login/'</p></description></tag>
+      </tags>
+    </method>
+    <method name="__canAccessAlerts" return="boolean">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="236">lib/core/class.administration.php</location>
+      <description>
+        <p>This function determines whether an administrative alert can be
+ displayed on the current page. It ensures that the page exists,
+ and the user is logged in and a developer</p>
+      </description>
+      <tags>
+        <tag group="Since">Symphony 2.2</tag>
+      </tags>
+    </method>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="74">lib/core/class.administration.php</location>
+      <description>
+        <p>The constructor for Administration calls the parent Symphony
+ constructor.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Symphony" docblock="__construct" path="core.Symphony#__construct()">core.Symphony#__construct()</tag>
+        <tag group="Deprecated"><description><p>The constructor creates backwards compatible references to <code>$this-&gt;Database</code>, <code>$this-&gt;ExtensionManager</code> and <code>$this-&gt;Configuration</code> that act as alias for <code>Symphony::Database()</code>, <code>Symphony::ExtensionManager()</code> and <code>Symphony::Configuration()</code>. These will be removed in the next Symphony release</p></description></tag>
+      </tags>
+    </method>
+    <method name="display" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="page" type="string"/>
+      </parameters>
+      <location line="373">lib/core/class.administration.php</location>
+      <description>
+        <p>Called by index.php, this function is responsible for rendering the current
+ page on the Frontend. Two delegates are fired, AdminPagePreGenerate and
+ AdminPagePostGenerate. This function runs the Profiler for the page build
+ process.</p>
+      </description>
+      <tags>
+        <tag group="Uses" package="" class="AdminPagePreGenerate" path="AdminPagePreGenerate">AdminPagePreGenerate</tag>
+        <tag group="Uses" package="" class="AdminPagePostGenerate" path="AdminPagePostGenerate">AdminPagePostGenerate</tag>
+        <tag group="See Also" package="core" class="Symphony" docblock="__buildPage" path="core.Symphony#__buildPage()">core.Symphony#__buildPage()</tag>
+        <tag group="See Also" package="boot" class="getCurrentPage" path="boot.getCurrentPage()">boot.getCurrentPage()</tag>
+        <tag group="Parameters" name="page"><description><p>The result of getCurrentPage, which returns the $_GET['symphony-page'] variable.</p></description></tag>
+        <tag group="Returns"><description><p>The HTML of the page to return</p></description></tag>
+      </tags>
+    </method>
+    <method name="errorPageNotFound" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="425">lib/core/class.administration.php</location>
+      <description>
+        <p>If a page is not found in the Symphony backend, this function should
+ be called which will raise a customError to display the default Symphony
+ page not found template</p>
+      </description>
+    </method>
+    <method name="getCurrentPageURL" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="89">lib/core/class.administration.php</location>
+      <description>
+        <p>Returns the current Page path, excluding the domain and Symphony path.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>The path of the current page, ie. '/blueprints/sections/'</p></description></tag>
+      </tags>
+    </method>
+    <method name="getPageCallback" return="array|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="page" type="string"/>
+      </parameters>
+      <location line="260">lib/core/class.administration.php</location>
+      <description>
+        <p>This function resolves the string of the page to the relevant
+ backend page class. The path to the backend page is split on
+ the slashes and the resulting pieces used to determine if the page
+ is provided by an extension, is a section (index or entry creation)
+ or finally a standard Symphony content page. If no page driver can
+ be found, this function will return false</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="page"><description><p>The full path (including the domain) of the Symphony backend page</p></description></tag>
+        <tag group="Returns"><description><p>If successful, this function will return an associative array that at the very least will return the page's classname, pageroot, driver and context, otherwise this will return false.</p></description></tag>
+      </tags>
+    </method>
+    <method name="instance" return="Administration">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="55">lib/core/class.administration.php</location>
+      <description>
+        <p>This function returns an instance of the Administration
+ class. It is the only way to create a new Administration, as
+ it implements the Singleton interface</p>
+      </description>
+    </method>
+    <method name="isLoggedIn" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="104">lib/core/class.administration.php</location>
+      <description>
+        <p>Overrides the Symphony isLoggedIn function to allow Authors
+ to become logged into the backend when <code>$_REQUEST['auth-token']</code>
+ is present. This logs an Author in using the loginFromToken function.
+ A token may be 6 or 8 characters in length in the backend. A 6 character token
+ is used for forget password requests, whereas the 8 character token is used to login
+ an Author into the page</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Symphony" docblock="loginFromToken" path="core.Symphony#loginFromToken()">core.Symphony#loginFromToken()</tag>
+      </tags>
+    </method>
+    <method name="saveConfig" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="context" type="string"/>
+        <parameter name="output" type="string"/>
+      </parameters>
+      <location line="415">lib/core/class.administration.php</location>
+      <description>
+        <p>Writes the current Symphony Configuration object to a file in the
+ CONFIG directory. This will overwrite any existing configuration
+ file every time this function is called.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Configuration" docblock="__toString" path="core.Configuration#__toString()">core.Configuration#__toString()</tag>
+        <tag group="Returns"><description><p>True if the Configuration object was successfully written, false otherwise</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="core" class="Symphony">
+    <class name="Symphony" package="core">
+      <method name="Configuration"/>
+      <method name="Database"/>
+      <method name="Engine"/>
+      <method name="ExtensionManager"/>
+      <method name="__construct"/>
+      <method name="customError"/>
+      <method name="initialiseCookie"/>
+      <method name="initialiseDatabase"/>
+      <method name="initialiseExtensionManager"/>
+      <method name="initialiseLog"/>
+      <method name="isLoggedIn"/>
+      <method name="login"/>
+      <method name="loginFromToken"/>
+      <method name="logout"/>
+      <method name="resolvePage"/>
+      <method name="resolvePagePath"/>
+      <method name="resolvePageTitle"/>
+    </class>
+  </inherited-methods>
+</class>

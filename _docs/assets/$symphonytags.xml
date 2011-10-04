@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+
+
+
+
+
+
+<class type="class" name="$.symphonyTags" handle="$.symphonyTags">
+	
+	<package name="assets" handle="assets"/>
+	
+	
+		<location>assets/symphony.tags.js</location>
+	
+	
+	<modifiers>
+		<modifier>public</modifier>
+	</modifiers>
+	
+	<!--description>
+		<p></p>
+	</description-->
+	
+			
+		<description>
+			<p>This plugin inserts tags from a list into an input field. It offers three modes:
+singular - allowing only one tag at a time (add a class of .singular)
+multiple - allowing multiple tags, comma separated
+inline - which adds tags at the current cursor position (add a class of .inline)</p>
+			
+				
+					<pre class="code">
+			$('.tags').symphonyTags();</pre>
+				
+			
+		</description>
+	
+	
+	
+	
+	
+	
+	
+	<methods>
+	
+		
+	
+		<method
+			name="symphonyTags"
+			 
+			
+		>
+		
+			<modifiers>
+				<modifier>public</modifier><modifier>static</modifier>
+			</modifiers>
+			
+			<location>assets/symphony.tags.js</location>
+			
+			<description>
+				<p>This plugin inserts tags from a list into an input field. It offers three modes:
+singular - allowing only one tag at a time (add a class of .singular)
+multiple - allowing multiple tags, comma separated
+inline - which adds tags at the current cursor position (add a class of .inline)</p>
+				
+					
+						<pre class="code">
+			$('.tags').symphonyTags();</pre>
+					
+				
+			</description>
+			
+			<tags>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					
+						<tag group="Parameters" name="custom_settings">
+							<description>
+								<p>An object specifying containing the attributes specified below</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.items">
+							<description>
+								<p>Selector to find collapsible items within the container</p>
+							</description>
+						</tag>
+					
+				
+				
+			</tags>
+			
+			
+				<parameters>
+					
+						<parameter name="custom_settings" type="Object" />
+					
+						<parameter name="custom_settings.items" type="String" />
+					
+				</parameters>
+			
+			
+		</method>
+		
+		
+		
+		
+		
+	</methods>
+			
+	
+	
+	
+</class>

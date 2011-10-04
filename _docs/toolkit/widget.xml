@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<class type="class" name="Widget" handle="widget">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="10">lib/toolkit/class.widget.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>Widget is a utility class that offers a number miscellaneous of
+ functions to help generate common HTML Forms elements as XMLElement
+ objects for inclusion in Symphony backend pages.</p>
+  </description>
+  <methods>
+    <method name="Anchor" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+        <parameter name="href" type="string"/>
+        <parameter name="title" type="string"/>
+        <parameter name="class" type="string"/>
+        <parameter name="id" type="string"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="131">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of <code>&lt;a&gt;</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>The text of the resulting <code>&lt;a&gt;</code></p></description></tag>
+        <tag group="Parameters" name="href"><description><p>The href attribute of the resulting <code>&lt;a&gt;</code></p></description></tag>
+        <tag group="Parameters" name="title"><description><p>(optional) The title attribute of the resulting <code>&lt;a&gt;</code></p></description></tag>
+        <tag group="Parameters" name="class"><description><p>(optional) The class attribute of the resulting <code>&lt;a&gt;</code></p></description></tag>
+        <tag group="Parameters" name="id"><description><p>(optional) The id attribute of the resulting <code>&lt;a&gt;</code></p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="Form" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="action" type="string"/>
+        <parameter name="method" type="string"/>
+        <parameter name="class" type="string"/>
+        <parameter name="id" type="string"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="164">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of <code>&lt;form&gt;</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="action"><description><p>The text of the resulting <code>&lt;form&gt;</code></p></description></tag>
+        <tag group="Parameters" name="method"><description><p>The method attribute of the resulting <code>&lt;form&gt;</code>. Defaults to "post".</p></description></tag>
+        <tag group="Parameters" name="class"><description><p>(optional) The class attribute of the resulting <code>&lt;form&gt;</code></p></description></tag>
+        <tag group="Parameters" name="id"><description><p>(optional) The id attribute of the resulting <code>&lt;form&gt;</code></p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="Input" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="value" type="string"/>
+        <parameter name="type" type="string"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="62">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of <code>&lt;input&gt;</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name attribute of the resulting <code>&lt;input&gt;</code></p></description></tag>
+        <tag group="Parameters" name="value"><description><p>(optional) The value attribute of the resulting <code>&lt;input&gt;</code></p></description></tag>
+        <tag group="Parameters" name="type"><description><p>The type attribute for this <code>&lt;input&gt;</code>, defaults to "text".</p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="Label" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="child" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="class" type="string"/>
+        <parameter name="id" type="string"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="31">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of <code>&lt;label&gt;</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>(optional) The text for the resulting <code>&lt;label&gt;</code></p></description></tag>
+        <tag group="Parameters" name="child"><description><p>(optional) An XMLElement that this <label> will become the parent of. Commonly used with <code>&lt;input&gt;</code>.</label></p></description></tag>
+        <tag group="Parameters" name="class"><description><p>(optional) The class attribute of the resulting <code>&lt;label&gt;</code></p></description></tag>
+        <tag group="Parameters" name="id"><description><p>(optional) The id attribute of the resulting <code>&lt;label&gt;</code></p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="Select" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="options" type="Array"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="409">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of a <code>&lt;select&gt;</code>. This uses
+ the private function <code>__SelectBuildOption()</code> to build XMLElements of
+ options given the <code>$options</code> array.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Widget" docblock="__SelectBuildOption" path="toolkit.Widget::__SelectBuildOption()">toolkit.Widget::__SelectBuildOption()</tag>
+        <tag group="Parameters" name="name"><description><p>The name attribute of the resulting <code>&lt;select&gt;</code></p></description></tag>
+        <tag group="Parameters" name="options"><description><p>(optional) An array containing the data for each <code>&lt;option&gt;</code> for this <code>&lt;select&gt;</code>. If the array is associative, it is assumed that <code>&lt;optgroup&gt;</code> are to be created, otherwise it's an array of the containing the option data. If no options are provided an empty <code>&lt;select&gt;</code> XMLElement is returned. <code>array( array($value, $selected, $desc, $class, $id, $attr) ) array( array('label' =&gt; 'Optgroup', 'options' = array( array($value, $selected, $desc, $class, $id, $attr) ) )</code></p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="Table" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="header" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="footer" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="body" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="class" type="string"/>
+        <parameter name="id" type="string"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="200">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of <code>&lt;table&gt;</code>
+ This is a simple way to create generic Symphony table wrapper</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="header"><description><p>An XMLElement containing the <code>&lt;thead&gt;</code>. See Widget::TableHead</p></description></tag>
+        <tag group="Parameters" name="footer"><description><p>An XMLElement containing the <code>&lt;tfoot&gt;</code></p></description></tag>
+        <tag group="Parameters" name="body"><description><p>An XMLElement containing the <code>&lt;tbody&gt;</code>. See Widget::TableBody</p></description></tag>
+        <tag group="Parameters" name="class"><description><p>(optional) The class attribute of the resulting <code>&lt;table&gt;</code></p></description></tag>
+        <tag group="Parameters" name="id"><description><p>(optional) The id attribute of the resulting <code>&lt;table&gt;</code></p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="TableBody" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="rows" type="Array"/>
+        <parameter name="class" type="string"/>
+        <parameter name="id" type="string"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="288">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of <code>&lt;tbody&gt;</code> from an array
+ containing <code>&lt;tr&gt;</code> XMLElements</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Widget" docblock="TableRow" path="toolkit.Widget#TableRow()">toolkit.Widget#TableRow()</tag>
+        <tag group="Parameters" name="rows"><description><p>An array of XMLElements of <code>&lt;tr&gt;</code>'s.</p></description></tag>
+        <tag group="Parameters" name="class"><description><p>(optional) The class attribute of the resulting <code>&lt;tbody&gt;</code></p></description></tag>
+        <tag group="Parameters" name="id"><description><p>(optional) The id attribute of the resulting <code>&lt;tbody&gt;</code></p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="TableData" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="XMLElement|string"/>
+        <parameter name="class" type="string"/>
+        <parameter name="id" type="string"/>
+        <parameter name="colspan" type="string"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="357">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of a <code>&lt;td&gt;</code>.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>Either an XMLElement object, or a string for the value of the resulting <code>&lt;td&gt;</code></p></description></tag>
+        <tag group="Parameters" name="class"><description><p>(optional) The class attribute of the resulting <code>&lt;td&gt;</code></p></description></tag>
+        <tag group="Parameters" name="id"><description><p>(optional) The id attribute of the resulting <code>&lt;td&gt;</code></p></description></tag>
+        <tag group="Parameters" name="colspan"><description><p>(optional) The colspan attribute of the resulting <code>&lt;td&gt;</code></p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="TableHead" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="columns" type="Array"/>
+      </parameters>
+      <location line="233">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of <code>&lt;thead&gt;</code> from an array
+ containing column names and any other attributes.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="columns"><description><p>An array of column arrays, where the first item is the name of the column, the second is the scope attribute, and the third is an array of possible attributes. <code>array( array('Column Name', 'scope', array('class'=&gt;'th-class')) )</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="TableRow" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="cells" type="Array"/>
+        <parameter name="class" type="string"/>
+        <parameter name="id" type="string"/>
+        <parameter name="rowspan" type="string"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="322">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of <code>&lt;tr&gt;</code> from an array
+ containing column names and any other attributes.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="cells"><description><p>An array of XMLElements of <code>&lt;td&gt;</code>'s. See Widget::TableData</p></description></tag>
+        <tag group="Parameters" name="class"><description><p>(optional) The class attribute of the resulting <code>&lt;tr&gt;</code></p></description></tag>
+        <tag group="Parameters" name="id"><description><p>(optional) The id attribute of the resulting <code>&lt;tr&gt;</code></p></description></tag>
+        <tag group="Parameters" name="rowspan"><description><p>(optional) The rowspan attribute of the resulting <code>&lt;tr&gt;</code></p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="Textarea" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="rows" type="integer"/>
+        <parameter name="cols" type="integer"/>
+        <parameter name="value" type="string"/>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="95">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Generates a XMLElement representation of <code>&lt;textarea&gt;</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the resulting <code>&lt;textarea&gt;</code></p></description></tag>
+        <tag group="Parameters" name="rows"><description><p>(optional) The height of the <code>&lt;textarea&gt;</code>, using the rows attribute. Defaults to 15</p></description></tag>
+        <tag group="Parameters" name="cols"><description><p>(optional) The width of the <code>&lt;textarea&gt;</code>, using the cols attribute. Defaults to 50.</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>(optional) The content to be displayed inside the <code>&lt;textarea&gt;</code></p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__SelectBuildOption" return="XMLElement">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="option" type="Array"/>
+      </parameters>
+      <location line="477">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>This function is used internally by the <code>Widget::Select()</code> to build
+ an XMLElement of an <code>&lt;option&gt;</code> from an array.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="option"><description><p>An array containing the data a single <code>&lt;option&gt;</code> for this <code>&lt;select&gt;</code>. The array can contain the following params: string $value The value attribute of the resulting <code>&lt;option&gt;</code> boolean $selected Whether this <code>&lt;option&gt;</code> should be selected string $desc (optional) The text of the resulting <code>&lt;option&gt;</code>. If omitted $value will be used a default. string $class (optional) The class attribute of the resulting <code>&lt;option&gt;</code> string $id (optional) The id attribute of the resulting <code>&lt;option&gt;</code> array $attributes (optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params. <code>array( array('one-shot', false, 'One Shot', 'my-option') )</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="wrapFormElementWithError" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="element" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="message" type="string"/>
+      </parameters>
+      <location line="511">lib/toolkit/class.widget.php</location>
+      <description>
+        <p>Will wrap a <code>&lt;div&gt;</code> around a desired element to trigger the default
+ Symphony error styling.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="element"><description><p>The element that should be wrapped with an error</p></description></tag>
+        <tag group="Parameters" name="message"><description><p>The text for this error. This will be appended after the $element, but inside the wrapping <code>&lt;div&gt;</code></p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

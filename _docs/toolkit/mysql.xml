@@ -1,0 +1,648 @@
+<?xml version="1.0"?>
+<class type="class" name="MySQL" handle="mysql">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="70">lib/toolkit/class.mysql.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The MySQL class acts as a wrapper for connecting to the Database
+ in Symphony. It utilises mysql_* functions in PHP to complete the usual
+ querying. As well as the normal set of insert, update, delete and query
+ functions, some convenience functions are provided to return results
+ in different ways. Symphony uses a prefix to namespace it's tables in a
+ database, allowing it play nice with other applications installed on the
+ database. An errors that occur during a query throw a DatabaseException.
+ By default, Symphony logs all queries to be used for Profiling and Debug
+ devkit extensions.</p>
+  </description>
+  <constants>
+    <constant name="__READ_OPERATION__" type="integer" value="1">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="84">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Constant to indicate whether the query is a write operation</p>
+      </description>
+    </constant>
+    <constant name="$__WRITE_OPERATION__" type="integer">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="77">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Constant to indicate whether the query is a write operation.</p>
+      </description>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_cache" type="boolean" value="true">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="107">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Whether query caching is enabled or not. By default this set
+ to true which will use SQL_CACHE to cache the results of queries</p>
+      </description>
+    </field>
+    <field name="$_connection" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="116">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>An associative array of connection properties for this MySQL
+ database including the host, port, username, password and
+ selected database.</p>
+      </description>
+    </field>
+    <field name="$_lastQuery" type="mixed" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="128">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>The last query that was executed by the class</p>
+      </description>
+    </field>
+    <field name="$_lastResult" type="mixed" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="134">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>By default, an array of arrays or objects representing the result set
+ from the <code>$this-&gt;_lastQuery</code></p>
+      </description>
+    </field>
+    <field name="$_log" type="array" value="array(...)">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="92">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Sets the current <code>$_log</code> to be an associative array with 'error'
+ and 'query' keys and empty array values.</p>
+      </description>
+    </field>
+    <field name="$_query_count" type="integer">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="99">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>The number of queries this class has executed, defaults to 0.</p>
+      </description>
+    </field>
+    <field name="$_result" type="resource" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="123">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>The resource of the last result returned from mysql_query</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__destruct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="142">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Magic function that will flush the MySQL log and close the MySQL
+ connection when the MySQL class is removed or destroyed.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://php.net/manual/en/language.oop5.decon.php</tag>
+      </tags>
+    </method>
+    <method name="__error" return="DatabaseException">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="702">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>If an error occurs in a query, this function is called which logs
+ the last query and the error number and error message from MySQL
+ before throwing a new DatabaseException</p>
+      </description>
+    </method>
+    <method name="cleanFields" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="array" type="array"/>
+      </parameters>
+      <location line="375">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>This function will apply the cleanValue function to an associative
+ array of data, encoding only the value, not the key. This function
+ can handle recursive arrays. This function manipulates the given
+ parameter by reference.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="array"><description><p>The associative array of data to encode, this parameter is manipulated by reference.</p></description></tag>
+      </tags>
+    </method>
+    <method name="cleanValue" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="356">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>This function will clean a string using the mysql<em>real</em>escape<em>string function
+ taking into account the current database character encoding. Note that this
+ function does not encode _ or %. If mysql</em>real<em>escape</em>string doesn't exist
+ addslashes will be used as a backup option</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>The string to be encoded into an escaped SQL string</p></description></tag>
+        <tag group="Returns"><description><p>The escaped SQL string</p></description></tag>
+      </tags>
+    </method>
+    <method name="close" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="244">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Called when the script has finished executing, this closes the MySQL
+ connection</p>
+      </description>
+    </method>
+    <method name="connect" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="host" type="string"/>
+        <parameter name="user" type="string"/>
+        <parameter name="password" type="string"/>
+        <parameter name="port" type="string"/>
+        <parameter name="database" type="mixed"/>
+      </parameters>
+      <location line="262">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Creates a connect to the database server given the credentials. If an
+ error occurs, a DatabaseException is thrown, otherwise true is returned</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="host"><description><p>Defaults to null, which MySQL assumes as localhost.</p></description></tag>
+        <tag group="Parameters" name="user"><description><p>Defaults to null</p></description></tag>
+        <tag group="Parameters" name="password"><description><p>Defaults to null</p></description></tag>
+        <tag group="Parameters" name="port"><description><p>Defaults to 3306.</p></description></tag>
+      </tags>
+    </method>
+    <method name="debug" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="mixed"/>
+      </parameters>
+      <location line="727">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Returns all the log entries by type. There are two valid types,
+ error and debug. If no type is given, the entire log is returned,
+ otherwise only log messages for that type are returned</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>An array of associative array's. Log entries of the error type return the query the error occurred on and the error number and message from MySQL. Log entries of the debug type return the the query and the start/stop time to indicate how long it took to run</p></description></tag>
+      </tags>
+    </method>
+    <method name="delete" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="table" type="string"/>
+        <parameter name="where" type="string"/>
+      </parameters>
+      <location line="582">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Given a table name and a WHERE statement, delete rows from the
+ Database.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="table"><description><p>The table name, including the tbl prefix which will be changed to this Symphony's table prefix in the query function</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>A WHERE statement for this DELETE statement, defaults to null, which will delete all rows in the $table</p></description></tag>
+      </tags>
+    </method>
+    <method name="determineQueryType" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="query" type="mixed"/>
+      </parameters>
+      <location line="401">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Determines whether this query is a read operation, or if it is a write operation.
+ A write operation is determined as any query that starts with CREATE, INSERT,
+ REPLACE, UPDATE, DELETE, OPTIMIZE or TRUNCATE. Anything else is
+ considered to be a read operation which are subject to query caching.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p><code>MySQL::__WRITE_OPERATION__</code> or <code>MySQL::__READ_OPERATION__</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="disableCaching" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="204">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Sets query caching to false, this will prepend all READ<em>OPERATION
+ queries will SQL</em>NO_CACHE.</p>
+      </description>
+    </method>
+    <method name="enableCaching" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="196">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Sets query caching to true, this will prepend all READ<em>OPERATION
+ queries with SQL</em>CACHE. Symphony be default enables caching. It
+ can be turned off by setting the query_cache parameter to 'off' in the
+ Symphony config file.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://dev.mysql.com/doc/refman/5.1/en/query-cache.html</tag>
+      </tags>
+    </method>
+    <method name="fetch" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="query" type="string"/>
+        <parameter name="index_by_column" type="string"/>
+      </parameters>
+      <location line="599">lib/toolkit/class.mysql.php</location>
+      <tags>
+        <tag group="Parameters" name="query"><description><p>The full SQL query to execute. Defaults to null, which will use the _lastResult</p></description></tag>
+        <tag group="Parameters" name="index_by_column"><description><p>The name of a column in the table to use it's value to index the result by. If this is omitted (and it is by default), an array of associative arrays is returned, with the key being the column names</p></description></tag>
+        <tag group="Returns"><description><p>An associative array with the column names as the keys</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchCol" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="column" type="string"/>
+        <parameter name="query" type="string"/>
+      </parameters>
+      <location line="658">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Returns an array of values for a specified column in a given query.
+ If no query is given, it will use the <code>$this-&gt;_lastResult</code>.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="column"><description><p>The column name in the query to return the values for</p></description></tag>
+        <tag group="Parameters" name="query"><description><p>The full SQL query to execute. Defaults to null, which will use the <code>$this-&gt;_lastResult</code></p></description></tag>
+        <tag group="Returns"><description><p>If there is no results for the <code>$query</code>, an empty array will be returned otherwise an array of values for that given <code>$column</code> will be returned</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchRow" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="offset" type="integer"/>
+        <parameter name="query" type="string"/>
+      </parameters>
+      <location line="640">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Returns the row at the specified index from the given query. If no
+ query is given, it will use the <code>$this-&gt;_lastResult</code>. If no offset is provided,
+ the function will return the first row. This function does not imply any
+ LIMIT to the given <code>$query</code>, so for the more efficient use, it is recommended
+ that the <code>$query</code> have a LIMIT set.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="offset"><description><p>The row to return from the SQL query. For instance, if the second row from the result was required, the offset would be 1, because it is zero based.</p></description></tag>
+        <tag group="Parameters" name="query"><description><p>The full SQL query to execute. Defaults to null, which will use the <code>$this-&gt;_lastResult</code></p></description></tag>
+        <tag group="Returns"><description><p>If there is no row at the specified <code>$offset</code>, an empty array will be returned otherwise an associative array of that row will be returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchVar" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="column" type="string"/>
+        <parameter name="offset" type="integer"/>
+        <parameter name="query" type="string"/>
+      </parameters>
+      <location line="688">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Returns the value for a specified column at a specified offset. If no
+ offset is provided, it will return the value for column of the first row.
+ If no query is given, it will use the <code>$this-&gt;_lastResult</code>.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="column"><description><p>The column name in the query to return the values for</p></description></tag>
+        <tag group="Parameters" name="offset"><description><p>The row to use to return the value for the given <code>$column</code> from the SQL query. For instance, if <code>$column</code> form the second row was required, the offset would be 1, because it is zero based.</p></description></tag>
+        <tag group="Parameters" name="query"><description><p>The full SQL query to execute. Defaults to null, which will use the <code>$this-&gt;_lastResult</code></p></description></tag>
+        <tag group="Returns"><description><p>Returns the value of the given column, if it doesn't exist, null will be returned</p></description></tag>
+      </tags>
+    </method>
+    <method name="flush" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="151">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Resets the result, <code>$this-&gt;_lastResult</code> and <code>$this-&gt;_lastQuery</code> to their empty
+ values. Called on each query and when the class is destroyed.</p>
+      </description>
+    </method>
+    <method name="flushLog" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="161">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Sets the current <code>$_log</code> to be an associative array with 'error'
+ and 'query' keys and empty array values.</p>
+      </description>
+    </method>
+    <method name="getConnectionResource" return="resource">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="291">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Accessor for the current MySQL resource from PHP. May be
+ useful for developers who want complete control over their
+ database queries and don't want anything abstract by the MySQL
+ class.</p>
+      </description>
+    </method>
+    <method name="getInsertID" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="484">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Returns the last insert ID from the previous query. This is
+ the value from an auto_increment field.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>The last interested row's ID</p></description></tag>
+      </tags>
+    </method>
+    <method name="getLastError" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="175">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Returns the last error that occurred while querying MySQL</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>An associative array with the last query, error number and error message from MySQL.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getStatistics" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="743">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Returns some basic statistics from the MySQL class about the
+ number of queries, the time it took to query and any slow queries.
+ A slow query is defined as one that took longer than 0.0999 seconds
+ This function is used by the Profile devkit</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>An associative array with the number of queries, an array of slow queries and the total query time.</p></description></tag>
+      </tags>
+    </method>
+    <method name="import" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="sql" type="string"/>
+      </parameters>
+      <location line="772">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Convenience function to allow you to execute multiple SQL queries at once
+ by providing a string with the queries delimited with a <code>;</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="sql"><description><p>A string containing SQL queries delimited by <code>;</code></p></description></tag>
+        <tag group="Returns"><description><p>If one of the queries fails, false will be returned and no further queries will be executed, otherwise true will be returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="insert" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="fields" type="array"/>
+        <parameter name="table" type="string"/>
+        <parameter name="updateOnDuplicate" type="boolean"/>
+      </parameters>
+      <location line="508">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>A convenience method to insert data into the Database. This function
+ takes an associative array of data to input, with the keys being the column
+ names and the table. An optional parameter exposes MySQL's ON DUPLICATE
+ KEY UPDATE functionality, which will update the values if a duplicate key
+ is found.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="fields"><description><p>An associative array of data to input, with the key's mapping to the column names. Alternatively, an array of associative array's can be provided, which will perform multiple inserts</p></description></tag>
+        <tag group="Parameters" name="table"><description><p>The table name, including the tbl prefix which will be changed to this Symphony's table prefix in the query function</p></description></tag>
+        <tag group="Parameters" name="updateOnDuplicate"><description><p>If set to true, data will updated if any key constraints are found that cause conflicts. By default this is set to false, which will not update the data and would return an SQL error</p></description></tag>
+      </tags>
+    </method>
+    <method name="isCachingEnabled" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="213">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Returns boolean if query caching is enabled or not</p>
+      </description>
+    </method>
+    <method name="isConnected" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="234">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Determines if a connection has been made to the MySQL server</p>
+      </description>
+    </method>
+    <method name="query" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="query" type="string"/>
+        <parameter name="type" type="string"/>
+      </parameters>
+      <location line="422">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Takes an SQL string and executes it. This function will apply query
+ caching if it is a read operation and if query caching is set. Symphony
+ will convert the <code>tbl_</code> prefix of tables to be the one set during installation.
+ A type parameter is provided to specify whether <code>$this-&gt;_lastResult</code> will be an array
+ of objects or an array of associative arrays. The default is objects. This
+ function will return boolean, but set <code>$this-&gt;_lastResult</code> to the result.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="query"><description><p>The full SQL query to execute.</p></description></tag>
+        <tag group="Parameters" name="type"><description><p>Whether to return the result as objects or associative array. Defaults to OBJECT which will return objects. The other option is ASSOC. If $type is not either of these, it will return objects.</p></description></tag>
+        <tag group="Returns"><description><p>True if the query executed without errors, false otherwise</p></description></tag>
+      </tags>
+    </method>
+    <method name="queryCount" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="184">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Returns the number of queries that has been executed</p>
+      </description>
+    </method>
+    <method name="select" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="db" type="string"/>
+      </parameters>
+      <location line="305">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>This function selects a MySQL database. Only used by installation
+ and must exists for compatibility reasons. But might be removed
+ in future versions. Not recommended its usage by developers.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au2.php.net/manual/en/function.mysql-select-db.php</tag>
+        <tag group="Parameters" name="db"><description><p>The name of the database that is to be selected, defaults to null.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setCharacterEncoding" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="set" type="string"/>
+      </parameters>
+      <location line="328">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>This will set the character encoding of the connection for sending and
+ receiving data. This function will only run if 'runtime<em>character</em>set_alter'
+ is set to 'true' in the Symphony config. This is set to true by default during
+ the Symphony installation. If no character encoding is provided, UTF-8
+ is assumed.</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au2.php.net/manual/en/function.mysql-set-charset.php</tag>
+        <tag group="Parameters" name="set"><description><p>The character encoding to use, by default this 'utf8'</p></description></tag>
+      </tags>
+    </method>
+    <method name="setCharacterSet" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="set" type="string"/>
+      </parameters>
+      <location line="340">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>This function will set the character encoding of the database so that any
+ new tables that are created by Symphony use this character encoding</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://dev.mysql.com/doc/refman/5.0/en/charset-connection.html</tag>
+        <tag group="Parameters" name="set"><description><p>The character encoding to use, by default this 'utf8'</p></description></tag>
+      </tags>
+    </method>
+    <method name="setPrefix" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="prefix" type="string"/>
+      </parameters>
+      <location line="225">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>Symphony uses a prefix for all it's database tables so it can live peacefully
+ on the same database as other applications. By default this is sym_, but it
+ can be changed when Symphony is installed.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="prefix"><description><p>The table prefix for Symphony, by default this is sym_</p></description></tag>
+      </tags>
+    </method>
+    <method name="update" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="fields" type="array"/>
+        <parameter name="table" type="string"/>
+        <parameter name="where" type="string"/>
+      </parameters>
+      <location line="558">lib/toolkit/class.mysql.php</location>
+      <description>
+        <p>A convenience method to update data that exists in the Database. This function
+ takes an associative array of data to input, with the keys being the column
+ names and the table. A WHERE statement can be provided to select the rows
+ to update</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="fields"><description><p>An associative array of data to input, with the key's mapping to the column names.</p></description></tag>
+        <tag group="Parameters" name="table"><description><p>The table name, including the tbl prefix which will be changed to this Symphony's table prefix in the query function</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>A WHERE statement for this UPDATE statement, defaults to null which will update all rows in the $table</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

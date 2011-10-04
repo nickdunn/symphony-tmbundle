@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<class type="class" name="HTMLPage" handle="htmlpage">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="12">lib/toolkit/class.htmlpage.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Page</superclass>
+  <description>
+    <p>HTMLPage extends the Page class to provide an object representation
+ of a Symphony backend page.</p>
+  </description>
+  <fields>
+    <field name="$Body" type="XMLElement" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="30">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>An XMLElement object for the <code>&lt;body&gt;</code></p>
+      </description>
+    </field>
+    <field name="$Form" type="XMLElement" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="37">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>An XMLElement object for the <code>&lt;form&gt;</code>. Most Symphony backend pages
+ are contained within a main form</p>
+      </description>
+    </field>
+    <field name="$Head" type="XMLElement" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="24">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>An XMLElement object for the <code>&lt;head&gt;</code></p>
+      </description>
+    </field>
+    <field name="$Html" type="XMLElement" value="null">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <location line="18">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>An XMLElement object for the <code>&lt;html&gt;</code> element. This is the parent
+ DOM element for all other elements on the output page.</p>
+      </description>
+    </field>
+    <field name="$_head" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="46">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>This holds all the elements that will eventually be in the <code>$Head</code>.
+ This allows extensions to add elements at certain indexes so
+ resource dependancies can be met, and duplicates can be removed.
+ Defaults to an empty array.</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Page" package="toolkit">
+      <field name="_headers"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__build" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="98">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>Called when page is generated, this function appends the <code>$Head</code>,
+ <code>$Form</code> and <code>$Body</code> elements to the <code>$Html</code>.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__generateHead" path="__generateHead()">__generateHead()</tag>
+      </tags>
+    </method>
+    <method name="__buildQueryString" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="exclude" type="array"/>
+      </parameters>
+      <location line="239">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>This function builds a HTTP query string from <code>$_GET</code> parameters with
+ the option to remove parameters with an <code>$exclude</code> array</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="exclude"><description><p>A simple array with the keys that should be omitted in the resulting query string.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="52">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>Constructor for the HTMLPage. Intialises the class variables with
+ empty instances of XMLElement</p>
+      </description>
+    </method>
+    <method name="__generateHead" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="108">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>Sorts the <code>$this-&gt;_head</code> elements by key, then appends them to the
+ <code>$Head</code> XMLElement in order.</p>
+      </description>
+    </method>
+    <method name="addElementToHead" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="object" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="position" type="integer"/>
+      </parameters>
+      <location line="130">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>Adds an XMLElement to the <code>$this-&gt;_head</code> array at a desired position.
+ If no position is given, the object will be added to the end
+ of the <code>$this-&gt;_head</code> array. If that position is already taken, it will
+ add the object at the next available position.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="General" docblock="array_find_available_index" path="toolkit.General#array_find_available_index()">toolkit.General#array_find_available_index()</tag>
+        <tag group="Parameters"></tag>
+        <tag group="Parameters" name="position"><description><p>Defaults to null which will put the <code>$object</code> at the end of the <code>$this-&gt;_head</code>.</p></description></tag>
+        <tag group="Returns"><description><p>Returns the position that the <code>$object</code> has been set in the <code>$this-&gt;_head</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="addScriptToHead" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="path" type="string"/>
+        <parameter name="position" type="integer"/>
+        <parameter name="duplicate" type="boolean"/>
+      </parameters>
+      <location line="193">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>Convenience function to add a <code>&lt;script&gt;</code> element to the <code>$this-&gt;_head</code>. By default
+ the function will allow duplicates to be added to the <code>$this-&gt;_head</code>. A duplicate
+ is determined by if the <code>$path</code> is unique.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="path"><description><p>The path to the script file</p></description></tag>
+        <tag group="Parameters" name="position"><description><p>The desired position that the resulting XMLElement will be placed in the <code>$this-&gt;_head</code>. Defaults to null which will append to the end.</p></description></tag>
+        <tag group="Parameters" name="duplicate"><description><p>When set to false the function will only add the script if it doesn't already exist. Defaults to true which allows duplicates.</p></description></tag>
+        <tag group="Returns"><description><p>Returns the position that the script has been set in the <code>$this-&gt;_head</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="addStylesheetToHead" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="path" type="string"/>
+        <parameter name="type" type="string"/>
+        <parameter name="position" type="integer"/>
+        <parameter name="duplicate" type="boolean"/>
+      </parameters>
+      <location line="221">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>Convenience function to add a stylesheet to the <code>$this-&gt;_head</code> in a <code>&lt;link&gt;</code> element.
+ By default the function will allow duplicates to be added to the <code>$this-&gt;_head</code>.
+ A duplicate is determined by if the <code>$path</code> is unique.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="path"><description><p>The path to the stylesheet file</p></description></tag>
+        <tag group="Parameters" name="type"><description><p>The media attribute for this stylesheet, defaults to 'screen'</p></description></tag>
+        <tag group="Parameters" name="position"><description><p>The desired position that the resulting XMLElement will be placed in the <code>$this-&gt;_head</code>. Defaults to null which will append to the end.</p></description></tag>
+        <tag group="Parameters" name="duplicate"><description><p>When set to false the function will only add the script if it doesn't already exist. Defaults to true which allows duplicates.</p></description></tag>
+        <tag group="Returns"><description><p>Returns the position that the stylesheet has been set in the <code>$this-&gt;_head</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="checkElementsInHead" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="path" type="mixed"/>
+        <parameter name="attribute" type="string"/>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="170">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>Determines if two elements are duplicates based on an attribute
+ and value</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>The value of the attribute</p></description></tag>
+        <tag group="Parameters" name="attribute"><description><p>The attribute to check</p></description></tag>
+      </tags>
+    </method>
+    <method name="generate" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="86">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>The generate function calls the <code>__build()</code> function before appending
+ all the current page's headers and then finally calling the <code>$Html's</code>
+ generate function which generates a HTML DOM from all the
+ XMLElement children.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__renderHeaders" path="__renderHeaders()">__renderHeaders()</tag>
+      </tags>
+    </method>
+    <method name="removeFromHead" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="elementName" type="string"/>
+      </parameters>
+      <location line="152">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>Given an elementName, this function will remove the corresponding
+ XMLElement from the <code>$this-&gt;_head</code></p>
+      </description>
+    </method>
+    <method name="setTitle" return="int">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="title" type="string"/>
+      </parameters>
+      <location line="72">lib/toolkit/class.htmlpage.php</location>
+      <description>
+        <p>Setter function for the <code>&lt;title&gt;</code> of a backend page. Uses the
+ <code>addElementToHead()</code> function to place into the <code>$this-&gt;_head</code> array.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="addElementToHead" path="addElementToHead()">addElementToHead()</tag>
+        <tag group="Returns"><description><p>Returns the position that the title has been set in the $_head</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Page">
+    <class name="Page" package="toolkit">
+      <method name="__construct"/>
+      <method name="__renderHeaders"/>
+      <method name="addHeaderToPage"/>
+      <method name="generate"/>
+      <method name="headers"/>
+    </class>
+  </inherited-methods>
+</class>

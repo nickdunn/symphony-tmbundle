@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<class type="class" name="EmailGatewayException" handle="emailgatewayexception">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="10">lib/toolkit/class.emailgateway.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass>Exception</superclass>
+  <description>
+    <p>The standard exception to be thrown by all email gateways.</p>
+  </description>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="message" type="string"/>
+        <parameter name="code" type="int"/>
+        <parameter name="previous" type="Exception"/>
+      </parameters>
+      <location line="22">lib/toolkit/class.emailgateway.php</location>
+      <description>
+        <p>Creates a new exception, and logs the error.</p>
+      </description>
+      <tags>
+        <tag group="Parameters"></tag>
+        <tag group="Parameters"></tag>
+        <tag group="Parameters" name="previous"><description><p>The previous exception, if nested. See http://www.php.net/manual/en/language.exceptions.extending.php</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<class type="class" name="DataSource" handle="datasource">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="20">lib/toolkit/class.datasource.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Datasource class provides functionality to mainly process any parameters
+ that the fields will use in filters find the relevant Entries and return these Entries
+ data as XML so that XSLT can be applied on it to create your website. In Symphony,
+ there are four Datasource types provided, Section, Author, Navigation and Dynamic
+ XML. Section is the mostly commonly used Datasource, which allows the filtering
+ and searching for Entries in a Section to be returned as XML. Navigation datasources
+ expose the Symphony Navigation structure of the Pages in the installation. Authors
+ expose the Symphony Authors that are registered as users of the backend. Finally,
+ the Dynamic XML datasource allows XML pages to be retrieved. This is especially
+ helpful for working with Restful XML API's. Datasources are saved through the
+ Symphony backend, which uses a Datasource template defined in
+ <code>TEMPLATE . /datasource.tpl</code>.</p>
+  </description>
+  <constants>
+    <constant name="CRLF" type="string" value="PHP_EOL">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="27">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This will be removed in the next version of Symphony</p></description></tag>
+      </tags>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_Parent" type="Administration">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="34">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>An instance of the Administration class</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Administration" path="core.Administration">core.Administration</tag>
+      </tags>
+    </field>
+    <field name="$_dependencies" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="55">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>An array of datasource dependancies. These are datasources that must
+ run first for this datasource to be able to execute correctly</p>
+      </description>
+    </field>
+    <field name="$_env" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="41">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>Holds all the environment variables which include parameters set by
+ other Datasources or Events.</p>
+      </description>
+    </field>
+    <field name="$_force_empty_result" type="boolean" value="false">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="63">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>When there is no entries found by the Datasource, this parameter will
+ be set to true, which will inject the default Symphony 'No records found'
+ message into the datasource's result</p>
+      </description>
+    </field>
+    <field name="$_param_output_only" type="boolean">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="48">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>If true, this datasource only will be outputting parameters from the
+ Entries, and no actual content.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="Administration" package="core" class="Administration"/>
+        <parameter name="env" type="array"/>
+        <parameter name="process_params" type="boolean"/>
+      </parameters>
+      <location line="80">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>Constructor for the datasource sets the parent, and if <code>$process_params</code> is set,
+ the <code>$env</code> variable will be run through <code>Datasource::processParameters</code>.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Datasource" docblock="processParameters" path="toolkit.Datasource#processParameters()">toolkit.Datasource#processParameters()</tag>
+        <tag group="Parameters" name="parent"><description><p>The Administration object that this page has been created from passed by reference</p></description></tag>
+        <tag group="Parameters" name="env"><description><p>The environment variables from the Frontend class which includes any params set by Symphony or Events or by other Datasources</p></description></tag>
+        <tag group="Parameters" name="process_params"><description><p>If set to true, <code>Datasource::processParameters</code> will be called. By default this is true</p></description></tag>
+      </tags>
+    </method>
+    <method name="__determineFilterType" return="DS_FILTER_OR">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="149">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>By default, all Symphony filters are considering to be AND filters, that is
+ they are all used and Entries must match each filter to be included. It is
+ possible to use OR filtering in a field, but using an + to separate the values.
+ eg. If the filter is test1 + test2, this will match any entries where this field
+ is test1 OR test2. This function is run on each filter (ie. each field) in a
+ datasource</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>The filter string for a field.</p></description></tag>
+        <tag group="Returns"><description><p>or DS<em>FILTER</em>AND</p></description></tag>
+      </tags>
+    </method>
+    <method name="__noRecordsFound" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="174">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>Returns an error XMLElement with a 'No records found' text</p>
+      </description>
+    </method>
+    <method name="__processParametersInString" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+        <parameter name="env" type="array"/>
+        <parameter name="includeParenthesis" type="boolean"/>
+        <parameter name="escape" type="boolean"/>
+      </parameters>
+      <location line="255">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>This function will replace any parameters in a string with their value.
+ Parameters are defined by being prefixed by a $ character. In certain
+ situations, the parameter will be surrounded by {}, which Symphony
+ takes to mean, evaluate this parameter to a value, other times it will be
+ omitted which is usually used to indicate that this parameter exists</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>The string with the parameters that need to be evaluated</p></description></tag>
+        <tag group="Parameters" name="env"><description><p>The environment variables from the Frontend class which includes any params set by Symphony or Events or by other Datasources</p></description></tag>
+        <tag group="Parameters" name="includeParenthesis"><description><p>Parameters will sometimes not be surrounded by {}. If this is the case setting this parameter to false will maket this function automatically add them to the parameter. By default this is true, which means all parameters in the string already are surrounded by {}</p></description></tag>
+        <tag group="Parameters" name="escape"><description><p>If set to true, the resulting value will be urlencoded before being returned. By default this is false</p></description></tag>
+        <tag group="Returns"><description><p>The string will all parameters evaluated. If a parameter was not found, it will not be replaced at all.</p></description></tag>
+      </tags>
+    </method>
+    <method name="about" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="124">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>Returns an associative array of information about a datasource.</p>
+      </description>
+    </method>
+    <method name="allowEditorToParse" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="96">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>This function is required in order to edit it in the datasource editor page.
+ Do not overload this function if you are creating a custom datasource. It is only
+ used by the datasource editor.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>True if the Datasource can be edited, false otherwise. Defaults to false</p></description></tag>
+      </tags>
+    </method>
+    <method name="emptyXMLSet" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="xml" type="XMLElement" package="toolkit" class="XMLElement"/>
+      </parameters>
+      <location line="162">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>If there is no results to return this function calls <code>Datasource::__noRecordsFound</code>
+ which appends an XMLElement to the current root element.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="xml"><description><p>The root element XMLElement for this datasource. By default, this will the handle of the datasource, as defined by <code>$this-&gt;dsParamROOTELEMENT</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="escapeCommas" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+      </parameters>
+      <location line="307">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>Using regex, this escapes any commas in the given string</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>The string to escape the commas in</p></description></tag>
+      </tags>
+    </method>
+    <method name="findParameterInEnv" return="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="needle" type="string"/>
+        <parameter name="env" type="array"/>
+      </parameters>
+      <location line="337">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>Parameters can exist in three different facets of Symphony; in the URL,
+ in the parameter pool or as an Symphony param. This function will attempt
+ to find a parameter in those three areas and return the value. If it is not found
+ null is returned</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="needle"><description><p>The parameter name</p></description></tag>
+        <tag group="Parameters" name="env"><description><p>The environment variables from the Frontend class which includes any params set by Symphony or Events or by other Datasources</p></description></tag>
+        <tag group="Returns"><description><p>If the value is not found, null, otherwise a string or an array is returned</p></description></tag>
+      </tags>
+    </method>
+    <method name="getDependencies" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="117">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>Accessor function to return this Datasource's dependencies</p>
+      </description>
+    </method>
+    <method name="getSource" return="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="108">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>This function is required in order to identify what section this Datasource is for. It
+ is used in the datasource editor. It must remain intact. Do not overload this function in
+ custom events. Other datasources may return a string here defining their datasource
+ type when they do not query a section.</p>
+      </description>
+    </method>
+    <method name="grab" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="param" type="array"/>
+      </parameters>
+      <location line="135">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>The meat of the Datasource, this function includes the datasource
+ type's file that will preform the logic to return the data for this datasource
+ It is passed the current parameters</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="param"><description><p>The current parameter pool that this Datasource can use when filtering and finding Entries or data.</p></description></tag>
+      </tags>
+    </method>
+    <method name="processParameters" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="env" type="array"/>
+      </parameters>
+      <location line="187">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>This function will iterates over the filters and replace any parameters with their
+ actual values. All other Datasource variables such as sorting, ordering and
+ pagination variables are also set by this function</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="env"><description><p>The environment variables from the Frontend class which includes any params set by Symphony or Events or by other Datasources</p></description></tag>
+      </tags>
+    </method>
+    <method name="removeEscapedCommas" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="string" type="string"/>
+      </parameters>
+      <location line="319">lib/toolkit/class.datasource.php</location>
+      <description>
+        <p>Used in conjunction with escapeCommas, this function will remove
+ the escaping pattern applied to the string (and commas)</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="string"><description><p>The string with the escaped commas in it to remove</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

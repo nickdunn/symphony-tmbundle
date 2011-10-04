@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<class type="class" name="Gateway" handle="gateway">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="20">lib/toolkit/class.gateway.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Gateway class provides a standard way to interact with other pages.
+ By default it is essentially a wrapper for CURL, but if that is not available
+ it falls back to use sockets.</p>
+  </description>
+  <tags>
+    <tag group="Example">` require_once(TOOLKIT . '/class.gateway.php'); $ch = new Gateway; $ch-&gt;init('http://www.example.com/'); $ch-&gt;setopt('POST', 1); $ch-&gt;setopt('POSTFIELDS', array('fred' =&gt; 1, 'happy' =&gt; 'yes')); print $ch-&gt;exec(); `</tag>
+  </tags>
+  <constants>
+    <constant name="FORCE_SOCKET" type="string" value="'socket'">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="27">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>Constant used to explicitly bypass CURL and use Sockets to
+ complete the request.</p>
+      </description>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_agent" type="string" value="'Symphony'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="93">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>The user agent for the request, defaults to Symphony.</p>
+      </description>
+    </field>
+    <field name="$_content_type" type="string" value="'application/x-www-form-urlencoded; charset=utf-8'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="87">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>The content-type of the request, defaults to application/x-www-form-urlencoded</p>
+      </description>
+    </field>
+    <field name="$_custom_opt" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="129">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>An array of custom options for the CURL request, this
+ can be any option as listed on the PHP manual</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au2.php.net/manual/en/function.curl-setopt.php</tag>
+      </tags>
+    </field>
+    <field name="$_headers" type="integer" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="120">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>An array of custom headers to pass with the request</p>
+      </description>
+    </field>
+    <field name="$_host" type="string" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="50">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>The hostname of the request, as parsed by parse_url</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://php.net/manual/en/function.parse-url.php</tag>
+      </tags>
+    </field>
+    <field name="$_info_last" type="mixed" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="138">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>An array of information about the request after it has
+ been executed. At minimum, regardless of if CURL or Sockets
+ are used, the HTTP Code, URL and Content Type will be returned</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au2.php.net/manual/en/function.curl-getinfo.php</tag>
+      </tags>
+    </field>
+    <field name="$_method" type="string" value="'GET'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="81">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>The method to request the URL. By default, this is GET</p>
+      </description>
+    </field>
+    <field name="$_path" type="string" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="75">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>The path of the URL in the request, as parsed by parse_url</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://php.net/manual/en/function.parse-url.php</tag>
+      </tags>
+    </field>
+    <field name="$_port" type="integer" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="67">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>The port of the URL in the request, as parsed by parse_url</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://php.net/manual/en/function.parse-url.php</tag>
+      </tags>
+    </field>
+    <field name="$_postfields" type="string" value="''">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="102">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>A URL encoded string of the <code>$_POST</code> fields, as built by
+ http<em>build</em>query()</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://www.php.net/manual/en/function.http-build-query.php</tag>
+      </tags>
+    </field>
+    <field name="$_returnHeaders" type="boolean" value="false">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="108">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>Whether to the return the Header with the result of the request</p>
+      </description>
+    </field>
+    <field name="$_scheme" type="string" value="'http://'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="59">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>The protocol of the URL in the request, as parsed by parse_url
+ Defaults to http:</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://php.net/manual/en/function.parse-url.php</tag>
+      </tags>
+    </field>
+    <field name="$_timeout" type="integer" value="4">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="114">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>The timeout in seconds for the request, defaults to 4</p>
+      </description>
+    </field>
+    <field name="$_url" type="string" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="42">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>The URL for the request, as string. This may be a full URL including
+ any basic authentication. It will be parsed and applied to CURL using
+ the correct options.</p>
+      </description>
+    </field>
+    <field name="$ports" type="array" value="array(...)">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="34">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>An associative array of some common ports for HTTP, HTTPS
+ and FTP. Port cannot be null when using Sockets</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="exec" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="force_connection_method" type="string"/>
+      </parameters>
+      <location line="287">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>Executes the request using Curl unless it is not available
+ or this function has explicitly been told not by providing
+ the <code>Gateway::FORCE_SOCKET</code> constant as a parameter. The function
+ will apply all the options set using <code>curl_setopt</code> before
+ executing the request. Information about the transfer is
+ available using the <code>getInfoLast()</code> function. Should Curl not be
+ available, this function will fallback to using Sockets with <code>fsockopen</code></p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Gateway" docblock="getInfoLast" path="toolkit.Gateway#getInfoLast()">toolkit.Gateway#getInfoLast()</tag>
+        <tag group="Parameters" name="force_connection_method"><description><p>Only one valid parameter, <code>Gateway::FORCE_SOCKET</code></p></description></tag>
+        <tag group="Returns"><description><p>The result of the transfer as a string. If any errors occur during a socket request, false will be returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="flush" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="167">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>Resets <code>$this-&gt;_postfields</code> variable to an empty string</p>
+      </description>
+    </method>
+    <method name="getInfoLast" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="430">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>Returns some information about the last transfer, this
+ the same output array as expected when calling the
+ <code>curl_getinfo()</code> function. If Sockets were used to complete
+ the request instead of CURL, the resulting array will be
+ the HTTP Code, the Content Type and the URL of the resulting
+ request</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au2.php.net/manual/en/function.curl-getinfo.php</tag>
+      </tags>
+    </method>
+    <method name="init" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="url" type="string"/>
+      </parameters>
+      <location line="148">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>Mimics curl_init in that a URL can be provided</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="url"><description><p>A full URL string to use for the request, this can include basic authentication which will automatically set the correct options for the CURL request. Defaults to null</p></description></tag>
+      </tags>
+    </method>
+    <method name="isCurlAvailable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="160">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>Checks to the see if CURL is available, if it isn't, false will
+ be returned, and sockets will be used</p>
+      </description>
+    </method>
+    <method name="setopt" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="opt" type="string"/>
+        <parameter name="value" type="mixed"/>
+      </parameters>
+      <location line="191">lib/toolkit/class.gateway.php</location>
+      <description>
+        <p>A basic wrapper that simulates the curl<em>setopt function. Any
+ options that are not recognised by Symphony will fallback to
+ being added to the <code>$custom_opt</code> array. Any options in <code>$custom_opt</code>
+ will be applied on executed using curl</em>setopt. Custom options are not
+ available for Socket requests. The benefit of using this function is for
+ convienience as it performs some basic preprocessing for some options
+ such as 'URL', which will take a full formatted URL string and set any
+ authentication or SSL curl options automatically</p>
+      </description>
+      <tags>
+        <tag group="See Also">http://au2.php.net/manual/en/function.curl-setopt.php</tag>
+        <tag group="Parameters" name="opt"><description><p>A string representing a CURL constant. Symphony will intercept the following, URL, POST, POSTFIELDS, USERAGENT, HTTPHEADER, RETURNHEADERS, CONTENTTYPE and TIMEOUT. Any other values will be saved in the <code>$custom_opt</code> array.</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>The value of the option, usually boolean or a string. Consult the setopt documentation for more information.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

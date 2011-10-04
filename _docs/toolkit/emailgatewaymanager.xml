@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<class type="class" name="EmailGatewayManager" handle="emailgatewaymanager">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="14">lib/toolkit/class.emailgatewaymanager.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Manager</superclass>
+  <description>
+    <p>A manager to standardize the finding and listing of installed gateways.</p>
+  </description>
+  <fields>
+    <field name="$_default_gateway" type="mixed" value="'sendmail'">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="16">lib/toolkit/class.emailgatewaymanager.php</location>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Manager" package="toolkit">
+      <field name="_Parent"/>
+      <field name="_pool"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="Administration" package="core" class="Administration"/>
+      </parameters>
+      <location line="18">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>The constructor for Manager. This sets the <code>$this-&gt;_Parent</code> to be an
+ instance of the Administration class.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The Administration object that this manager has been created from passed by reference</p></description></tag>
+      </tags>
+    </method>
+    <method name="__find" return="string|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="63">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>Finds the gateway by name</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The gateway to look for</p></description></tag>
+        <tag group="Returns"><description><p>If the gateway is found, the path to the folder containing the gateway is returned. If the gateway is not found, false is returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getClassName" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="87">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>Returns the classname from the gateway name.
+ Does not check if the gateway exists.</p>
+      </description>
+    </method>
+    <method name="__getClassPath" return="string|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="97">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>Alias for __find</p>
+      </description>
+    </method>
+    <method name="__getDriverPath" return="string|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="109">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>Returns the path to the gateway file.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The gateway to look for</p></description></tag>
+        <tag group="Todo">fix return if gateway does not exist.</tag>
+      </tags>
+    </method>
+    <method name="__getHandleFromFilename" return="string|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="filename" type="string"/>
+      </parameters>
+      <location line="120">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>Finds the name from the filename.
+ Does not check if the gateway exists.</p>
+      </description>
+    </method>
+    <method name="create" return="EmailGateway">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="176">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>Creates a new object from a gateway name.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The gateway to look for</p></description></tag>
+        <tag group="Returns"><description><p>If the gateway is found, an instantiated object is returned. If the gateway is not found, an error is triggered.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getDefaultGateway" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="43">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>Returns the default gateway.
+ Will throw an exception if the gateway can not be found.</p>
+      </description>
+    </method>
+    <method name="listAll" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="131">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>Returns an array of all gateways.
+ Each item in the array will contain the return value of the about() 
+ function of each gateway.</p>
+      </description>
+    </method>
+    <method name="setDefaultGateway" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="27">lib/toolkit/class.emailgatewaymanager.php</location>
+      <description>
+        <p>Sets the default gateway.
+ Will throw an exception if the gateway can not be found.</p>
+      </description>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Manager">
+    <class name="Manager" package="toolkit">
+      <method name="__construct"/>
+      <method name="__getClassName"/>
+      <method name="__getClassPath"/>
+      <method name="__getDriverPath"/>
+      <method name="__getHandleFromFilename"/>
+      <method name="about"/>
+      <method name="create"/>
+      <method name="flush"/>
+      <method name="listAll"/>
+    </class>
+  </inherited-methods>
+</class>

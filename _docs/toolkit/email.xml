@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<class type="class" name="Email" handle="email">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="18">lib/toolkit/class.email.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+    <modifier>abstract</modifier>
+  </modifiers>
+  <description>
+    <p>The Email class is a factory class to make it possible to send emails using different gateways.</p>
+  </description>
+  <fields>
+    <field name="$gateway" type="mixed" value="false">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="20">lib/toolkit/class.email.php</location>
+    </field>
+  </fields>
+  <methods>
+    <method name="create" return="EmailGateway">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="gateway" type="string"/>
+      </parameters>
+      <location line="32">lib/toolkit/class.email.php</location>
+      <description>
+        <p>Returns the EmailGateway to send emails with.
+ Calling this function multiple times will return unique objects.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="gateway"><description><p>The name of the gateway to use. Please only supply if specific gateway functions are being used. If the gateway is not found, it will throw an EmailException</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

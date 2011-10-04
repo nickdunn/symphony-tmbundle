@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<class type="class" name="GenericExceptionHandler" handle="genericexceptionhandler">
+  <package name="core" handle="core"/>
+  <location line="14">lib/core/class.errorhandler.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>GenericExceptionHandler will handle any uncaught exceptions thrown in Symphony.
+ Additionally, all errors in Symphony are raised to exceptions to be handled by this class.
+ It is possible for Exceptions to be caught by their own <code>ExceptionHandler</code> which can
+ override the render function so that it can be displayed to the user appropriately</p>
+  </description>
+  <fields>
+    <field name="$_Log" type="Log" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="26">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>An instance of the Symphony Log class, used to write errors to the log</p>
+      </description>
+    </field>
+    <field name="$enabled" type="boolean" value="true">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="20">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>Whether the <code>GenericExceptionHandler</code> should handle exceptions defaults to true</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__nearbyLines" return="array">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="line" type="integer"/>
+        <parameter name="file" type="string"/>
+        <parameter name="window" type="integer"/>
+      </parameters>
+      <location line="54">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>Retrieves a window of lines before and after the line where the error
+ occurred so that a developer can help debug the exception</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="line"><description><p>The line where the error occurred.</p></description></tag>
+        <tag group="Parameters" name="file"><description><p>The file that holds the logic that caused the error.</p></description></tag>
+        <tag group="Parameters" name="window"><description><p>The number of lines either side of the line where the error occurred to show</p></description></tag>
+      </tags>
+    </method>
+    <method name="handler" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="e" type="Exception"/>
+      </parameters>
+      <location line="69">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>The handler function is given an Exception and will call it's render
+ function to display the Exception to a user. After calling the render
+ function, the output is displayed and then exited to prevent any further
+ logic from occurring.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="e"><description><p>The Exception object</p></description></tag>
+        <tag group="Returns"><description><p>The result of the Exception's render function</p></description></tag>
+      </tags>
+    </method>
+    <method name="initialise" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="Log" type="Log" package="core" class="Log"/>
+        <parameter name="log" type="Log|null"/>
+      </parameters>
+      <location line="34">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>The initialise function will set the exception_handler to the this class's
+ handler function</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="log"><description><p>An instance of a Symphony Log object to write errors to</p></description></tag>
+      </tags>
+    </method>
+    <method name="render" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="e" type="Exception"/>
+      </parameters>
+      <location line="133">lib/core/class.errorhandler.php</location>
+      <description>
+        <p>The render function will take an Exception and output a HTML page</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="e"><description><p>The Exception object</p></description></tag>
+        <tag group="Returns"><description><p>An HTML string</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

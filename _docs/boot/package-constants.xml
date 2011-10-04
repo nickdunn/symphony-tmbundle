@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<constants package="boot">
+  <constant name="__IN_SYMPHONY__" type="boolean">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="12">lib/boot/defines.php</location>
+    <description>
+      <p>Used to determine if Symphony has been loaded, useful to prevent
+ files from being accessed directly.</p>
+    </description>
+  </constant>
+  <constant name="symphony-page" type="mixed">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="50">lib/boot/func.utilities.php</location>
+  </constant>
+  <constant name="version" type="mixed">
+    <modifiers>
+      <modifier>public</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="8">lib/boot/bundle.php</location>
+  </constant>
+</constants>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<class type="class" name="DatabaseExceptionHandler" handle="databaseexceptionhandler">
+  <package name="core" handle="core"/>
+  <location line="676">lib/core/class.symphony.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="core">GenericExceptionHandler</superclass>
+  <description>
+    <p>The DatabaseExceptionHandler provides a render function to provide
+ customised output for Database exceptions. It displays the Exception
+ message as provided by the Database.</p>
+  </description>
+  <inherited-fields>
+    <class name="GenericExceptionHandler" package="core">
+      <field name="_Log"/>
+      <field name="enabled"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="render" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="e" type="DatabaseException" package="toolkit" class="DatabaseException"/>
+      </parameters>
+      <location line="687">lib/core/class.symphony.php</location>
+      <description>
+        <p>The render function will take a DatabaseException and output a
+ HTML page.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="e"><description><p>The Exception object</p></description></tag>
+        <tag group="Returns"><description><p>An HTML string</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="core" class="GenericExceptionHandler">
+    <class name="GenericExceptionHandler" package="core">
+      <method name="__nearbyLines"/>
+      <method name="handler"/>
+      <method name="initialise"/>
+      <method name="render"/>
+    </class>
+  </inherited-methods>
+</class>

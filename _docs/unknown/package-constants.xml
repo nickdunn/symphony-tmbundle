@@ -1,0 +1,392 @@
+<?xml version="1.0"?>
+<constants package="Unknown">
+  <constant name="ACTIVITY_LOG" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="128">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>main</code> file which is contained within
+ the <code>manifest/logs</code> folder. This is the default Symphony log file.</p>
+    </description>
+  </constant>
+  <constant name="ASSETS" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="50">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>assets</code> folder which is contained within
+ the <code>symphony</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="BOOT" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="143">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>boot</code> folder which is contained within
+ the <code>symphony/lib</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="CACHE" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="106">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>cache</code> folder which is contained within
+ the <code>manifest</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="CONFIG" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="136">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>config.php</code> file which is contained within
+ the <code>manifest</code> folder. This holds all the Symphony configuration settings
+ for this install.</p>
+    </description>
+  </constant>
+  <constant name="CONTENT" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="57">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>content</code> folder which is contained within
+ the <code>symphony</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="CORE" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="150">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>core</code> folder which is contained within
+ the <code>symphony/lib</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="DATASOURCES" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="78">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>data-sources</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="EMAILGATEWAYS" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="172">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>email-gateways</code> folder which is contained within
+ the <code>symphony/lib/toolkit</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="EVENTS" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="85">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>events</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="EXTENSIONS" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="24">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>extensions</code> folder</p>
+    </description>
+  </constant>
+  <constant name="HTTPS" type="string|boolean">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="191">lib/boot/defines.php</location>
+    <description>
+      <p>Returns the environmental variable if HTTPS is in use.</p>
+    </description>
+  </constant>
+  <constant name="HTTP_HOST" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="197">lib/boot/defines.php</location>
+    <description>
+      <p>Returns the current host, ie. google.com</p>
+    </description>
+  </constant>
+  <constant name="HTTP_USER_AGENT" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="209">lib/boot/defines.php</location>
+    <description>
+      <p>Returns the User Agent string of the browser that is viewing the current page</p>
+    </description>
+  </constant>
+  <constant name="LANG" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="158">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>lang</code> folder which is contained within
+ the <code>symphony/lib</code> folder. By default, the Symphony install comes with
+ an english language translation.</p>
+    </description>
+  </constant>
+  <constant name="LIBRARY" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="43">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>lib</code> folder which is contained within
+ the <code>symphony</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="LOGS" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="121">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>logs</code> folder which is contained within
+ the <code>manifest</code> folder. The default Symphony Log file is saved at this
+ path.</p>
+    </description>
+  </constant>
+  <constant name="MANIFEST" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="18">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>manifest</code> folder</p>
+    </description>
+  </constant>
+  <constant name="PAGES" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="99">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>pages</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="PHP_VERSION_ID" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="18">lib/boot/bundle.php</location>
+    <description>
+      <p>For versions of PHP below 5.2.7, the PHP<em>VERSION</em>ID constant, doesn't
+ exist, so this will just mimic the functionality as described on the
+ PHP documentation</p>
+    </description>
+  </constant>
+  <constant name="REMOTE_ADDR" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="203">lib/boot/defines.php</location>
+    <description>
+      <p>Returns the IP address of the machine that is viewing the current page.</p>
+    </description>
+  </constant>
+  <constant name="STARTTIME" type="float">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="179">lib/boot/defines.php</location>
+    <description>
+      <p>Used as a default seed, this returns the time in seconds that Symphony started
+ to load. Most profiling runs use this as a benchmark.</p>
+    </description>
+  </constant>
+  <constant name="SYMPHONY" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="36">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>symphony</code> folder</p>
+    </description>
+  </constant>
+  <constant name="SYMPHONY_URL" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="229">lib/boot/defines.php</location>
+    <description>
+      <p>Returns the URL + /symphony. This should be used whenever the a developer
+ wants to link to the Symphony root</p>
+    </description>
+  </constant>
+  <constant name="TEMPLATE" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="64">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>template</code> folder which is contained within
+ the <code>symphony</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="TEXTFORMATTERS" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="92">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>text-formatters</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="TMP" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="113">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>tmp</code> folder which is contained within
+ the <code>manifest</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="TOOLKIT" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="165">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>toolkit</code> folder which is contained within
+ the <code>symphony/lib</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="TWO_WEEKS" type="integer">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="185">lib/boot/defines.php</location>
+    <description>
+      <p>Returns the number of seconds that represent two weeks.</p>
+    </description>
+  </constant>
+  <constant name="URL" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="221">lib/boot/defines.php</location>
+    <description>
+      <p>The base URL of this Symphony install, minus the symphony path.</p>
+    </description>
+  </constant>
+  <constant name="UTILITIES" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="71">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>utilities</code> folder which is contained within
+ the <code>workspace</code> folder.</p>
+    </description>
+  </constant>
+  <constant name="WORKSPACE" type="string">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="30">lib/boot/defines.php</location>
+    <description>
+      <p>The filesystem path to the <code>workspace</code> folder</p>
+    </description>
+  </constant>
+  <constant name="__SECURE__" type="string|boolean">
+    <modifiers>
+      <modifier>public</modifier>
+      <modifier>final</modifier>
+    </modifiers>
+    <parameters/>
+    <location line="215">lib/boot/defines.php</location>
+    <description>
+      <p>If HTTPS is on, <code>__SECURE__</code> will be set to true, otherwise false</p>
+    </description>
+  </constant>
+</constants>

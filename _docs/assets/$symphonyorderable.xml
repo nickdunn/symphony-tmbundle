@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+
+
+
+
+
+
+
+<class type="class" name="$.symphonyOrderable" handle="$.symphonyOrderable">
+	
+	<package name="assets" handle="assets"/>
+	
+	
+		<location>assets/symphony.orderable.js</location>
+	
+	
+	<modifiers>
+		<modifier>public</modifier>
+	</modifiers>
+	
+	<!--description>
+		<p></p>
+	</description-->
+	
+			
+		<description>
+			<p>This plugin allows items to be orderable.</p>
+			
+				
+					<pre class="code">
+			$('table').symphonyOrderable({
+				items: 'tr',
+				handles: 'td'
+			});</pre>
+				
+			
+		</description>
+	
+	
+	
+	
+	
+	
+	
+	<methods>
+	
+		
+	
+		<method
+			name="symphonyOrderable"
+			 
+			
+		>
+		
+			<modifiers>
+				<modifier>public</modifier><modifier>static</modifier>
+			</modifiers>
+			
+			<location>assets/symphony.orderable.js</location>
+			
+			<description>
+				<p>This plugin allows items to be orderable.</p>
+				
+					
+						<pre class="code">
+			$('table').symphonyOrderable({
+				items: 'tr',
+				handles: 'td'
+			});</pre>
+					
+				
+			</description>
+			
+			<tags>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					
+						<tag group="Parameters" name="custom_settings">
+							<description>
+								<p>An object specifying containing the attributes specified below</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.items">
+							<description>
+								<p>Selector to find items to be orderable</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.handles">
+							<description>
+								<p>Selector to find children that can be grabbed to re-order</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.delay_initialize">
+							<description>
+								<p>Initialise plugin extensions before the orderable itself is initialised</p>
+							</description>
+						</tag>
+					
+				
+				
+			</tags>
+			
+			
+				<parameters>
+					
+						<parameter name="custom_settings" type="Object" />
+					
+						<parameter name="custom_settings.items" type="String" />
+					
+						<parameter name="custom_settings.handles" type="String" />
+					
+						<parameter name="custom_settings.delay_initialize" type="Boolean" />
+					
+				</parameters>
+			
+			
+		</method>
+		
+		
+		
+		
+		
+	</methods>
+			
+	
+	
+	
+</class>

@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<class type="class" name="Author" handle="author">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="9">lib/toolkit/class.author.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Author class represents a Symphony Author object. Authors are
+ the backend users in Symphony.</p>
+  </description>
+  <fields>
+    <field name="$_accessSections" type="array" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="23">lib/toolkit/class.author.php</location>
+      <description>
+        <p>An array of all the sections an author can have access to. Defaults
+ to null. This is currently unused by Symphony.</p>
+      </description>
+    </field>
+    <field name="$_fields" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="16">lib/toolkit/class.author.php</location>
+      <description>
+        <p>An associative array of information relating to this author where
+ the keys map directly to the <code>tbl_authors</code> columns.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="commit" return="integer|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="181">lib/toolkit/class.author.php</location>
+      <description>
+        <p>This is the insert method for the Author. This takes the current
+ <code>$this-&gt;_fields</code> values and adds them to the database using either the
+ <code>AuthorManager::edit</code> or <code>AuthorManager::add</code> functions. An
+ existing user is determined by if an ID is already set.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="AuthorManager" docblock="add" path="toolkit.AuthorManager#add()">toolkit.AuthorManager#add()</tag>
+        <tag group="See Also" package="toolkit" class="AuthorManager" docblock="edit" path="toolkit.AuthorManager#edit()">toolkit.AuthorManager#edit()</tag>
+        <tag group="Returns"><description><p>When a new Author is added or updated, an integer of the Author ID will be returned, otherwise false will be returned for a failed update.</p></description></tag>
+      </tags>
+    </method>
+    <method name="createAuthToken" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="118">lib/toolkit/class.author.php</location>
+      <description>
+        <p>Creates an author token using the <code>General::hash</code> function and the
+ current Author's username and password. The default hash function
+ is SHA1</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="General" docblock="hash" path="toolkit.General#hash()">toolkit.General#hash()</tag>
+        <tag group="See Also" package="toolkit" class="General" docblock="substrmin" path="toolkit.General#substrmin()">toolkit.General#substrmin()</tag>
+      </tags>
+    </method>
+    <method name="get" return="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="field" type="string"/>
+      </parameters>
+      <location line="48">lib/toolkit/class.author.php</location>
+      <description>
+        <p>Retrieves the value from the Author object by field from <code>$this-&gt;_fields</code>
+ array. If field is omitted, all fields are returned.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="field"><description><p>Maps directly to a column in the <code>tbl_authors</code> table. Defaults to null</p></description></tag>
+        <tag group="Returns"><description><p>If the field is not set or is empty, returns null. If the field is not provided, returns the <code>$this-&gt;_fields</code> array Otherwise returns a string.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getFullName" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="104">lib/toolkit/class.author.php</location>
+      <description>
+        <p>A convenience method that returns an Authors full name</p>
+      </description>
+    </method>
+    <method name="isDeveloper" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="75">lib/toolkit/class.author.php</location>
+      <description>
+        <p>Returns boolean if the current Author is of the developer
+ user type.</p>
+      </description>
+    </method>
+    <method name="isPrimaryAccount" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="85">lib/toolkit/class.author.php</location>
+      <description>
+        <p>Returns boolean if the current Author is the original creator
+ of this Symphony installation.</p>
+      </description>
+    </method>
+    <method name="isTokenActive" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="95">lib/toolkit/class.author.php</location>
+      <description>
+        <p>Returns boolean if the current Author's authentication token
+ is active or not.</p>
+      </description>
+    </method>
+    <method name="loadAuthor" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="integer"/>
+      </parameters>
+      <location line="226">lib/toolkit/class.author.php</location>
+      <description>
+        <p>This function will load an Author by ID into the current Author object</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This function will be removed in the next major release. The AuthorManager::fetchByID is the preferred way to find Authors by ID.</p></description></tag>
+        <tag group="See Also" package="toolkit" class="AuthorManager" docblock="fetchByID" path="toolkit.AuthorManager#fetchByID">toolkit.AuthorManager#fetchByID</tag>
+        <tag group="Parameters" name="id"><description><p>The Author ID to load.</p></description></tag>
+      </tags>
+    </method>
+    <method name="loadAuthorFromUsername" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="username" type="mixed"/>
+        <parameter name="usernames" type="string"/>
+      </parameters>
+      <location line="251">lib/toolkit/class.author.php</location>
+      <description>
+        <p>This function will load an Author by Username into the current Author object</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This function will be removed in the next major release. The <code>AuthorManager::fetchByUsername</code> is the preferred way to find Authors by Username.</p></description></tag>
+        <tag group="See Also" package="toolkit" class="AuthorManager" docblock="fetchByUsername" path="toolkit.AuthorManager#fetchByUsername()">toolkit.AuthorManager#fetchByUsername()</tag>
+        <tag group="Parameters" name="usernames"><description><p>The Author's username</p></description></tag>
+      </tags>
+    </method>
+    <method name="remove" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="field" type="string"/>
+      </parameters>
+      <location line="63">lib/toolkit/class.author.php</location>
+      <description>
+        <p>Given a field, remove it from <code>$this-&gt;_fields</code></p>
+      </description>
+      <tags>
+        <tag group="Since">Symphony 2.2.1</tag>
+        <tag group="Parameters" name="field"><description><p>Maps directly to a column in the <code>tbl_authors</code> table. Defaults to null</p></description></tag>
+      </tags>
+    </method>
+    <method name="set" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="field" type="string"/>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="33">lib/toolkit/class.author.php</location>
+      <description>
+        <p>Stores a key=&gt;value pair into the Author object's <code>$this-&gt;_fields</code> array.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="field"><description><p>Maps directly to a column in the <code>tbl_authors</code> table.</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>The value for the given $field</p></description></tag>
+      </tags>
+    </method>
+    <method name="validate" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="errors" type="array"/>
+      </parameters>
+      <location line="131">lib/toolkit/class.author.php</location>
+      <description>
+        <p>Prior to saving an Author object, the validate function ensures that
+ the values in <code>$this-&gt;_fields</code> array are correct. The function returns
+ boolean, but an errors array is provided by reference to the callee
+ function.</p>
+      </description>
+    </method>
+    <method name="verifyToken" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="token" type="string"/>
+      </parameters>
+      <location line="206">lib/toolkit/class.author.php</location>
+      <description>
+        <p>This function compares a given token to an Author's actual token.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This function will be removed in the next major release. It is unused by Symphony.</p></description></tag>
+        <tag group="Parameters" name="token"><description><p>A token to test against this Author's token</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

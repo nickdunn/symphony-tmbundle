@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/system/preferences/',
+	'delegate' => 'CustomActions',
+	'callback' => 'customActions'
+),
+</string>
+	<key>name</key>
+	<string>CustomActions</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>CEC22D8C-B33A-AD1F-1866-309FA9E815F6</string>
+</dict>
+</plist>

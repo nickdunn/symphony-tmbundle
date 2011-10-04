@@ -1,0 +1,321 @@
+<?xml version="1.0"?>
+
+
+
+
+
+
+	
+
+
+<class type="class" name="$.symphonyDuplicator" handle="$.symphonyDuplicator">
+	
+	<package name="assets" handle="assets"/>
+	
+	
+		<location>assets/symphony.duplicator.js</location>
+	
+	
+	<modifiers>
+		<modifier>public</modifier>
+	</modifiers>
+	
+	<!--description>
+		<p></p>
+	</description-->
+	
+			
+		<description>
+			<p>This plugin creates a Symphony duplicator.</p>
+			
+				
+					<pre class="code">
+			$('.duplicator').symphonyDuplicator({
+				orderable: true,
+				collapsible: true
+			});</pre>
+				
+			
+		</description>
+	
+	
+	
+	
+	
+	
+	
+	<methods>
+	
+		
+	
+		<method
+			name="symphonyDuplicator"
+			 
+			
+		>
+		
+			<modifiers>
+				<modifier>public</modifier><modifier>static</modifier>
+			</modifiers>
+			
+			<location>assets/symphony.duplicator.js</location>
+			
+			<description>
+				<p>This plugin creates a Symphony duplicator.</p>
+				
+					
+						<pre class="code">
+			$('.duplicator').symphonyDuplicator({
+				orderable: true,
+				collapsible: true
+			});</pre>
+					
+				
+			</description>
+			
+			<tags>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+					
+						<tag group="Parameters" name="custom_settings">
+							<description>
+								<p>An object specifying containing the attributes specified below</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.instances">
+							<description>
+								<p>Selector to find children to use as instances</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.templates">
+							<description>
+								<p>Selector to find children to use as templates</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.headers">
+							<description>
+								<p>Selector to find the header part of each instance</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.orderable">
+							<description>
+								<p>Can instances be ordered</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.collapsible">
+							<description>
+								<p>Can instances be collapsed</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.constructable">
+							<description>
+								<p>Allow construction of new instances</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.destructable">
+							<description>
+								<p>Allow destruction of instances</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.minimum">
+							<description>
+								<p>Do not allow instances to be removed below this limit</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.maximum">
+							<description>
+								<p>Do not allow instances to be added above this limit</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.speed">
+							<description>
+								<p>Animation speed</p>
+							</description>
+						</tag>
+					
+						<tag group="Parameters" name="custom_settings.delay_initialize">
+							<description>
+								<p>Initialise plugin extensions before the duplicator itself is initialised</p>
+							</description>
+						</tag>
+					
+				
+				
+			</tags>
+			
+			
+				<parameters>
+					
+						<parameter name="custom_settings" type="Object" />
+					
+						<parameter name="custom_settings.instances" type="String" />
+					
+						<parameter name="custom_settings.templates" type="String" />
+					
+						<parameter name="custom_settings.headers" type="String" />
+					
+						<parameter name="custom_settings.orderable" type="Boolean" />
+					
+						<parameter name="custom_settings.collapsible" type="Boolean" />
+					
+						<parameter name="custom_settings.constructable" type="Boolean" />
+					
+						<parameter name="custom_settings.destructable" type="Boolean" />
+					
+						<parameter name="custom_settings.minimum" type="Integer" />
+					
+						<parameter name="custom_settings.maximum" type="Integer" />
+					
+						<parameter name="custom_settings.speed" type="String" />
+					
+						<parameter name="custom_settings.delay_initialize" type="Boolean" />
+					
+				</parameters>
+			
+			
+		</method>
+		
+		
+		
+		
+
+				
+
+					<method
+						name="collapseAll"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Collapse all open items</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+								
+									<tag group="See Also" package="assets" class="$.symphonyCollapsible" docblock="collapseAll" path="assets/$symphonycollapsible#collapseAll">
+										assets.$.symphonyCollapsible#collapseAll()
+									</tag>
+								
+							
+
+							
+
+							
+								
+									<tag group="Requires">
+										<description>
+											<p>$.symphonyCollapsible plugin</p>
+										</description>
+									</tag>
+								
+									<tag group="Requires">
+										<description>
+											<p>constructor { collapsible: true }</p>
+										</description>
+									</tag>
+								
+							
+
+							
+
+						</tags>
+
+						
+
+					</method>
+
+				
+
+					<method
+						name="expandAll"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Expand all closed items</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+								
+									<tag group="See Also" package="assets" class="$.symphonyCollapsible" docblock="expandAll" path="assets/$symphonycollapsible#expandAll">
+										assets.$.symphonyCollapsible#expandAll()
+									</tag>
+								
+							
+
+							
+
+							
+								
+									<tag group="Requires">
+										<description>
+											<p>$.symphonyCollapsible plugin</p>
+										</description>
+									</tag>
+								
+									<tag group="Requires">
+										<description>
+											<p>constructor { collapsible: true }</p>
+										</description>
+									</tag>
+								
+							
+
+							
+
+						</tags>
+
+						
+
+					</method>
+
+				
+
+		
+		
+	</methods>
+			
+	
+	
+	
+</class>

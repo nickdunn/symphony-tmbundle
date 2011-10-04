@@ -1,0 +1,447 @@
+<?xml version="1.0"?>
+<class type="class" name="fieldAuthor" handle="fieldauthor">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="15">lib/toolkit/fields/field.author.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Field</superclass>
+  <description>
+    <p>The Author field allows Symphony Authors to be selected in your entries.
+ It is a read only field, new Authors cannot be added from the Frontend using
+ events.</p>
+    <p>The Author field allows filtering by Author ID or Username.
+ Sorting is done based on the Author's first name and last name.</p>
+  </description>
+  <inherited-fields>
+    <class name="Field" package="toolkit">
+      <field name="Database"/>
+      <field name="_Parent"/>
+      <field name="_engine"/>
+      <field name="_fields"/>
+      <field name="_key"/>
+      <field name="_required"/>
+      <field name="_showassociation"/>
+      <field name="_showcolumn"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="mixed"/>
+      </parameters>
+      <location line="16">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Construct a new instance of this field.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The class that created this Field object, usually the FieldManager, passed by reference.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__parseFilter" return="string">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="187">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Determines based on the input value whether we want to filter the Author
+ field by ID or by the Author's Username</p>
+      </description>
+      <tags>
+        <tag group="Since">Symphony 2.2</tag>
+        <tag group="Returns"><description><p>Either <code>author_id</code> or <code>username</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="allowDatasourceOutputGrouping" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="38">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Test whether this field supports data-source output grouping. This
+ default implementation prohibits grouping. Data-source grouping allows
+ clients of this field to group the xml output according to this field.
+ Subclasses should override this if grouping is supported.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>true if this field does support data-source grouping, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="appendFormattedElement" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="data" type="array"/>
+        <parameter name="encode" type="bool"/>
+        <parameter name="mode" type="string"/>
+        <parameter name="entry_id" type="integer"/>
+      </parameters>
+      <location line="208">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Append the formatted xml output of this field as utilized as a data source.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="wrapper"><description><p>the xml element to append the xml representation of this to.</p></description></tag>
+        <tag group="Parameters" name="data"><description><p>the current set of values for this field. the values are structured as for displayPublishPanel.</p></description></tag>
+        <tag group="Parameters" name="encode"><description><p>(optional) flag as to whether this should be html encoded prior to output. this defaults to false.</p></description></tag>
+        <tag group="Parameters" name="mode"><description><p>A field can provide ways to output this field's data. For instance a mode could be 'items' or 'full' and then the function would display the data in a different way depending on what was selected in the datasource included elements.</p></description></tag>
+        <tag group="Parameters" name="entry_id"><description><p>(optional) the identifier of this field entry instance. defaults to null.</p></description></tag>
+      </tags>
+    </method>
+    <method name="buildDSRetrievalSQL" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="array"/>
+        <parameter name="joins" type="string"/>
+        <parameter name="where" type="string"/>
+        <parameter name="andOperation" type="bool"/>
+      </parameters>
+      <location line="130">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Construct the SQL statement fragments to use to retrieve the data of this
+ field when utilized as a data source.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>the supplied form data to use to construct the query from</p></description></tag>
+        <tag group="Parameters" name="joins"><description><p>the join sql statement fragment to append the additional join sql to.</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>the where condition sql statement fragment to which the additional where conditions will be appended.</p></description></tag>
+        <tag group="Parameters" name="andOperation"><description><p>(optional) true if the values of the input data should be appended as part of the where condition. this defaults to false.</p></description></tag>
+        <tag group="Returns"><description><p>true if the construction of the sql was successful, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="buildSortingSQL" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="joins" type="string"/>
+        <parameter name="where" type="string"/>
+        <parameter name="sort" type="string"/>
+        <parameter name="order" type="str"/>
+      </parameters>
+      <location line="120">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Build the SQL command to append to the default query to enable
+ sorting of this field. By default this will sort the results by
+ the entry id in ascending order.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="joins"><description><p>the join element of the query to append the custom join sql to.</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>the where condition of the query to append to the existing where clause.</p></description></tag>
+        <tag group="Parameters" name="sort"><description><p>the existing sort component of the sql query to append the custom sort sql code to.</p></description></tag>
+        <tag group="Parameters" name="order"><description><p>(optional) an optional sorting direction. this defaults to ascending. if this is declared either 'random' or 'rand' then a random sort is applied.</p></description></tag>
+      </tags>
+    </method>
+    <method name="canFilter" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="30">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Test whether this field can be filtered. This default implementation
+ prohibits filtering. Filtering allows the xml output results to be limited
+ according to an input parameter. Subclasses should override this if
+ filtering is supported.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>true if this can be filtered, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="canImport" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="34">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Test whether this field can be imported. This default implementation
+ prohibits importing. Subclasses should override this is importing is
+ supported.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This function will be removed in the next major release. It is unused by Symphony.</p></description></tag>
+        <tag group="Returns"><description><p>true if this can be imported, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="canToggle" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="22">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Test whether this field can be toggled using the With Selected menu
+ on the Publish Index.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>true if it can be toggled, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="commit" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="191">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Commit the settings of this field from the section editor to
+ create an instance of this field in a section.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>true if the commit was successful, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="createTable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="257">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>The default field table construction method. This constructs the bare
+ minimum set of columns for a valid field table. Subclasses are expected
+ to overload this method to create a table structure that contains
+ additional columns to store the specific data created by the field.</p>
+      </description>
+    </method>
+    <method name="displayPublishPanel" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="data" type="array"/>
+        <parameter name="flagWithError" type="mixed"/>
+        <parameter name="fieldnamePrefix" type="string"/>
+        <parameter name="fieldnamePostfix" type="mixed"/>
+        <parameter name="entry_id" type="integer"/>
+        <parameter name="fieldnameSuffix" type="string"/>
+      </parameters>
+      <location line="72">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Display the publish panel for this field. The display panel is the
+ interface shown to Authors that allow them to input data into this 
+ field for an Entry.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="wrapper"><description><p>the xml element to append the html defined user interface to this field.</p></description></tag>
+        <tag group="Parameters" name="data"><description><p>(optional) any existing data that has been supplied for this field instance. this is encoded as an array of columns, each column maps to an array of row indexes to the contents of that column. this defaults to null.</p></description></tag>
+        <tag group="Parameters" name="flagWithError"><description><p>(optional) flag with error defaults to null.</p></description></tag>
+        <tag group="Parameters" name="fieldnamePrefix"><description><p>(optional) the string to be prepended to the display of the name of this field. this defaults to null.</p></description></tag>
+        <tag group="Parameters" name="fieldnameSuffix"><description><p>(optional) the string to be appended to the display of the name of this field. this defaults to null.</p></description></tag>
+        <tag group="Parameters" name="entry_id"><description><p>(optional) the entry id of this field. this defaults to null.</p></description></tag>
+      </tags>
+    </method>
+    <method name="displaySettingsPanel" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+        <parameter name="errors" type="mixed"/>
+      </parameters>
+      <location line="233">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Display the default settings panel, calls the <code>buildSummaryBlock</code>
+ function after basic field settings are added to the wrapper.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="buildSummaryBlock" path="buildSummaryBlock()">buildSummaryBlock()</tag>
+        <tag group="Parameters" name="wrapper"><description><p>the input XMLElement to which the display of this will be appended.</p></description></tag>
+        <tag group="Parameters" name="errors"><description><p>(optional) the input error collection. this defaults to null.</p></description></tag>
+      </tags>
+    </method>
+    <method name="findDefaults" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="fields" type="mixed"/>
+        <parameter name="settings" type="array"/>
+      </parameters>
+      <location line="229">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Allows a field to set default settings.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="settings"><description><p>the array of settings to populate with their defaults.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getExampleFormMarkup" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="270">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>The default method for constructing the example form markup containing this
+ field when utilized as part of an event. This displays in the event documentation
+ and serves as a basic guide for how markup should be constructed on the
+ Frontend to save this field</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>a label widget containing the formatted field element name of this.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getToggleStates" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="43">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Accessor to the toggle states. This default implementation returns
+ an empty array.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>the array of toggle states.</p></description></tag>
+      </tags>
+    </method>
+    <method name="isSortable" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="26">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Test whether this field can be sorted. This default implementation
+ returns false.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>true if this field is sortable, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="prepareTableValue" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="array"/>
+        <parameter name="link" type="XMLElement" package="toolkit" class="XMLElement"/>
+      </parameters>
+      <location line="101">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Format this field value for display in the publish index tables. By default,
+ Symphony will truncate the value to the configuration setting <code>cell_truncation_length</code>.
+ This function will attempt to use PHP's <code>mbstring</code> functions if they are available.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>an associative array of data for this string. At minimum this requires a key of 'value'.</p></description></tag>
+        <tag group="Parameters" name="link"><description><p>(optional) an xml link structure to append the content of this to provided it is not null. it defaults to null.</p></description></tag>
+        <tag group="Returns"><description><p>the formatted string summary of the values of this field instance.</p></description></tag>
+      </tags>
+    </method>
+    <method name="processRawFieldData" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="mixed"/>
+        <parameter name="status" type="integer"/>
+        <parameter name="simulate" type="bool"/>
+        <parameter name="entry_id" type="mixed"/>
+      </parameters>
+      <location line="58">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Process the raw field data.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>post data from the entry form</p></description></tag>
+        <tag group="Parameters" name="status"><description><p>the status code resultant from processing the data.</p></description></tag>
+        <tag group="Parameters" name="simulate"><description><p>(optional) true if this will tell the CF's to simulate data creation, false otherwise. this defaults to false. this is important if clients will be deleting or adding data outside of the main entry object commit function.</p></description></tag>
+        <tag group="Parameters" name="entry_id"><description><p>(optional) the current entry. defaults to null.</p></description></tag>
+        <tag group="Returns"><description><p>the processed field data.</p></description></tag>
+      </tags>
+    </method>
+    <method name="toggleFieldData" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="array"/>
+        <parameter name="newState" type="string"/>
+      </parameters>
+      <location line="53">lib/toolkit/fields/field.author.php</location>
+      <description>
+        <p>Toggle the field data. This default implementation always returns
+ the input data.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="data"><description><p>the data to toggle.</p></description></tag>
+        <tag group="Parameters" name="newState"><description><p>the new value to set</p></description></tag>
+        <tag group="Returns"><description><p>the toggled data.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Field">
+    <class name="Field" package="toolkit">
+      <method name="__construct"/>
+      <method name="allowDatasourceOutputGrouping"/>
+      <method name="allowDatasourceParamOutput"/>
+      <method name="appendFormattedElement"/>
+      <method name="appendRequiredCheckbox"/>
+      <method name="appendShowAssociationCheckbox"/>
+      <method name="appendShowColumnCheckbox"/>
+      <method name="buildDSRetrievalSQL"/>
+      <method name="buildDSRetrivalSQL"/>
+      <method name="buildFormatterSelect"/>
+      <method name="buildLocationSelect"/>
+      <method name="buildSortingSQL"/>
+      <method name="buildSummaryBlock"/>
+      <method name="buildValidationSelect"/>
+      <method name="canFilter"/>
+      <method name="canImport"/>
+      <method name="canPrePopulate"/>
+      <method name="canShowTableColumn"/>
+      <method name="canToggle"/>
+      <method name="checkFields"/>
+      <method name="checkPostFieldData"/>
+      <method name="cleanValue"/>
+      <method name="commit"/>
+      <method name="createSectionAssociation"/>
+      <method name="createTable"/>
+      <method name="displayDatasourceFilterPanel"/>
+      <method name="displayPublishPanel"/>
+      <method name="displaySettingsPanel"/>
+      <method name="entryDataCleanup"/>
+      <method name="fetchAssociatedEntryCount"/>
+      <method name="fetchAssociatedEntryIDs"/>
+      <method name="fetchAssociatedEntrySearchValue"/>
+      <method name="fetchIncludableElements"/>
+      <method name="findDefaults"/>
+      <method name="get"/>
+      <method name="getExampleFormMarkup"/>
+      <method name="getParameterPoolValue"/>
+      <method name="getToggleStates"/>
+      <method name="groupRecords"/>
+      <method name="handle"/>
+      <method name="isFilterRegex"/>
+      <method name="isSortable"/>
+      <method name="mustBeUnique"/>
+      <method name="name"/>
+      <method name="prepareTableValue"/>
+      <method name="processRawFieldData"/>
+      <method name="remove"/>
+      <method name="removeSectionAssociation"/>
+      <method name="requiresSQLGrouping"/>
+      <method name="set"/>
+      <method name="setArray"/>
+      <method name="setFromPOST"/>
+      <method name="tearDown"/>
+      <method name="toggleFieldData"/>
+    </class>
+  </inherited-methods>
+</class>

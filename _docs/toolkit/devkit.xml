@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<class type="class" name="DevKit" handle="devkit">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="17">lib/toolkit/class.devkit.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">HTMLPage</superclass>
+  <description>
+    <p>Devkit extends the HTMLPage class to provide an object representation
+ of a Symphony Devkit page. Devkit's are used to aid in debugging by providing
+ raw XML representations of data sources and parameters and to help provide
+ profiling. There are two Symphony Devkit's currently, Debug and Profile. Devkit
+ pages are restricted to Symphony Author's and require them to be authenticated
+ to view them.</p>
+  </description>
+  <fields>
+    <field name="$_output" type="string" value="''">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="56">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>The resulting Page after it has been transformed, as a string. This is
+ similar to what you would see if you 'view-sourced' a page in a web browser</p>
+      </description>
+    </field>
+    <field name="$_page" type="XSLTPage" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="29">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>An instance of the XSLTPage, usually FrontendPage</p>
+      </description>
+    </field>
+    <field name="$_pagedata" type="array" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="36">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>An associative array of the details of the Page that is being 'Devkitted'.
+ The majority of this information is from <code>tbl_pages</code> table.</p>
+      </description>
+    </field>
+    <field name="$_param" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="49">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>An array of the page parameters, including those provided by datasources.</p>
+      </description>
+    </field>
+    <field name="$_query_string" type="string" value="''">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="23">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>The Devkit's <code>$_GET</code> query string</p>
+      </description>
+    </field>
+    <field name="$_xml" type="string" value="null">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="43">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>The XML of the page that the XSLT will be applied to, this includes any
+ datasource results.</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="HTMLPage" package="toolkit">
+      <field name="Body"/>
+      <field name="Form"/>
+      <field name="Head"/>
+      <field name="Html"/>
+      <field name="_head"/>
+    </class>
+    <class name="Page" package="toolkit">
+      <field name="_headers"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="build" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="259">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>Called when page is generated, this function calls each of the other
+ other functions in this page to build the Header, the Navigation,
+ the Jump menu and finally the content. This function calls it's parent
+ generate function</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="HTMLPage" docblock="generate" path="toolkit.HTMLPage#generate()">toolkit.HTMLPage#generate()</tag>
+      </tags>
+    </method>
+    <method name="buildContent" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+      </parameters>
+      <location line="216">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>The content of the Devkit, defaults to empty.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="wrapper"><description><p>The parent XMLElement that the content will be appended to. By default this is <code>&lt;div id='content'&gt;</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="buildHeader" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="mixed"/>
+      </parameters>
+      <location line="83">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>This function will build the <code>&lt;title&gt;</code> element and create a default
+ <code>&lt;h1&gt;</code> with an anchor to this query string</p>
+      </description>
+    </method>
+    <method name="buildIncludes" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="63">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>Builds the Includes for a Devkit and sets the Content Type
+ to be text/html. The default Symphony devkit stylesheet
+ is the only include. The default doctype is enables HTML5</p>
+      </description>
+    </method>
+    <method name="buildJump" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+      </parameters>
+      <location line="182">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>This function builds a Jump menu, which is what a Devkit uses as it's
+ internal navigation. Items are added to the Jump menu using the
+ buildJumpItem function</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="buildJumpItem" path="buildJumpItem">buildJumpItem</tag>
+        <tag group="Parameters" name="wrapper"><description><p>The parent XMLElement that the jump menu will be appended to. By default this is <code>&lt;div id='jump'&gt;</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="buildJumpItem" return="XMLElement">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="link" type="string"/>
+        <parameter name="active" type="boolean"/>
+      </parameters>
+      <location line="195">lib/toolkit/class.devkit.php</location>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the jump</p></description></tag>
+        <tag group="Parameters" name="link"><description><p>The link for this jump item</p></description></tag>
+        <tag group="Parameters" name="active"><description><p>Whether this is the active link, if true, this will add an active class to the link built. By default this is false</p></description></tag>
+      </tags>
+    </method>
+    <method name="buildNavigation" return="void">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="wrapper" type="XMLElement" package="toolkit" class="XMLElement"/>
+      </parameters>
+      <location line="112">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>Using DOMDocument, construct the Navigation list using the <code>devkit_navigation.xml</code>
+ file in the <code>ASSETS</code> folder. The default navigation file is an empty <code>&lt;navigation&gt;</code>
+ element. The <code>ManipulateDevKitNavigation</code> delegate allows extensions
+ to inject items into the navigation. The navigation is build by iterating over <code>&lt;item&gt;</code>
+ elements added. The idea is that all Devkit's can be accessed using the Navigation.</p>
+      </description>
+      <tags>
+        <tag group="Uses" package="" class="ManipulateDevKitNavigation" path="ManipulateDevKitNavigation">ManipulateDevKitNavigation</tag>
+        <tag group="Parameters" name="wrapper"><description><p>The parent XMLElement to add the navigation to</p></description></tag>
+      </tags>
+    </method>
+    <method name="prepare" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="page" type="XSLTPage" package="toolkit" class="XSLTPage"/>
+        <parameter name="pagedata" type="array"/>
+        <parameter name="xml" type="string"/>
+        <parameter name="param" type="array"/>
+        <parameter name="output" type="string"/>
+      </parameters>
+      <location line="238">lib/toolkit/class.devkit.php</location>
+      <description>
+        <p>The prepare function acts a pseudo constructor for the Devkit,
+ setting some base variables with the given parameters</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="page"><description><p>An instance of the XSLTPage, usually FrontendPage</p></description></tag>
+        <tag group="Parameters" name="pagedata"><description><p>An associative array of the details of the Page that is being 'Devkitted'. The majority of this information is from tbl_pages table.</p></description></tag>
+        <tag group="Parameters" name="xml"><description><p>The XML of the page that the XSLT will be applied to, this includes any datasource results.</p></description></tag>
+        <tag group="Parameters" name="param"><description><p>An array of the page parameters, including those provided by datasources.</p></description></tag>
+        <tag group="Parameters" name="output"><description><p>The resulting Page after it has been transformed, as a string. This is similar to what you would see if you 'view-sourced' a page.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Page">
+    <class name="HTMLPage" package="toolkit">
+      <method name="__build"/>
+      <method name="__buildQueryString"/>
+      <method name="__construct"/>
+      <method name="__generateHead"/>
+      <method name="addElementToHead"/>
+      <method name="addScriptToHead"/>
+      <method name="addStylesheetToHead"/>
+      <method name="checkElementsInHead"/>
+      <method name="generate"/>
+      <method name="removeFromHead"/>
+      <method name="setTitle"/>
+    </class>
+    <class name="Page" package="toolkit">
+      <method name="__construct"/>
+      <method name="__renderHeaders"/>
+      <method name="addHeaderToPage"/>
+      <method name="generate"/>
+      <method name="headers"/>
+    </class>
+  </inherited-methods>
+</class>

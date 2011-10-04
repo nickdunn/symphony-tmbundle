@@ -1,0 +1,482 @@
+<?xml version="1.0"?>
+<class type="class" name="XMLElement" handle="xmlelement">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="14">lib/toolkit/class.xmlelement.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>XMLElement is a class used to simulate PHP's DOMElement
+ class. Each object is a representation of a HTML element
+ and can store it's children in an array. When an XMLElement
+ is generated, it is output as an XML string.</p>
+  </description>
+  <constants>
+    <constant name="CRLF" type="string" value="PHP_EOL">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="21">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>The end-of-line constant.</p>
+      </description>
+      <tags>
+        <tag group="Deprecated"><description><p>This will be removed in the next version of Symphony</p></description></tag>
+      </tags>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_allowEmptyAttributes" type="boolean" value="true">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="108">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Specifies whether attributes need to have a value or if they can
+ be shorthand. Defaults to true. An example of this would be:
+  <code>&lt;option selected&gt;Value&lt;/option&gt;</code></p>
+      </description>
+    </field>
+    <field name="$_attributes" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="47">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Any additional attributes can be included in an associative array
+ with the key being the name and the value being the value of the
+ attribute.</p>
+      </description>
+    </field>
+    <field name="$_children" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="53">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Any children of this element as XMLElements</p>
+      </description>
+    </field>
+    <field name="$_dtd" type="string" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="66">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>The DTD the should be output when a XMLElement is generated, defaults to null.</p>
+      </description>
+    </field>
+    <field name="$_elementStyle" type="string" value="'xml'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="85">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>The type of element, defaults to 'xml'. Used when determining the style
+ of end tag for this element when generated</p>
+      </description>
+    </field>
+    <field name="$_encoding" type="string" value="'utf-8'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="72">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>The encoding of the XMLElement, defaults to 'utf-8'</p>
+      </description>
+    </field>
+    <field name="$_includeHeader" type="boolean" value="false">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="92">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>When set to true this will include the XML declaration will be
+ output when the XML Element is generated. Defaults to false.</p>
+      </description>
+    </field>
+    <field name="$_name" type="string">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="33">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>The name of the HTML Element, eg. 'p'</p>
+      </description>
+    </field>
+    <field name="$_placeValueAfterChildElements" type="boolean" value="false">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="116">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Defaults to false, which puts the value before any children elements.
+ Setting to true will append any children first, then add the value
+ to the current XMLElement</p>
+      </description>
+    </field>
+    <field name="$_processingInstructions" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="60">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Any processing instructions that the XSLT should know about when a
+ XMLElement is generated</p>
+      </description>
+    </field>
+    <field name="$_selfclosing" type="boolean" value="true">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="100">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Specifies whether this HTML element has an closing element, or if
+ it self closing. Defaults to true.
+  eg. <code>&lt;p&gt;&lt;/p&gt;</code> or <code>&lt;input /&gt;</code></p>
+      </description>
+    </field>
+    <field name="$_value" type="string|XMLElement">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="39">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>The value of this XMLElement, it can be a string or another XMLElement object.</p>
+      </description>
+    </field>
+    <field name="$_version" type="string" value="'1.0'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="78">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>The version of the XML that is used for generation, defaults to '1.0'</p>
+      </description>
+    </field>
+    <field name="$no_end_tags" type="array" value="array(...)">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="27">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>This is an array of all HTML elements that are self closing.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="value" type="string|XMLElement"/>
+        <parameter name="attributes" type="array"/>
+        <parameter name="createHandle" type="boolean"/>
+      </parameters>
+      <location line="136">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>The constructor for the XMLElement</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the XMLElement, 'p'.</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>(optional) The value of this XMLElement, it can be a string or another XMLElement object.</p></description></tag>
+        <tag group="Parameters" name="attributes"><description><p>(optional) Any additional attributes can be included in an associative array with the key being the name and the value being the value of the attribute. Attributes set from this array will override existing attributes set by previous params.</p></description></tag>
+        <tag group="Parameters" name="createHandle"><description><p>Whether this function should convert the <code>$name</code> to a handle. Defaults to false.</p></description></tag>
+      </tags>
+    </method>
+    <method name="addProcessingInstruction" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="pi" type="string"/>
+      </parameters>
+      <location line="187">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Adds processing instructions to this XMLElement</p>
+      </description>
+    </method>
+    <method name="appendChild" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="child" type="XMLElement" package="toolkit" class="XMLElement"/>
+      </parameters>
+      <location line="324">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Adds an XMLElement to the children array</p>
+      </description>
+    </method>
+    <method name="appendChildArray" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="children" type="array"/>
+      </parameters>
+      <location line="334">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>A convenience method to add children to an XMLElement
+ quickly.</p>
+      </description>
+    </method>
+    <method name="generate" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="indent" type="boolean"/>
+        <parameter name="tab_depth" type="integer"/>
+        <parameter name="hasParent" type="boolean"/>
+      </parameters>
+      <location line="376">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>This function will turn the XMLElement into a string
+ representing the element as it would appear in the markup.
+ It is valid XML.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="indent"><description><p>Defaults to false</p></description></tag>
+        <tag group="Parameters" name="tab_depth"><description><p>Defaults to 0, indicates the number of tabs (\t) that this element should be indented by in the output string</p></description></tag>
+        <tag group="Parameters" name="hasParent"><description><p>Defaults to false, set to true when the children are being generated. Only the parent will output an XML declaration if <code>$this-&gt;_includeHeader</code> is set to true.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getAttribute" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="314">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Retrieves the value of an attribute by name</p>
+      </description>
+    </method>
+    <method name="getAttributes" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="169">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Accessor for <code>$_attributes</code></p>
+      </description>
+    </method>
+    <method name="getChildren" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="178">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Accessor for <code>$_children</code></p>
+      </description>
+    </method>
+    <method name="getName" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="151">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Accessor for <code>$_name</code></p>
+      </description>
+    </method>
+    <method name="getNumberOfChildren" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="356">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Returns the number of children this XMLElement has.</p>
+      </description>
+    </method>
+    <method name="getValue" return="string|XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="160">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Accessor for <code>$_value</code></p>
+      </description>
+    </method>
+    <method name="prependChild" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="child" type="XMLElement" package="toolkit" class="XMLElement"/>
+      </parameters>
+      <location line="348">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Adds an XMLElement to the start of the children
+ array, this will mean it is output before any other
+ children when the XMLElement is generated</p>
+      </description>
+    </method>
+    <method name="setAllowEmptyAttributes" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="263">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Specifies whether attributes need to have a value
+ or if they can be shorthand on this XMLElement.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>(optional) Defaults to true</p></description></tag>
+      </tags>
+    </method>
+    <method name="setAttribute" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="289">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Sets an attribute</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the attribute</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>The value of the attribute</p></description></tag>
+      </tags>
+    </method>
+    <method name="setAttributeArray" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="attributes" type="array"/>
+      </parameters>
+      <location line="301">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>A convenience method to quickly add multiple attributes to
+ an XMLElement</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="attributes"><description><p>Associative array with the key being the name and the value being the value of the attribute.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setDTD" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="dtd" type="string"/>
+      </parameters>
+      <location line="196">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Sets the DTD for this XMLElement</p>
+      </description>
+    </method>
+    <method name="setElementStyle" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="style" type="string"/>
+      </parameters>
+      <location line="230">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Sets the style of the XMLElement. Used when the
+ XMLElement is being generated to determine whether
+ needs to be closed, is self closing or is standalone.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="style"><description><p>(optional) Defaults to 'xml', any other value will trigger the XMLElement to be closed by itself or left standalone if it is in the <code>XMLElement::no_end_tags</code>.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setEncoding" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="206">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Sets the encoding for this XMLElement for when
+ it's generated.</p>
+      </description>
+    </method>
+    <method name="setIncludeHeader" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="242">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Sets whether this XMLElement needs to output an
+ XML declaration or not. This normally is only set to
+ true for the parent XMLElement, eg. 'html'.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>(optional) Defaults to false</p></description></tag>
+      </tags>
+    </method>
+    <method name="setSelfClosingTag" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="252">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Sets whether this XMLElement is self closing or not.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="value"><description><p>(optional) Defaults to true</p></description></tag>
+      </tags>
+    </method>
+    <method name="setValue" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string|XMLElement"/>
+        <parameter name="prepend" type="boolean"/>
+      </parameters>
+      <location line="276">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Sets the value of the XMLElement. Checks to see
+ whether the value should be prepended or appended
+ to the children.</p>
+      </description>
+      <tags>
+        <tag group="Parameters"></tag>
+        <tag group="Parameters" name="prepend"><description><p>(optional) Defaults to true.</p></description></tag>
+      </tags>
+    </method>
+    <method name="setVersion" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="216">lib/toolkit/class.xmlelement.php</location>
+      <description>
+        <p>Sets the version for the XML declaration of this
+ XMLElement</p>
+      </description>
+    </method>
+  </methods>
+</class>

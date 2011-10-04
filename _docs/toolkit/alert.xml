@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<class type="class" name="Alert" handle="alert">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="11">lib/toolkit/class.alert.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The Alert class drives the standard Symphony notices that
+ appear at the top of the backend pages to alert the user of
+ something. Their are three default alert styles, notice, error
+ and success.</p>
+  </description>
+  <constants>
+    <constant name="ERROR" type="string" value="'error'">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="27">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>Represents an error, used when something has gone wrong during
+ the previous action. It is blocking, in that the action has
+ not completed successfully.</p>
+      </description>
+    </constant>
+    <constant name="NOTICE" type="string" value="'notice'">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="19">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>Represents a notice, usually used for non blocking alerts,
+ just to inform that user that something has happened and
+ they need to aware of it</p>
+      </description>
+    </constant>
+    <constant name="SUCCESS" type="string" value="'success'">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="34">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>Represents success, used when an action has completed successfully
+ with no errors</p>
+      </description>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_message" type="string">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="40">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>The message for this Alert, this text will be displayed to the user</p>
+      </description>
+    </field>
+    <field name="$_type" type="string">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="47">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>The Alert constant to represent the style that this alert should
+ take on. Defaults to <code>Alert::NOTICE</code>.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="message" type="string"/>
+        <parameter name="type" type="string"/>
+      </parameters>
+      <location line="59">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>Constructor for the Alert class initialises some default
+ variables</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="message"><description><p>This text will be displayed to the user</p></description></tag>
+        <tag group="Parameters" name="type"><description><p>The type of alert this is. Defaults to NOTICE, available values are <code>Alert::NOTICE</code>, <code>Alert::ERROR</code>, <code>Alert::SUCCESS</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="__get" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="73">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>Magic accessor function to get the private variables from
+ an Alert instance</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the variable, message or type are the valid values</p></description></tag>
+      </tags>
+    </method>
+    <method name="__isset" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="100">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>Magic isset function to check if a variable is set by ensuring
+ it's not null</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the variable to check, message or type are the valid values</p></description></tag>
+        <tag group="Returns"><description><p>True when set, false when not set.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__set" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+        <parameter name="value" type="string"/>
+      </parameters>
+      <location line="86">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>Magic setter function to set the private variables of
+ an Alert instance</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the variable, message or type are the valid values</p></description></tag>
+        <tag group="Parameters" name="value"><description><p>The value of the variable that is being set</p></description></tag>
+      </tags>
+    </method>
+    <method name="asXML" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="109">lib/toolkit/class.alert.php</location>
+      <description>
+        <p>Generates as XMLElement representation of this Alert</p>
+      </description>
+    </method>
+  </methods>
+</class>

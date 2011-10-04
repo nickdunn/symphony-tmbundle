@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<class type="class" name="EventManager" handle="eventmanager">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="15">lib/toolkit/class.eventmanager.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Manager</superclass>
+  <description>
+    <p>The EventManager class is responsible for managing all Event objects
+ in Symphony. Event's are stored on the file system either in the
+ /workspace/events folder or provided by an extension in an /events folder.
+ Events run from the Frontend usually to add new entries to the system, but
+ they are not limited to that facet.</p>
+  </description>
+  <inherited-fields>
+    <class name="Manager" package="toolkit">
+      <field name="_Parent"/>
+      <field name="_pool"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__getClassName" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="handle" type="string"/>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="37">lib/toolkit/class.eventmanager.php</location>
+      <description>
+        <p>Given a name, returns the full class name of an Event. Events
+ use an 'event' prefix.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="handle"><description><p>The Event handle</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getClassPath" return="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="handle" type="string"/>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="51">lib/toolkit/class.eventmanager.php</location>
+      <description>
+        <p>Finds an Event by name by searching the events folder in the workspace
+ and in all installed extension folders and returns the path to it's folder.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="handle"><description><p>The handle of the Event free from any Symphony conventions such as <code>event.*.php</code></p></description></tag>
+        <tag group="Returns"><description><p>If the Event is found, the function returns the path it's folder, otherwise false.</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getDriverPath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="handle" type="string"/>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="76">lib/toolkit/class.eventmanager.php</location>
+      <description>
+        <p>Given a name, return the path to the Event class</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="EventManager" docblock="__getClassPath" path="toolkit.EventManager#__getClassPath()">toolkit.EventManager#__getClassPath()</tag>
+        <tag group="Parameters" name="handle"><description><p>The handle of the Event free from any Symphony conventions such as event.*.php</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getHandleFromFilename" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="filename" type="string"/>
+      </parameters>
+      <location line="25">lib/toolkit/class.eventmanager.php</location>
+      <description>
+        <p>Given the filename of an Event return it's handle. This will remove
+ the Symphony convention of <code>event.*.php</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="filename"><description><p>The filename of the Event</p></description></tag>
+      </tags>
+    </method>
+    <method name="create" return="Event">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="handle" type="string"/>
+        <parameter name="env" type="array"/>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="155">lib/toolkit/class.eventmanager.php</location>
+      <description>
+        <p>Creates an instance of a given class and returns it.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="handle"><description><p>The handle of the Event to create</p></description></tag>
+        <tag group="Parameters" name="env"><description><p>The environment variables from the Frontend class which includes any params set by Symphony or Datasources or by other Events</p></description></tag>
+      </tags>
+    </method>
+    <method name="listAll" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="90">lib/toolkit/class.eventmanager.php</location>
+      <description>
+        <p>Finds all available Events by searching the events folder in the workspace
+ and in all installed extension folders. Returns an associative array of Events.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Manager" docblock="about" path="toolkit.Manager#about()">toolkit.Manager#about()</tag>
+        <tag group="Returns"><description><p>Associative array of Events with the key being the handle of the Event and the value being the Event's <code>about()</code> information.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Manager">
+    <class name="Manager" package="toolkit">
+      <method name="__construct"/>
+      <method name="__getClassName"/>
+      <method name="__getClassPath"/>
+      <method name="__getDriverPath"/>
+      <method name="__getHandleFromFilename"/>
+      <method name="about"/>
+      <method name="create"/>
+      <method name="flush"/>
+      <method name="listAll"/>
+    </class>
+  </inherited-methods>
+</class>

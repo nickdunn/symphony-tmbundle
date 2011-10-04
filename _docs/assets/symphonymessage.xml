@@ -1,0 +1,390 @@
+<?xml version="1.0"?>
+
+
+
+
+	
+
+
+
+	
+
+
+<class type="class" name="Symphony.Message" handle="Symphony.Message">
+	
+	<package name="assets" handle="assets"/>
+	
+	
+		<location>assets/admin.js</location>
+	
+	
+	<modifiers>
+		<modifier>public</modifier>
+	</modifiers>
+	
+	<!--description>
+		<p></p>
+	</description-->
+	
+			
+		<description>
+			<p>The message object handles system messages that should be displayed on the fly.
+It offers a post and a clear function to set and remove messages. Absolute dates
+and times will be replaced by a representation relative to the user's system time.</p>
+			
+		</description>
+	
+	
+	
+	
+		
+		<fields>
+			
+			
+				
+				<field name="Queue"  >
+					<modifiers>
+						<modifier>private</modifier><modifier>static</modifier>
+					</modifiers>
+					
+					
+					
+					<description>
+						<p>This array is private and should not be accessed directly.</p>
+						
+					</description>
+					
+					<tags>
+						
+						
+						
+						
+
+					</tags>
+
+					
+				</field>
+
+			
+		
+		</fields>
+		
+	
+	
+	
+	
+	<methods>
+	
+		
+	
+		<method
+			name="Message"
+			 
+			
+		>
+		
+			<modifiers>
+				<modifier>public</modifier><modifier>static</modifier>
+			</modifiers>
+			
+			<location>assets/admin.js</location>
+			
+			<description>
+				<p>The message object handles system messages that should be displayed on the fly.
+It offers a post and a clear function to set and remove messages. Absolute dates
+and times will be replaced by a representation relative to the user's system time.</p>
+				
+			</description>
+			
+			<tags>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</tags>
+			
+			
+			
+		</method>
+		
+		
+		
+		
+
+				
+
+					<method
+						name="clear"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier><modifier>static</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Clear message by type</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+								
+									<tag group="Parameters" name="type">
+										<description>
+											<p>Message type</p>
+										</description>
+									</tag>
+								
+							
+
+						</tags>
+
+						
+							<parameters>
+								
+									<parameter name="type" type="String" />
+								
+							</parameters>
+						
+
+					</method>
+
+				
+
+					<method
+						name="distance"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier><modifier>static</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Calculate relative time.</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+								
+									<tag group="Parameters" name="from">
+										<description>
+											<p>Starting date</p>
+										</description>
+									</tag>
+								
+									<tag group="Parameters" name="to">
+										<description>
+											<p>Current date</p>
+										</description>
+									</tag>
+								
+							
+
+						</tags>
+
+						
+							<parameters>
+								
+									<parameter name="from" type="Date" />
+								
+									<parameter name="to" type="Date" />
+								
+							</parameters>
+						
+
+					</method>
+
+				
+
+					<method
+						name="fade"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier><modifier>static</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Fade message highlight color to grey</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+								
+									<tag group="Parameters" name="newclass">
+										<description>
+											<p></p>
+										</description>
+									</tag>
+								
+									<tag group="Parameters" name="delay">
+										<description>
+											<p></p>
+										</description>
+									</tag>
+								
+							
+
+						</tags>
+
+						
+							<parameters>
+								
+									<parameter name="newclass" type="" />
+								
+									<parameter name="delay" type="" />
+								
+							</parameters>
+						
+
+					</method>
+
+				
+
+					<method
+						name="post"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier><modifier>static</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Post system message</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+								
+									<tag group="Parameters" name="message">
+										<description>
+											<p>Message to be shown</p>
+										</description>
+									</tag>
+								
+									<tag group="Parameters" name="type">
+										<description>
+											<p>Message type to be used as class name</p>
+										</description>
+									</tag>
+								
+							
+
+						</tags>
+
+						
+							<parameters>
+								
+									<parameter name="message" type="String" />
+								
+									<parameter name="type" type="String" />
+								
+							</parameters>
+						
+
+					</method>
+
+				
+
+					<method
+						name="timer"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier><modifier>static</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Convert absolute message time to relative time and update continuously</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+
+						</tags>
+
+						
+
+					</method>
+
+				
+
+		
+		
+	</methods>
+			
+	
+	
+	
+</class>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>content</key>
+	<string>array(
+	'page' =&gt; '/blueprints/events/(edit|new|info)/',
+	'delegate' => 'AppendEventFilter',
+	'callback' => 'appendEventFilter'
+),
+</string>
+	<key>name</key>
+	<string>AppendEventFilter</string>
+	<key>scope</key>
+	<string>source.php</string>
+	<key>tabTrigger</key>
+	<string>delegate</string>
+	<key>uuid</key>
+	<string>A1E16AA2-571B-B6F3-17D1-4D86203F6C1C</string>
+</dict>
+</plist>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<class type="interface" name="iEvent" handle="ievent">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="10">lib/toolkit/class.event.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <description>
+    <p>The iEvent interface provides two functions, about and load that
+ Events can implement.</p>
+  </description>
+  <methods>
+    <method name="about" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="17">lib/toolkit/class.event.php</location>
+      <description>
+        <p>Return an associative array of meta information about this event such
+ creation date, who created it and the name.</p>
+      </description>
+    </method>
+    <method name="load" return="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="28">lib/toolkit/class.event.php</location>
+      <description>
+        <p>The load functions determines whether an event will be executed or not
+ by comparing the Event's action with the <code>$_POST</code> data. This function will
+ be called every time a page is loaded that an event is attached too. If the
+ action does exist, it typically calls the <code>__trigger()</code> method, otherwise void.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>XMLElement with the event result or void if the action did not match</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>

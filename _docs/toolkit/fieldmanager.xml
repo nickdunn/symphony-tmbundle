@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<class type="class" name="FieldManager" handle="fieldmanager">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="14">lib/toolkit/class.fieldmanager.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass package="toolkit">Manager</superclass>
+  <description>
+    <p>The FieldManager class is responsible for managing all fields types in Symphony.
+ Fields are stored on the file system either in the <code>/fields</code> folder of <code>TOOLKIT</code> or
+ in a <code>fields</code> folder in an extension directory.</p>
+  </description>
+  <fields>
+    <field name="$_initialiased_fields" type="array" value="array()">
+      <modifiers>
+        <modifier>private</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="27">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>An array of all fields whose have been created by ID</p>
+      </description>
+    </field>
+    <field name="$_pool" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="21">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>An array of all the objects that the Manager is responsible for.
+ Defaults to an empty array.</p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Manager" package="toolkit">
+      <field name="_Parent"/>
+      <field name="_pool"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__getClassName" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="string"/>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="49">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Given a type, returns the full class name of a Field. Fields use a
+ 'field' prefix</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="type"><description><p>A field handle</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getClassPath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="mixed"/>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="62">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Finds a Field by type by searching the <code>TOOLKIT . /fields</code> folder and then
+ any fields folders in the installed extensions. The function returns
+ the path to the folder where the field class resides.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The field handle, that is, <code>field.{$handle}.php</code></p></description></tag>
+      </tags>
+    </method>
+    <method name="__getDriverPath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="string"/>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="86">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Given a field type, return the path to it's class</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__getClassPath" path="__getClassPath()">__getClassPath()</tag>
+        <tag group="Parameters" name="type"><description><p>The handle of the field to load (it's type)</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getHandleFromFilename" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="filename" type="string"/>
+      </parameters>
+      <location line="37">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Given the filename of a Field, return it's handle. This will remove
+ the Symphony conventions of <code>field.*.php</code></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="filename"><description><p>The filename of the Field</p></description></tag>
+      </tags>
+    </method>
+    <method name="add" return="integer|boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="fields" type="array"/>
+      </parameters>
+      <location line="102">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Given an associative array of fields, insert them into the database
+ returning the resulting Field ID if successful, or false if there
+ was an error. As fields are saved in order on a section, a query is
+ made to determine the sort order of this field to be current sort order
+ +1.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="fields"><description><p>Associative array of field names =&gt; values for the Field object</p></description></tag>
+        <tag group="Returns"><description><p>Returns a Field ID of the created Field on success, false otherwise.</p></description></tag>
+      </tags>
+    </method>
+    <method name="create" return="Field">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="type" type="string"/>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="336">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Creates an instance of a given class and returns it. Adds the instance
+ to the <code>$_pool</code> array with the key being the handle.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="type"><description><p>The handle of the Field to create (which is it's handle)</p></description></tag>
+      </tags>
+    </method>
+    <method name="delete" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="integer"/>
+      </parameters>
+      <location line="143">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Given a Field ID, delete a Field from Symphony. This will remove the field from
+ the fields table, all of the data stored in this field's <code>tbl_entries_data_$id</code> any
+ existing section associations. This function additionally call the Field's <code>tearDown</code>
+ method so that it can cleanup any additional settings or entry tables it may of created.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>The ID of the Field that should be deleted</p></description></tag>
+      </tags>
+    </method>
+    <method name="edit" return="boolean">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="integer"/>
+        <parameter name="fields" type="array"/>
+      </parameters>
+      <location line="127">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Given a Field ID and associative array of fields, update an existing Field
+ row in the <code>tbl_fields</code>table. Returns boolean for success/failure</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>The ID of the Field that should be updated</p></description></tag>
+        <tag group="Parameters" name="fields"><description><p>Associative array of field names =&gt; values for the Field object This array does need to contain every value for the field object, it can just be the changed values.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetch" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="integer"/>
+        <parameter name="section_id" type="integer"/>
+        <parameter name="order" type="string"/>
+        <parameter name="sortfield" type="string"/>
+        <parameter name="type" type="string"/>
+        <parameter name="location" type="string"/>
+        <parameter name="where" type="string"/>
+        <parameter name="restrict" type="string"/>
+      </parameters>
+      <location line="189">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>The fetch method returns a instance of a Field from tbl_fields. The most common
+ use of this function is to retrieve a Field by ID, but it can be used to retrieve
+ Fields from a Section also. There are several parameters that can be used to fetch
+ fields by their Type, Location, by a Field Constant or with a custom WHERE query.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="id"><description><p>The ID of the field to retrieve. Defaults to null which will return multiple field objects</p></description></tag>
+        <tag group="Parameters" name="section_id"><description><p>The ID of the section to look for the fields in. Defaults to null which will allow all fields in the Symphony installation to be searched on.</p></description></tag>
+        <tag group="Parameters" name="order"><description><p>Available values of ASC (Ascending) or DESC (Descending), which refer to the sort order for the query. Defaults to ASC (Ascending)</p></description></tag>
+        <tag group="Parameters" name="sortfield"><description><p>The field to sort the query by. Can be any from the tbl_fields schema. Defaults to 'sortorder'</p></description></tag>
+        <tag group="Parameters" name="type"><description><p>Filter fields by their type, ie. input, select. Defaults to null</p></description></tag>
+        <tag group="Parameters" name="location"><description><p>Filter fields by their location in the entry form. There are two possible values, 'main' or 'sidebar'. Defaults to null</p></description></tag>
+        <tag group="Parameters" name="where"><description><p>Allows a custom where query to be included. Must be valid SQL. The tbl_fields alias is t1</p></description></tag>
+        <tag group="Parameters" name="restrict"><description><p>Only return fields if they match one of the Field Constants. Available values are <code>__TOGGLEABLE_ONLY__</code>, <code>__UNTOGGLEABLE_ONLY__</code>, <code>__FILTERABLE_ONLY__</code>, <code>__UNFILTERABLE_ONLY__</code> or <code>__FIELD_ALL__</code>. Defaults to <code>__FIELD_ALL__</code></p></description></tag>
+        <tag group="Returns"><description><p>An array of Field objects. If no Field are found, null is returned.</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchFieldIDFromElementName" return="integer">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="element_name" type="string"/>
+        <parameter name="section_id" type="integer"/>
+      </parameters>
+      <location line="283">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Given an element name and it's section, return it's ID. Symphony enforces
+ a uniqueness constraint on a section where every field must have a unique
+ label (and therefore handle) so whilst it is impossible to have two fields
+ from the same section, it would be possible to have two fields with the same
+ name from different sections. Passing the $section_id allows you to specify
+ which section should be searched.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="element_name"><description><p>The handle of the Field label</p></description></tag>
+        <tag group="Parameters" name="section_id"><description><p>The section that this field belongs too</p></description></tag>
+        <tag group="Returns"><description><p>The field ID</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchFieldTypeFromID" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="integer"/>
+      </parameters>
+      <location line="254">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Given a field ID, return the type of the field by querying <code>tbl_fields</code></p>
+      </description>
+    </method>
+    <method name="fetchHandleFromElementName" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="mixed"/>
+      </parameters>
+      <location line="369">lib/toolkit/class.fieldmanager.php</location>
+      <tags>
+        <tag group="Deprecated"><description><p>This function will be removed in the next major release. The <code>FieldManager::fetchHandleFromID</code> is the preferred way to get a field's handle</p></description></tag>
+      </tags>
+    </method>
+    <method name="fetchHandleFromID" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="id" type="integer"/>
+      </parameters>
+      <location line="264">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Given a field ID, return the handle of the field by querying <code>tbl_fields</code></p>
+      </description>
+    </method>
+    <method name="fetchTypes" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="302">lib/toolkit/class.fieldmanager.php</location>
+      <description>
+        <p>Returns an array of all available field handles discovered in the
+ <code>TOOLKIT . /fields</code> or <code>EXTENSIONS . /{}/fields</code>.</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>A single dimensional array of field handles.</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Manager">
+    <class name="Manager" package="toolkit">
+      <method name="__construct"/>
+      <method name="__getClassName"/>
+      <method name="__getClassPath"/>
+      <method name="__getDriverPath"/>
+      <method name="__getHandleFromFilename"/>
+      <method name="about"/>
+      <method name="create"/>
+      <method name="flush"/>
+      <method name="listAll"/>
+    </class>
+  </inherited-methods>
+</class>

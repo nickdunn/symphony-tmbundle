@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<class type="class" name="AjaxPage" handle="ajaxpage">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="12">lib/toolkit/class.ajaxpage.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+    <modifier>abstract</modifier>
+  </modifiers>
+  <superclass package="toolkit">Page</superclass>
+  <description>
+    <p>AjaxPage extends the Page class to provide an object representation
+ of a Symphony backend AJAX page.</p>
+  </description>
+  <constants>
+    <constant name="STATUS_BAD" type="integer" value="400">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="24">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>Refers to the HTTP status code, 400 Bad Request</p>
+      </description>
+    </constant>
+    <constant name="STATUS_ERROR" type="integer" value="400">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="30">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>Refers to the HTTP status code, 400 Bad Request</p>
+      </description>
+    </constant>
+    <constant name="STATUS_OK" type="integer" value="200">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="18">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>Refers to the HTTP status code, 200 OK</p>
+      </description>
+    </constant>
+    <constant name="STATUS_UNAUTHORISED" type="integer" value="401">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>final</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="36">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>Refers to the HTTP status code, 401 Unauthorized</p>
+      </description>
+    </constant>
+  </constants>
+  <fields>
+    <field name="$_Parent" type="Administration">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="43">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>An instance of the Administration class</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="core" class="Administration" path="core.Administration">core.Administration</tag>
+      </tags>
+    </field>
+    <field name="$_Result" type="XMLElement">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="49">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>The root node for the response of the AJAXPage</p>
+      </description>
+    </field>
+    <field name="$_status" type="integer">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="56">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>The HTTP status code of the page using the AJAXPage constants
+ <code>STATUS_OK</code>, <code>STATUS_BAD</code>, <code>STATUS_ERROR</code> or <code>STATUS_UNAUTHORISED</code></p>
+      </description>
+    </field>
+  </fields>
+  <inherited-fields>
+    <class name="Page" package="toolkit">
+      <field name="_headers"/>
+    </class>
+  </inherited-fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="Administration" package="core" class="Administration"/>
+      </parameters>
+      <location line="69">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>The constructor for AJAXPage. This sets the page status to <code>STATUS_OK</code>,
+ the default content type to text/xml and initialises <code>$this-&gt;_Result</code>
+ with an XMLElement. The constructor also starts the Profiler for this
+ page template.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="toolkit" class="Profiler" path="toolkit.Profiler">toolkit.Profiler</tag>
+        <tag group="Parameters" name="parent"><description><p>The Administration object that this page has been created from passed by reference</p></description></tag>
+      </tags>
+    </method>
+    <method name="build" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="context" type="array"/>
+      </parameters>
+      <location line="101">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>Calls the view function of this page. If a context is passed, it is
+ also set.</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="view" path="view()">view()</tag>
+        <tag group="Parameters" name="context"><description><p>The context of the page as an array. Defaults to null</p></description></tag>
+      </tags>
+    </method>
+    <method name="generate" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="114">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>The generate functions outputs the correct headers for
+ this AJAXPage, adds <code>$this-&gt;_status</code> code to the root attribute
+ before calling the parent generate function and generating
+ the <code>$this-&gt;_Result</code> XMLElement</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="__renderHeaders" path="__renderHeaders()">__renderHeaders()</tag>
+      </tags>
+    </method>
+    <method name="handleFailedAuthorisation" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="88">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>This function is called when a user is not authenticated to the Symphony
+ backend. It sets the status of this page to <code>STATUS_UNAUTHORISED</code> and
+ appends a message for generation</p>
+      </description>
+    </method>
+    <method name="view" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>abstract</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="147">lib/toolkit/class.ajaxpage.php</location>
+      <description>
+        <p>All classes that extend the AJAXPage class must define a view method
+ which contains the logic for the content of this page. The resulting HTML
+ is append to <code>$this-&gt;_Result</code> where it is generated on build</p>
+      </description>
+      <tags>
+        <tag group="See Also" package="" class="build" path="build()">build()</tag>
+      </tags>
+    </method>
+  </methods>
+  <inherited-methods package="toolkit" class="Page">
+    <class name="Page" package="toolkit">
+      <method name="__construct"/>
+      <method name="__renderHeaders"/>
+      <method name="addHeaderToPage"/>
+      <method name="generate"/>
+      <method name="headers"/>
+    </class>
+  </inherited-methods>
+</class>

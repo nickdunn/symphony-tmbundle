@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<class type="class" name="EmailException" handle="emailexception">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="10">lib/toolkit/class.email.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass>Exception</superclass>
+  <description>
+    <p>The Exception to be thrown by the Email class.</p>
+  </description>
+</class>

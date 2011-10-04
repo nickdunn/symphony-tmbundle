@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<class type="class" name="EmailHelper" handle="emailhelper">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="10">lib/toolkit/class.emailhelper.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+    <modifier>abstract</modifier>
+  </modifiers>
+  <description>
+    <p>A helper class for various email functions.</p>
+  </description>
+  <methods>
+    <method name="arrayToList" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="arr" type="string"/>
+      </parameters>
+      <location line="237">lib/toolkit/class.emailhelper.php</location>
+      <description>
+        <p>Implode an array to a comma-separated list</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="arr"><description><p>input array</p></description></tag>
+      </tags>
+    </method>
+    <method name="base64ContentTransferEncode" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="data" type="string"/>
+        <parameter name="length" type="int"/>
+      </parameters>
+      <location line="227">lib/toolkit/class.emailhelper.php</location>
+      <description>
+        <p>Content-Transfer-Encoding for attachments</p>
+        <p>This function will encode attachments according to RFC2045.
+ Line length must not exceed the default (76 characters).</p>
+      </description>
+      <tags>
+        <tag group="Author">Michael Eichelsdoerfer</tag>
+      </tags>
+    </method>
+    <method name="fold" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="input" type="string"/>
+        <parameter name="max_length" type="string"/>
+      </parameters>
+      <location line="19">lib/toolkit/class.emailhelper.php</location>
+      <description>
+        <p>Folding an email header field body as required by RFC2822.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="input"><description><p>header field body string</p></description></tag>
+        <tag group="Parameters" name="max_length"><description><p>defaults to 75</p></description></tag>
+        <tag group="Returns"><description><p>folded output string</p></description></tag>
+      </tags>
+    </method>
+    <method name="getMimeType" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="file" type="string"/>
+      </parameters>
+      <location line="262">lib/toolkit/class.emailhelper.php</location>
+      <description>
+        <p>Gets mime type of a file.</p>
+        <p>For email attachments, the mime type is very important.
+ Uses the php 5.3 function (finfo_open), if this function is not found,
+ fallback to a fallback function.
+ Will use application/octet-stream as a fallback when no matches were found.</p>
+      </description>
+      <tags>
+        <tag group="Returns" package="" class="MIMEtype" path="MIMEtype"><description><p>MIMEtype</p></description></tag>
+        <tag group="Author">Michael Eichelsdoerfer</tag>
+        <tag group="Author">Huib Keemink</tag>
+      </tags>
+    </method>
+    <method name="qEncode" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="input" type="string"/>
+        <parameter name="max_length" type="string"/>
+      </parameters>
+      <location line="54">lib/toolkit/class.emailhelper.php</location>
+      <description>
+        <p>Q-encoding of a header field 'text' token or 'word' entity
+ within a 'phrase', according to RFC2047. The output is called
+ an 'encoded-word'; it must not be longer than 75 characters.</p>
+        <p>This might be achieved with PHP's <code>mbstring</code> functions, but
+ <code>mbstring</code> is a non-default extension.</p>
+        <p>For simplicity reasons this function encodes every character
+ except upper and lower case letters and decimal digits.</p>
+        <p>RFC: 'While there is no limit to the length of a multiple-line
+ header field, each line of a header field that contains one or
+ more 'encoded-word's is limited to 76 characters.'
+ The required 'folding' will not be done here, but in another
+ helper function.</p>
+        <p>This function must be 'multi-byte-sensitive' in a way that it
+ must never scatter a multi-byte character representation across
+ multiple encoded-words. So a 'lookahead' has been implemented,
+ based on the fact that for UTF-8 encoded characters any byte
+ except the first byte will have a leading '10' bit pattern,
+ which means an ASCII value &gt;=128 and &lt;=191.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="input"><description><p>string to encode</p></description></tag>
+        <tag group="Parameters" name="max_length"><description><p>maximum line length (default: 75 chars)</p></description></tag>
+        <tag group="Returns"><description><p>$output encoded string</p></description></tag>
+        <tag group="Author">Elmar Bartel</tag>
+        <tag group="Author">Michael Eichelsdoerfer</tag>
+      </tags>
+    </method>
+    <method name="qpContentTransferEncode" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="input" type="string"/>
+        <parameter name="max_length" type="string"/>
+      </parameters>
+      <location line="139">lib/toolkit/class.emailhelper.php</location>
+      <description>
+        <p>Quoted-printable encoding of a message body (part),
+ according to RFC2045.</p>
+        <p>This function handles <cr>, <lf>, <cr><lf> and <lf><cr> sequences
+ as 'user relevant' line breaks and encodes them as RFC822 line
+ breaks as required by RFC2045.</cr></lf></lf></cr></lf></cr></p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="input"><description><p>string to encode</p></description></tag>
+        <tag group="Parameters" name="max_length"><description><p>maximum line length (default: 76 chars)</p></description></tag>
+        <tag group="Returns"><description><p>$output encoded string</p></description></tag>
+        <tag group="Author">Elmar Bartel</tag>
+        <tag group="Author">Michael Eichelsdoerfer</tag>
+      </tags>
+    </method>
+  </methods>
+</class>

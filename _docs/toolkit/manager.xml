@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<class type="class" name="Manager" handle="manager">
+  <package name="toolkit" handle="toolkit"/>
+  <location line="13">lib/toolkit/class.manager.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+    <modifier>abstract</modifier>
+  </modifiers>
+  <description>
+    <p>The abstract Manager class provides some generic functions
+ to assist the managers in cataloguing their children. This class
+ defines a number of abstract methods to enable autodiscovery of
+ file based objects such as Datasource, Event, Extension and
+ Text Formatter. Manager classes implement CRUD methods to
+ apply their objects.</p>
+  </description>
+  <fields>
+    <field name="$_Parent" type="mixed">
+      <modifiers>
+        <modifier>protected</modifier>
+      </modifiers>
+      <location line="19">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>The class that initialised the Entry, usually the EntryManager</p>
+      </description>
+    </field>
+    <field name="$_pool" type="array" value="array()">
+      <modifiers>
+        <modifier>protected</modifier>
+        <modifier>static</modifier>
+      </modifiers>
+      <location line="26">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>An array of all the objects that the Manager is responsible for.
+ Defaults to an empty array.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="parent" type="Administration" package="core" class="Administration"/>
+      </parameters>
+      <location line="36">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>The constructor for Manager. This sets the <code>$this-&gt;_Parent</code> to be an
+ instance of the Administration class.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="parent"><description><p>The Administration object that this manager has been created from passed by reference</p></description></tag>
+      </tags>
+    </method>
+    <method name="__getClassName" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="99">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>Given a name, return the class name of that object. Symphony objects
+ often have conventions tied to an objects class name that prefix the
+ class with the type of the object. eg. field{Class}, formatter{Class}</p>
+      </description>
+    </method>
+    <method name="__getClassPath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="108">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>Given a name, return the path to the class of that object</p>
+      </description>
+    </method>
+    <method name="__getDriverPath" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="mixed"/>
+      </parameters>
+      <location line="117">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>Given a name, return the path to the driver of that object</p>
+      </description>
+    </method>
+    <method name="__getHandleFromFilename" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="filename" type="mixed"/>
+      </parameters>
+      <location line="88">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>Given a filename, return the handle. This will remove
+ any Symphony conventions such as <code>field.*.php</code></p>
+      </description>
+    </method>
+    <method name="about" return="boolean|array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="64">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>The about function returns information about a particular object
+ in this manager's pool. It is limited for use on file based objects
+ such as Datasource, Event, Extension and Text Formatter. The function
+ uses the <code>getClassName()</code>, <code>getDriverPath()</code> and <code>getHandleFromFilename()</code>
+ functions to autodiscover the object. There is no confusion between names (ie.
+ does author refer to a Datasource or Field) because the Manager subclass
+ will override the autodiscovery functions to only look for objects of
+ that type.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>The name of the object that has the about information. This should be lowercase and free from any Symphony conventions. eg. <code>author</code>, not <code>field.author.php</code>.</p></description></tag>
+        <tag group="Returns"><description><p>False is object doesn't exist or an associative array of information</p></description></tag>
+      </tags>
+    </method>
+    <method name="create" return="object">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="name" type="string"/>
+      </parameters>
+      <location line="142">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>Creates a new instance of an object by name and returns it by reference.</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="name"><description><p>(optional) The name of the Object to be created. Can be used in conjunction with the auto discovery methods to find a class.</p></description></tag>
+        <tag group="Returns"><description><p>by reference</p></description></tag>
+      </tags>
+    </method>
+    <method name="flush" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="43">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>This function will empty the $_pool array.</p>
+      </description>
+    </method>
+    <method name="listAll" return="array">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="129">lib/toolkit/class.manager.php</location>
+      <description>
+        <p>Returns an array of all the objects that this manager is responsible for.
+ This function is only use on the file based Managers in Symphony
+ such DatasourceManager, EventManager, ExtensionManager, FieldManager
+ and TextformatterManager.</p>
+      </description>
+    </method>
+  </methods>
+</class>

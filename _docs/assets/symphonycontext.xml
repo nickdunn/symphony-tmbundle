@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+
+
+
+
+	
+
+
+
+	
+
+
+<class type="class" name="Symphony.Context" handle="Symphony.Context">
+	
+	<package name="assets" handle="assets"/>
+	
+	
+		<location>assets/admin.js</location>
+	
+	
+	<modifiers>
+		<modifier>public</modifier>
+	</modifiers>
+	
+	<!--description>
+		<p></p>
+	</description-->
+	
+			
+		<description>
+			<p>The Context object contains general information about the system,
+the backend, the current user. It includes an add and a get function.</p>
+			
+		</description>
+	
+	
+	
+	
+		
+		<fields>
+			
+			
+				
+				<field name="Storage"  >
+					<modifiers>
+						<modifier>private</modifier><modifier>static</modifier>
+					</modifiers>
+					
+					
+					
+					<description>
+						<p>This object is private, use Symphony.Context.add() and
+Symphony.Context.get() to interact with the dictionary.</p>
+						
+					</description>
+					
+					<tags>
+						
+						
+						
+						
+
+					</tags>
+
+					
+				</field>
+
+			
+		
+		</fields>
+		
+	
+	
+	
+	
+	<methods>
+	
+		
+	
+		<method
+			name="Context"
+			 
+			
+		>
+		
+			<modifiers>
+				<modifier>public</modifier><modifier>static</modifier>
+			</modifiers>
+			
+			<location>assets/admin.js</location>
+			
+			<description>
+				<p>The Context object contains general information about the system,
+the backend, the current user. It includes an add and a get function.</p>
+				
+			</description>
+			
+			<tags>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			</tags>
+			
+			
+			
+		</method>
+		
+		
+		
+		
+
+				
+
+					<method
+						name="add"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier><modifier>static</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Add data to the Context object</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+								
+									<tag group="Parameters" name="group">
+										<description>
+											<p>Name of the data group</p>
+										</description>
+									</tag>
+								
+									<tag group="Parameters" name="values">
+										<description>
+											<p>Object or string to be stored</p>
+										</description>
+									</tag>
+								
+							
+
+						</tags>
+
+						
+							<parameters>
+								
+									<parameter name="group" type="String" />
+								
+									<parameter name="values" type="String|Object" />
+								
+							</parameters>
+						
+
+					</method>
+
+				
+
+					<method
+						name="get"
+						 
+						
+					>
+						<modifiers>
+							<modifier>public</modifier><modifier>static</modifier>
+						</modifiers>
+
+						
+
+						<description>
+							<p>Get data from the Context object</p>
+							
+						</description>
+
+						<tags>
+
+							
+
+							
+
+							
+
+							
+
+							
+								
+									<tag group="Parameters" name="group">
+										<description>
+											<p>Name of the group to be returned</p>
+										</description>
+									</tag>
+								
+							
+
+						</tags>
+
+						
+							<parameters>
+								
+									<parameter name="group" type="String" />
+								
+							</parameters>
+						
+
+					</method>
+
+				
+
+		
+		
+	</methods>
+			
+	
+	
+	
+</class>

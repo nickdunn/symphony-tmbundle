@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<class type="class" name="SymphonyErrorPage" handle="symphonyerrorpage">
+  <package name="core" handle="core"/>
+  <location line="561">lib/core/class.symphony.php</location>
+  <modifiers>
+    <modifier>public</modifier>
+  </modifiers>
+  <superclass>Exception</superclass>
+  <description>
+    <p>The SymphonyErrorPage extends the default Exception class. All
+ of these Exceptions will halt execution immediately and return the
+ Exception as a HTML page. By default the HTML template is <code>tpl.error.php</code>
+ from the <code>TEMPLATES</code> directory.</p>
+  </description>
+  <fields>
+    <field name="$_additional" type="StdClass" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="597">lib/core/class.symphony.php</location>
+      <description>
+        <p>An object of an additional information for this error page. Note that
+ this is provided as an array and then typecast to an object</p>
+      </description>
+    </field>
+    <field name="$_heading" type="mixed" value="'error'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="568">lib/core/class.symphony.php</location>
+      <description>
+        <p>A heading for the error page, this will be prepended to
+ "Symphony Fatal Error".</p>
+      </description>
+    </field>
+    <field name="$_message" type="string|XMLElement">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="575">lib/core/class.symphony.php</location>
+      <description>
+        <p>A description for this error, which can be provided as a string
+ or as an XMLElement.</p>
+      </description>
+    </field>
+    <field name="$_messageObject" type="XMLElement" value="null">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="590">lib/core/class.symphony.php</location>
+      <description>
+        <p>If the message as provided as an XMLElement, it will be saved to
+ this parameter</p>
+      </description>
+    </field>
+    <field name="$_template" type="string" value="'error'">
+      <modifiers>
+        <modifier>private</modifier>
+      </modifiers>
+      <location line="583">lib/core/class.symphony.php</location>
+      <description>
+        <p>A string for the error page template to use, defaults to 'error'. This
+ can be the name of any template file in the <code>TEMPLATES</code> directory.
+ A template using the naming convention of <code>tpl.*.php</code>.</p>
+      </description>
+    </field>
+  </fields>
+  <methods>
+    <method name="__construct" return="void">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters>
+        <parameter name="message" type="string|XMLElement"/>
+        <parameter name="heading" type="string"/>
+        <parameter name="template" type="string"/>
+        <parameter name="additional" type="array"/>
+      </parameters>
+      <location line="615">lib/core/class.symphony.php</location>
+      <description>
+        <p>Constructor for SymphonyErrorPage sets it's class variables</p>
+      </description>
+      <tags>
+        <tag group="Parameters" name="message"><description><p>A description for this error, which can be provided as a string or as an XMLElement.</p></description></tag>
+        <tag group="Parameters" name="heading"><description><p>A heading for the error page, by default this is "Symphony Fatal Error"</p></description></tag>
+        <tag group="Parameters" name="template"><description><p>A string for the error page template to use, defaults to 'error'. This can be the name of any template file in the <code>TEMPLATES</code> directory. A template using the naming convention of <code>tpl.*.php</code>.</p></description></tag>
+        <tag group="Parameters" name="additional"><description><p>Allows custom information to be passed to the Symphony Error Page that the template may want to expose, such as custom Headers etc.</p></description></tag>
+      </tags>
+    </method>
+    <method name="getAdditional" return="StdClass">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="652">lib/core/class.symphony.php</location>
+      <description>
+        <p>Accessor for <code>$_additional</code></p>
+      </description>
+    </method>
+    <method name="getHeading" return="string">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="634">lib/core/class.symphony.php</location>
+      <description>
+        <p>Accessor for the <code>$_heading</code> of the error page</p>
+      </description>
+    </method>
+    <method name="getMessageObject" return="XMLElement">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="643">lib/core/class.symphony.php</location>
+      <description>
+        <p>Accessor for <code>$_messageObject</code></p>
+      </description>
+    </method>
+    <method name="getTemplate" return="mixed">
+      <modifiers>
+        <modifier>public</modifier>
+      </modifiers>
+      <parameters/>
+      <location line="665">lib/core/class.symphony.php</location>
+      <description>
+        <p>Returns the path to the current template by looking at the
+ <code>TEMPLATES</code> directory for the convention <code>tpl.*.php</code>. If the
+ template is not found, false is returned</p>
+      </description>
+      <tags>
+        <tag group="Returns"><description><p>String, which is the path to the template if the template is found, false otherwise</p></description></tag>
+      </tags>
+    </method>
+  </methods>
+</class>
